@@ -161,3 +161,7 @@ body {
     width: 150px;
     text-align: center;
 }
+
+.game-cover{
+    max-width: 150px;
+}
