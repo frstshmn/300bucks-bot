@@ -100,6 +100,11 @@ $(document).ready(function() {
     }
 
     function cellClickHandler() {
+        if (!gameStarted) {
+            $("#result").text("You must start the game first.");
+            return;
+        }
+
         if ($(this).hasClass("mine")) {
             $(this).removeClass("hidden").addClass("revealed mine").text("💣");
             $("#result").text("Game Over! You hit a mine.");
