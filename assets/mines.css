@@ -53,13 +53,13 @@ button:hover {
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px; /* Adjusted from 400px to 300px */
     margin: 20px auto;
 }
 
 .tile {
-    width: 52px;
-    padding-top: 52px; /* This creates a square tile */
+    width: 42px; /* Adjusted from 52px to 42px */
+    padding-top: 42px; /* Adjusted from 52px to 42px */
     position: relative;
     background-color: #213743;
     text-align: center;
@@ -72,12 +72,12 @@ button:hover {
 }
 
 .tile.mine {
-    background-color: #213743; /* Color same as hidden */
+    background-color: #213743;
     color: white;
 }
 
 .tile.gem {
-    background-color: #213743; /* Color same as hidden */
+    background-color: #213743;
     color: white;
 }
 
