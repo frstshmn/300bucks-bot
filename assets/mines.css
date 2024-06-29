@@ -63,8 +63,9 @@ button:hover {
 }
 
 .tile {
-    width: 52px; /* Adjusted from 52px to 40px */
-    padding-top: 15px; /* Adjusted from 52px to 40px */
+    width: 42px; /* Adjusted to your desired width */
+    height: 42px; /* Set an explicit height */
+    padding-top: 5px;
     position: relative;
     background-color: #213743;
     text-align: center;
