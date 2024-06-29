@@ -8,6 +8,7 @@ $(document).ready(function() {
     let betAmount = 1;
     let balance = 300;
     let gameStarted = false;
+    let gameOver = false;
 
     const multipliers = {
         1: {1: 1.03, 2: 1.08, 3: 1.12, 4: 1.18, 5: 1.24, 6: 1.30, 7: 1.37, 8: 1.46, 9: 1.55, 10: 1.65, 11: 1.77, 12: 1.90, 13: 2.06, 14: 2.25, 15: 2.47, 16: 2.75, 17: 3.09, 18: 3.54, 19: 4.12, 20: 4.95, 21: 6.19, 22: 8.00, 23: 12.37, 24: 24.75},
@@ -41,6 +42,11 @@ $(document).ready(function() {
     }
 
     function resetGame() {
+        if (gameStarted && !gameOver) {
+            $("#result").text("You must cash out or hit a mine before starting a new game.");
+            return;
+        }
+
         gemsFound = 0;
         multiplier = 1;
         betAmount = parseInt($("#bet").val());
@@ -50,6 +56,7 @@ $(document).ready(function() {
             return;
         }
         gameStarted = true;
+        gameOver = false;
 
         if (balance >= betAmount) {
             balance -= betAmount;
@@ -99,6 +106,7 @@ $(document).ready(function() {
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;
+            gameOver = true;
         } else if ($(this).hasClass("gem")) {
             $(this).removeClass("hidden").addClass("revealed gem").text("💎");
             gemsFound++;
@@ -116,6 +124,7 @@ $(document).ready(function() {
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;
+            gameOver = true;
         }
     });
 
