@@ -161,15 +161,13 @@ table {
     max-width: 400px;
     margin: 20px auto;
 }
-th, td {
+td {
     border: 1px solid #ddd;
     text-align: center;
     padding: 20px;
     font-size: 16px;
     cursor: pointer;
-}
-th {
-    background-color: #f2f2f2;
+    background-color: #ccc;
 }
 .gem {
     background-color: green;
