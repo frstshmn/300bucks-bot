@@ -39,6 +39,6 @@ th {
 }
 
 .previous {
-    background-color: #f1f1f1;
-    color: black;
+    background-color: transparent;
+    color: #ffffff;
 }
