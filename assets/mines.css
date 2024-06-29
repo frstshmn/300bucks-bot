@@ -17,67 +17,109 @@ body {
 .container {
     display: flex;
     flex-direction: row;
-    width: 80%;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #1e2a38;
+    border-radius: 8px;
+    padding: 20px;
 }
 
 .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
     background-color: #1e2a38;
-    padding: 20px;
     border-radius: 8px;
-    margin-right: 20px;
-    flex: 1;
-    max-width: 300px;
+    padding: 20px;
+    margin-left: 20px;
 }
 
-.menu-header, .menu-content, .menu-footer {
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.balance {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.menu-header a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 18px;
+.bet-section, .mines-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.menu-content label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-.menu-content input, .menu-content select {
+.bet-section input, .mines-section select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-top: 10px;
     border: none;
     border-radius: 4px;
 }
 
-.menu-content button {
-    width: 100%;
+.bet-control {
+    margin-top: 10px;
+    width: 45%;
     padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
 }
 
-.menu-content button:hover {
+.bet-control:hover {
     background-color: #45a049;
 }
 
-.menu-footer p {
-    font-size: 16px;
+.bet-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.bet-button:hover {
+    background-color: #45a049;
+}
+
+.mode-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mode-buttons button {
+    width: 48%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.mode-buttons button:hover {
+    background-color: #45a049;
 }
 
 .game {
-    flex: 3;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
 }
 
 .grid {
@@ -89,8 +131,8 @@ body {
 }
 
 .tile {
-    width: 100%;
-    padding-top: 100%; /* This creates a square tile */
+    width: 150px;
+    padding-top: 150px; /* This creates a square tile */
     position: relative;
     background-color: #213743;
     text-align: center;
