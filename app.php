@@ -14,9 +14,16 @@
 
             <div class="games">
 
-            <a class="game" href="slots.php">Slots</a>
-            <a class="game" href="mines.php">Mines</a>
-
+       
+                <a class="game" href="slots.php">
+                    <img src="/assets/images/slot.jpg" alt="">
+                </a>
+        
+             
+            <a class="game" href="mines.php">
+                <img src="/assets/images/mines.jpg">
+            </a>
+              
             </div>
 
 
