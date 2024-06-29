@@ -9,6 +9,18 @@ $(document).ready(function() {
 
     let gemsFound = 0;
     let multiplier = 1;
+    let betAmount = 1;
+
+    function resetGame() {
+        gemsFound = 0;
+        multiplier = 1;
+        betAmount = parseInt($("#bet").val());
+        $("#result").text('');
+        $("td").removeClass("mine gem").addClass("hidden").text('');
+        placeItems();
+        $("td.hidden").off("click").on("click", cellClickHandler);
+        $("#restart").hide();
+    }
 
     // Place mines and gems randomly
     function placeItems() {
@@ -39,20 +51,23 @@ $(document).ready(function() {
         });
     }
 
-    placeItems();
-
-    $("td.hidden").click(function() {
+    function cellClickHandler() {
         if ($(this).hasClass("mine")) {
-            $(this).removeClass("hidden").addClass("mine");
+            $(this).removeClass("hidden").addClass("mine").text("💣");
             $("#result").text("Game Over! You hit a mine.");
             $("td.hidden").off("click"); // Disable further clicks
+            $("#restart").show();
         } else if ($(this).hasClass("gem")) {
-            $(this).removeClass("hidden").addClass("gem");
+            $(this).removeClass("hidden").addClass("gem").text("💎");
             gemsFound++;
             multiplier += 0.5;
             $("#result").text(`Gems found: ${gemsFound}. Current multiplier: ${multiplier}`);
         } else {
             $(this).removeClass("hidden");
         }
-    });
+    }
+
+    $("#restart").click(resetGame);
+
+    resetGame();
 });
