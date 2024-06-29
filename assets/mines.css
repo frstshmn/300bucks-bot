@@ -6,38 +6,42 @@ body {
     font-variation-settings:
             "wdth" 100,
             "YTLC" 500;
-
     background-color: #2f4553;
     color: #ffffff;
 }
-table {
-    border-collapse: collapse;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
     width: 100%;
     max-width: 400px;
     margin: 20px auto;
 }
-th, td {
-    border: 1px solid #ddd;
+.tile {
+    width: 100%;
+    padding-top: 100%; /* This creates a square tile */
+    position: relative;
+    background-color: #ccc;
     text-align: center;
-    padding: 20px;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
 }
-th {
-    background-color: #f2f2f2;
+.tile.hidden {
+    background-color: #ccc;
 }
-.gem {
-    background-color: green;
-    color: white;
-}
-.mine {
+.tile.mine {
     background-color: red;
     color: white;
 }
-.hidden {
-    background-color: #ccc;
+.tile.gem {
+    background-color: green;
+    color: white;
 }
-
+.tile::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
 .previous {
     background-color: transparent;
     color: #ffffff;
