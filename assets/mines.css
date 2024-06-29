@@ -21,23 +21,23 @@ body {
     width: 100px;
     padding-top: 100px; /* This creates a square tile */
     position: relative;
-    background-color: #213743;;
+    background-color: #213743;
     text-align: center;
     cursor: pointer;
     font-size: 32px;
 }
 
 .tile.hidden {
-    background-color: #ccc;
+    background-color: #213743;
 }
 
 .tile.mine {
-    background-color: #ccc; /* Color same as hidden */
+    background-color: #213743; /* Color same as hidden */
     color: white;
 }
 
 .tile.gem {
-    background-color: #ccc; /* Color same as hidden */
+    background-color: #213743; /* Color same as hidden */
     color: white;
 }
 
