@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="slot-wrapper">
-            <h1>⚣ 300Bucks Casino Menu ⚣</h1>
+            <h1>⚣ 300Bucks Casino ⚣</h1>
 
             <div class="games">
 
