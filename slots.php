@@ -11,7 +11,9 @@
 <body>
 <div class="slot-wrapper">
     <h1>⚣ 300Bucks Slots ⚣</h1>
-
+    <div class="menu-header">
+        <a href="app.php" class="previous">&laquo; Back to all Games</a>
+    </div>
     <div class="slot-machine">
         <div class="upper-bar"></div>
         <div class="reels">
