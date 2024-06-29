@@ -1,9 +1,5 @@
 body {
     font-family: "Nunito Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "wdth" 100, "YTLC" 500;
     background-color: #2f4553;
     color: #ffffff;
     margin: 0;
@@ -15,38 +11,65 @@ body {
     height: 100vh;
 }
 
+.navbar {
+    text-align: center;
+    margin: 20px;
+}
+
+.amount, .nav-buttons {
+    margin: 10px;
+}
+
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: #213743;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: #213743;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1a2c3a;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
+    width: 100%;
     max-width: 400px;
     margin: 20px auto;
 }
 
 .tile {
-    width: 72px;
-    height: 72px;
+    width: 52px;
+    padding-top: 52px;
+    position: relative;
     background-color: #213743;
     text-align: center;
     cursor: pointer;
     font-size: 16px;
-    line-height: 52px; /* Center text vertically */
-    color: white;
     transition: background-color 0.3s;
 }
 
 .tile.hidden {
     background-color: #213743;
-}
-
-.tile.mine {
-    background-color: #213743;
-    color: white;
-}
-
-.tile.gem {
-    background-color: #213743;
-    color: white;
 }
 
 .tile.revealed.mine {
@@ -57,17 +80,13 @@ body {
     background-color: green;
 }
 
+.tile::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
+
 .previous {
     background-color: transparent;
     color: #ffffff;
-    text-decoration: none;
-    margin: 10px;
-}
-.navbar{
-    display: flex;
-}
-
-.nav-buttons{
-    display: flex;
-    flex-wrap: wrap;
 }
