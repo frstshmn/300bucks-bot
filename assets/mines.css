@@ -51,16 +51,20 @@ button:hover {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 2px; /* Reduced the gap between tiles */
-    width: 100%;
-    max-width: 300px; /* Adjusted from 400px to 300px */
-    margin: 0px auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px 5px;
+    grid-template-areas:
+    ". . . . ."
+    ". . . . ."
+    ". . . . ."
+    ". . . . ."
+    ". . . . .";
 }
 
 .tile {
-    width: 40px; /* Adjusted from 52px to 40px */
-    padding-top: 40px; /* Adjusted from 52px to 40px */
+    width: 52px; /* Adjusted from 52px to 40px */
+    padding-top: 52px; /* Adjusted from 52px to 40px */
     position: relative;
     background-color: #213743;
     text-align: center;
