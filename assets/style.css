@@ -145,3 +145,19 @@ body {
 .bet-choice input[type="radio"]:checked + label {
     background-color: #4f7246;
 }
+
+
+.games {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.game {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 150px;
+    text-align: center;
+}

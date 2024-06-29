@@ -12,8 +12,9 @@
         <div class="slot-wrapper">
             <h1>⚣ 300Bucks Casino Menu ⚣</h1>
 
-            <a href="slots.php">Slots</a>
-            <a href="mines.php">Mines</a>
+            <a class="game" href="slots.php">Slots</a>
+            <a class="game" href="mines.php">Mines</a>
+
 
 
         </div>
