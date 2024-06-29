@@ -10,36 +10,15 @@ $(document).ready(function() {
     let gameStarted = false;
 
     function getMultiplier(mines) {
-        // Example multipliers based on the table
         const multipliers = {
-            1: 1.03,
-            2: 1.08,
-            3: 1.12,
-            4: 1.18,
-            5: 1.24,
-            6: 1.30,
-            7: 1.37,
-            8: 1.46,
-            9: 1.55,
-            10: 1.65,
-            11: 1.77,
-            12: 1.90,
-            13: 2.06,
-            14: 2.25,
-            15: 2.47,
-            16: 2.75,
-            17: 3.09,
-            18: 3.54,
-            19: 4.12,
-            20: 4.95,
-            21: 6.19,
-            22: 8.00,
-            23: 12.37,
-            24: 24.75
+            1: 1.03, 2: 1.08, 3: 1.12, 4: 1.18, 5: 1.24, 6: 1.30,
+            7: 1.37, 8: 1.46, 9: 1.55, 10: 1.65, 11: 1.77, 12: 1.90,
+            13: 2.06, 14: 2.25, 15: 2.47, 16: 2.75, 17: 3.09, 18: 3.54,
+            19: 4.12, 20: 4.95, 21: 6.19, 22: 8.00, 23: 12.37, 24: 24.75,
+            25: 50.00  // Extend as necessary
         };
         return multipliers[mines] || 1;
     }
-
     function resetGame() {
         gemsFound = 0;
         minesCount = parseInt($("#mines").val());
