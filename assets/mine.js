@@ -1,11 +1,7 @@
-Telegram.WebApp.ready();
-
 $(document).ready(function() {
-    // Game configuration
     const rows = 8;
     const cols = 8;
     let minesCount = 10;
-    const gemsCount = 64 - minesCount;
 
     let gemsFound = 0;
     let multiplier = 1;
@@ -13,11 +9,42 @@ $(document).ready(function() {
     let balance = 100;
     let gameStarted = false;
 
+    function getMultiplier(mines) {
+        // Example multipliers based on the table
+        const multipliers = {
+            1: 1.03,
+            2: 1.08,
+            3: 1.12,
+            4: 1.18,
+            5: 1.24,
+            6: 1.30,
+            7: 1.37,
+            8: 1.46,
+            9: 1.55,
+            10: 1.65,
+            11: 1.77,
+            12: 1.90,
+            13: 2.06,
+            14: 2.25,
+            15: 2.47,
+            16: 2.75,
+            17: 3.09,
+            18: 3.54,
+            19: 4.12,
+            20: 4.95,
+            21: 6.19,
+            22: 8.00,
+            23: 12.37,
+            24: 24.75
+        };
+        return multipliers[mines] || 1;
+    }
+
     function resetGame() {
         gemsFound = 0;
-        multiplier = 1;
-        betAmount = parseInt($("#bet").val());
         minesCount = parseInt($("#mines").val());
+        multiplier = getMultiplier(minesCount);
+        betAmount = parseInt($("#bet").val());
         gameStarted = true;
 
         if (balance >= betAmount) {
@@ -37,27 +64,23 @@ $(document).ready(function() {
     }
 
     function updateBalance() {
-        $("#balance").text(`Balance: ${balance}`);
+        $("#balance").text(`Balance: ${balance.toFixed(2)}`);
     }
 
-    // Place mines and gems randomly
     function placeItems() {
         const totalCells = rows * cols;
         let allPositions = Array.from(Array(totalCells).keys());
         let minePositions = [];
-        let gemPositions = [];
 
         while (minePositions.length < minesCount) {
             let minePosition = Math.floor(Math.random() * allPositions.length);
             minePositions.push(allPositions.splice(minePosition, 1)[0]);
         }
 
-        gemPositions = allPositions;  // Remaining positions are for gems
-
         $("td.hidden").each(function(index) {
             if (minePositions.includes(index)) {
                 $(this).addClass("mine");
-            } else if (gemPositions.includes(index)) {
+            } else {
                 $(this).addClass("gem");
             }
         });
@@ -67,15 +90,14 @@ $(document).ready(function() {
         if ($(this).hasClass("mine")) {
             $(this).removeClass("hidden").addClass("mine").text("💣");
             $("#result").text("Game Over! You hit a mine.");
-            $("td.hidden").off("click"); // Disable further clicks
+            $("td.hidden").off("click");
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;
         } else if ($(this).hasClass("gem")) {
             $(this).removeClass("hidden").addClass("gem").text("💎");
             gemsFound++;
-            multiplier += 0.5;
-            $("#result").text(`Gems found: ${gemsFound}. Current multiplier: ${multiplier}`);
+            $("#result").text(`Gems found: ${gemsFound}. Current multiplier: ${multiplier.toFixed(2)}`);
         } else {
             $(this).removeClass("hidden");
         }
@@ -86,7 +108,7 @@ $(document).ready(function() {
             let winnings = betAmount * multiplier;
             balance += winnings;
             updateBalance();
-            $("#result").text(`You cashed out with ${winnings}. Your balance is now ${balance}.`);
+            $("#result").text(`You cashed out with ${winnings.toFixed(2)}. Your balance is now ${balance.toFixed(2)}.`);
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;
