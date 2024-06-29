@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<a href="app.php" class="previous">&laquo; Previous</a>
 
 <div style="text-align: center; margin-top: 20px;">
     <label for="bet">Bet Amount: </label>
