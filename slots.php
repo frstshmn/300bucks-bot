@@ -30,6 +30,7 @@
 
     <div class="controls">
         <button id="spin">Spin ⬇️</button>
+        <button id="stop" disabled>Stop ⏹️</button>
     </div>
 
     <div class="balance">

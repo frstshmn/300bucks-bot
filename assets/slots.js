@@ -19,6 +19,7 @@ $(document).ready(function() {
         } else {
             status = 1;
             $('#spin').prop('disabled', true);
+            $('#stop').prop('disabled', false);
         }
 
         if (balance < bet) {
@@ -63,51 +64,48 @@ $(document).ready(function() {
         }, 1000); // Start spinning after 1000 milliseconds
     });
 
-    setTimeout(
-        function () {
-            stopSpinning();
-            status = 0;
-        }, 3000);
-});
-
-function stopSpinning() {
-    setTimeout(function() {
-        $('#reel-1').removeClass('reel-spinning');
-        if (intervalId1) {
-            clearInterval(intervalId1);
-        }
-    }, 0); // Stop spinning immediately
-
-    setTimeout(function() {
-        $('#reel-2').removeClass('reel-spinning');
-        if (intervalId2) {
-            clearInterval(intervalId2);
-        }
-    }, 500); // Stop spinning after 500 milliseconds
-
-    setTimeout(function() {
-        $('#reel-3').removeClass('reel-spinning');
-        if (intervalId3) {
-            clearInterval(intervalId3);
-        }
+    $('#stop').click(function() {
+        setTimeout(function() {
+            $('#reel-1').removeClass('reel-spinning');
+            if (intervalId1) {
+                clearInterval(intervalId1);
+            }
+        }, 0); // Stop spinning immediately
 
         setTimeout(function() {
-            let reel1 = $('#reel-1').text();
-            let reel2 = $('#reel-2').text();
-            let reel3 = $('#reel-3').text();
+            $('#reel-2').removeClass('reel-spinning');
+            if (intervalId2) {
+                clearInterval(intervalId2);
+            }
+        }, 500); // Stop spinning after 500 milliseconds
 
-            if (reel1 === reel2 && reel2 === reel3) {
-                balance += bet * 10;
-            } else if (reel1 === reel2 || reel2 === reel3 || reel1 === reel3) {
-                balance += bet * 1.5;
-            } else if (emojis.slice(0, 4).includes(reel1) && emojis.slice(0, 4).includes(reel2) && emojis.slice(0, 4).includes(reel3)) {
-                balance += bet * 5;
+        setTimeout(function() {
+            $('#reel-3').removeClass('reel-spinning');
+            if (intervalId3) {
+                clearInterval(intervalId3);
             }
 
-            $('#balance').text(balance);
-            $('input[name="bet"]').prop('disabled', false);
+            setTimeout(function() {
+                let reel1 = $('#reel-1').text();
+                let reel2 = $('#reel-2').text();
+                let reel3 = $('#reel-3').text();
 
-            $('#spin').prop('disabled', false);
-        }, 500); // Stop spinning after 1000 milliseconds
-    }, 1000); // Stop spinning after 1000 milliseconds
-}
+                if (reel1 === reel2 && reel2 === reel3) {
+                    balance += bet * 10;
+                } else if (reel1 === reel2 || reel2 === reel3 || reel1 === reel3) {
+                    balance += bet * 1.5;
+                } else if (emojis.slice(0, 4).includes(reel1) && emojis.slice(0, 4).includes(reel2) && emojis.slice(0, 4).includes(reel3)) {
+                    balance += bet * 5;
+                }
+
+                $('#balance').text(balance);
+                $('input[name="bet"]').prop('disabled', false);
+
+                status = 0;
+                $('#spin').prop('disabled', false);
+                $('#stop').prop('disabled', true);
+
+            }, 500); // Stop spinning after 1000 milliseconds
+        }, 1000); // Stop spinning after 1000 milliseconds
+    });
+});
