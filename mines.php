@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="slot-wrapper">
-    <h1>⚣ 300Bucks Mines ⚣</h1>
+    <h1>⚣ 300Bucks Mines slot ⚣</h1>
 
     <div class="slot-machine">
         <div class="upper-bar"></div>

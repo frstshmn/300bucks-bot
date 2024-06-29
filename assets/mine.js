@@ -41,7 +41,6 @@ $(document).ready(function() {
 
     placeItems();
 
-    // Handle cell click
     $("td.hidden").click(function() {
         if ($(this).hasClass("mine")) {
             $(this).removeClass("hidden").addClass("mine");
