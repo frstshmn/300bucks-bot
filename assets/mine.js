@@ -60,9 +60,9 @@ $(document).ready(function() {
         }
 
         $("#result").text('');
-        $("td").removeClass("mine gem").addClass("hidden").text('');
+        $(".tile").removeClass("mine gem").addClass("hidden").text('');
         placeItems();
-        $("td.hidden").off("click").on("click", cellClickHandler);
+        $(".tile.hidden").off("click").on("click", cellClickHandler);
         $("#cashout").show();
         $("#restart").hide();
     }
@@ -82,7 +82,7 @@ $(document).ready(function() {
             minePositions.push(allPositions.splice(minePosition, 1)[0]);
         }
 
-        $("td.hidden").each(function(index) {
+        $(".tile.hidden").each(function(index) {
             if (minePositions.includes(index)) {
                 $(this).addClass("mine");
             } else {
@@ -95,7 +95,7 @@ $(document).ready(function() {
         if ($(this).hasClass("mine")) {
             $(this).removeClass("hidden").addClass("mine").text("💣");
             $("#result").text("Game Over! You hit a mine.");
-            $("td.hidden").off("click");
+            $(".tile.hidden").off("click");
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;

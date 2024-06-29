@@ -26,56 +26,33 @@
     <p id="balance">Balance: 300</p>
 </div>
 
-<table>
-    <tr>
-        <th></th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
-    </tr>
-    <tr>
-        <th>A</th>
-        <td class="hidden" data-row="A" data-col="1"></td>
-        <td class="hidden" data-row="A" data-col="2"></td>
-        <td class="hidden" data-row="A" data-col="3"></td>
-        <td class="hidden" data-row="A" data-col="4"></td>
-        <td class="hidden" data-row="A" data-col="5"></td>
-    </tr>
-    <tr>
-        <th>B</th>
-        <td class="hidden" data-row="B" data-col="1"></td>
-        <td class="hidden" data-row="B" data-col="2"></td>
-        <td class="hidden" data-row="B" data-col="3"></td>
-        <td class="hidden" data-row="B" data-col="4"></td>
-        <td class="hidden" data-row="B" data-col="5"></td>
-    </tr>
-    <tr>
-        <th>C</th>
-        <td class="hidden" data-row="C" data-col="1"></td>
-        <td class="hidden" data-row="C" data-col="2"></td>
-        <td class="hidden" data-row="C" data-col="3"></td>
-        <td class="hidden" data-row="C" data-col="4"></td>
-        <td class="hidden" data-row="C" data-col="5"></td>
-    </tr>
-    <tr>
-        <th>D</th>
-        <td class="hidden" data-row="D" data-col="1"></td>
-        <td class="hidden" data-row="D" data-col="2"></td>
-        <td class="hidden" data-row="D" data-col="3"></td>
-        <td class="hidden" data-row="D" data-col="4"></td>
-        <td class="hidden" data-row="D" data-col="5"></td>
-    </tr>
-    <tr>
-        <th>E</th>
-        <td class="hidden" data-row="E" data-col="1"></td>
-        <td class="hidden" data-row="E" data-col="2"></td>
-        <td class="hidden" data-row="E" data-col="3"></td>
-        <td class="hidden" data-row="E" data-col="4"></td>
-        <td class="hidden" data-row="E" data-col="5"></td>
-    </tr>
-</table>
+<div class="grid">
+    <div class="tile hidden" data-row="A" data-col="1"></div>
+    <div class="tile hidden" data-row="A" data-col="2"></div>
+    <div class="tile hidden" data-row="A" data-col="3"></div>
+    <div class="tile hidden" data-row="A" data-col="4"></div>
+    <div class="tile hidden" data-row="A" data-col="5"></div>
+    <div class="tile hidden" data-row="B" data-col="1"></div>
+    <div class="tile hidden" data-row="B" data-col="2"></div>
+    <div class="tile hidden" data-row="B" data-col="3"></div>
+    <div class="tile hidden" data-row="B" data-col="4"></div>
+    <div class="tile hidden" data-row="B" data-col="5"></div>
+    <div class="tile hidden" data-row="C" data-col="1"></div>
+    <div class="tile hidden" data-row="C" data-col="2"></div>
+    <div class="tile hidden" data-row="C" data-col="3"></div>
+    <div class="tile hidden" data-row="C" data-col="4"></div>
+    <div class="tile hidden" data-row="C" data-col="5"></div>
+    <div class="tile hidden" data-row="D" data-col="1"></div>
+    <div class="tile hidden" data-row="D" data-col="2"></div>
+    <div class="tile hidden" data-row="D" data-col="3"></div>
+    <div class="tile hidden" data-row="D" data-col="4"></div>
+    <div class="tile hidden" data-row="D" data-col="5"></div>
+    <div class="tile hidden" data-row="E" data-col="1"></div>
+    <div class="tile hidden" data-row="E" data-col="2"></div>
+    <div class="tile hidden" data-row="E" data-col="3"></div>
+    <div class="tile hidden" data-row="E" data-col="4"></div>
+    <div class="tile hidden" data-row="E" data-col="5"></div>
+</div>
 
 <p id="result" style="text-align: center;"></p>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
