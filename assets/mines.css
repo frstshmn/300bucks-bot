@@ -3,12 +3,11 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    font-variation-settings:
-            "wdth" 100,
-            "YTLC" 500;
+    font-variation-settings: "wdth" 100, "YTLC" 500;
     background-color: #2f4553;
     color: #ffffff;
 }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -17,6 +16,7 @@ body {
     max-width: 400px;
     margin: 20px auto;
 }
+
 .tile {
     width: 100%;
     padding-top: 100%; /* This creates a square tile */
@@ -26,22 +26,35 @@ body {
     cursor: pointer;
     font-size: 16px;
 }
+
 .tile.hidden {
     background-color: #ccc;
 }
+
 .tile.mine {
-    background-color: red;
+    background-color: #ccc; /* Color same as hidden */
     color: white;
 }
+
 .tile.gem {
-    background-color: green;
+    background-color: #ccc; /* Color same as hidden */
     color: white;
 }
+
+.tile.revealed.mine {
+    background-color: red;
+}
+
+.tile.revealed.gem {
+    background-color: green;
+}
+
 .tile::after {
     content: '';
     display: block;
     padding-bottom: 100%;
 }
+
 .previous {
     background-color: transparent;
     color: #ffffff;

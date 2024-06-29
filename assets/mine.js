@@ -60,7 +60,7 @@ $(document).ready(function() {
         }
 
         $("#result").text('');
-        $(".tile").removeClass("mine gem").addClass("hidden").text('');
+        $(".tile").removeClass("mine gem revealed").addClass("hidden").text('');
         placeItems();
         $(".tile.hidden").off("click").on("click", cellClickHandler);
         $("#cashout").show();
@@ -93,14 +93,14 @@ $(document).ready(function() {
 
     function cellClickHandler() {
         if ($(this).hasClass("mine")) {
-            $(this).removeClass("hidden").addClass("mine").text("💣");
+            $(this).removeClass("hidden").addClass("revealed mine").text("💣");
             $("#result").text("Game Over! You hit a mine.");
             $(".tile.hidden").off("click");
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;
         } else if ($(this).hasClass("gem")) {
-            $(this).removeClass("hidden").addClass("gem").text("💎");
+            $(this).removeClass("hidden").addClass("revealed gem").text("💎");
             gemsFound++;
             multiplier = getMultiplier(gemsFound, minesCount);
             $("#result").text(`Gems found: ${gemsFound}. Current multiplier: ${multiplier.toFixed(2)}`);
