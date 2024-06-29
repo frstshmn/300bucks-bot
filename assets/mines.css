@@ -13,7 +13,8 @@ body {
 
 .navbar {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 20px; /* Adjusted to ensure visibility */
+    margin-bottom: 0;
 }
 
 .amount, .nav-buttons {
@@ -51,20 +52,21 @@ button:hover {
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 5px;
+    grid-gap: 2px; /* Reduced the gap between tiles */
     width: 100%;
     max-width: 300px; /* Adjusted from 400px to 300px */
-    margin: 5px auto;
+    margin: 20px auto;
 }
 
 .tile {
-    width: 42px; /* Adjusted from 52px to 42px */
-    padding-top: 42px; /* Adjusted from 52px to 42px */
+    width: 40px; /* Adjusted from 52px to 40px */
+    padding-top: 40px; /* Adjusted from 52px to 40px */
     position: relative;
     background-color: #213743;
     text-align: center;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s; /* Add a smooth transition */
 }
 
 .tile.hidden {
@@ -72,12 +74,12 @@ button:hover {
 }
 
 .tile.mine {
-    background-color: #213743;
+    background-color: #213743; /* Color same as hidden */
     color: white;
 }
 
 .tile.gem {
-    background-color: #213743;
+    background-color: #213743; /* Color same as hidden */
     color: white;
 }
 
