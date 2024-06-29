@@ -33,9 +33,7 @@
         <th>3</th>
         <th>4</th>
         <th>5</th>
-        <th>6</th>
-        <th>7</th>
-        <th>8</th>
+
     </tr>
     <tr>
         <th>A</th>
@@ -44,9 +42,7 @@
         <td class="hidden" data-row="A" data-col="3"></td>
         <td class="hidden" data-row="A" data-col="4"></td>
         <td class="hidden" data-row="A" data-col="5"></td>
-        <td class="hidden" data-row="A" data-col="6"></td>
-        <td class="hidden" data-row="A" data-col="7"></td>
-        <td class="hidden" data-row="A" data-col="8"></td>
+
     </tr>
     <tr>
         <th>B</th>
@@ -55,9 +51,7 @@
         <td class="hidden" data-row="B" data-col="3"></td>
         <td class="hidden" data-row="B" data-col="4"></td>
         <td class="hidden" data-row="B" data-col="5"></td>
-        <td class="hidden" data-row="B" data-col="6"></td>
-        <td class="hidden" data-row="B" data-col="7"></td>
-        <td class="hidden" data-row="B" data-col="8"></td>
+
     </tr>
     <tr>
         <th>C</th>
@@ -66,9 +60,7 @@
         <td class="hidden" data-row="C" data-col="3"></td>
         <td class="hidden" data-row="C" data-col="4"></td>
         <td class="hidden" data-row="C" data-col="5"></td>
-        <td class="hidden" data-row="C" data-col="6"></td>
-        <td class="hidden" data-row="C" data-col="7"></td>
-        <td class="hidden" data-row="C" data-col="8"></td>
+
     </tr>
     <tr>
         <th>D</th>
@@ -77,9 +69,7 @@
         <td class="hidden" data-row="D" data-col="3"></td>
         <td class="hidden" data-row="D" data-col="4"></td>
         <td class="hidden" data-row="D" data-col="5"></td>
-        <td class="hidden" data-row="D" data-col="6"></td>
-        <td class="hidden" data-row="D" data-col="7"></td>
-        <td class="hidden" data-row="D" data-col="8"></td>
+
     </tr>
     <tr>
         <th>E</th>
@@ -88,43 +78,7 @@
         <td class="hidden" data-row="E" data-col="3"></td>
         <td class="hidden" data-row="E" data-col="4"></td>
         <td class="hidden" data-row="E" data-col="5"></td>
-        <td class="hidden" data-row="E" data-col="6"></td>
-        <td class="hidden" data-row="E" data-col="7"></td>
-        <td class="hidden" data-row="E" data-col="8"></td>
-    </tr>
-    <tr>
-        <th>F</th>
-        <td class="hidden" data-row="F" data-col="1"></td>
-        <td class="hidden" data-row="F" data-col="2"></td>
-        <td class="hidden" data-row="F" data-col="3"></td>
-        <td class="hidden" data-row="F" data-col="4"></td>
-        <td class="hidden" data-row="F" data-col="5"></td>
-        <td class="hidden" data-row="F" data-col="6"></td>
-        <td class="hidden" data-row="F" data-col="7"></td>
-        <td class="hidden" data-row="F" data-col="8"></td>
-    </tr>
-    <tr>
-        <th>G</th>
-        <td class="hidden" data-row="G" data-col="1"></td>
-        <td class="hidden" data-row="G" data-col="2"></td>
-        <td class="hidden" data-row="G" data-col="3"></td>
-        <td class="hidden" data-row="G" data-col="4"></td>
-        <td class="hidden" data-row="G" data-col="5"></td>
-        <td class="hidden" data-row="G" data-col="6"></td>
-        <td class="hidden" data-row="G" data-col="7"></td>
-        <td class="hidden" data-row="G" data-col="8"></td>
-    </tr>
-    <tr>
-        <th>H</th>
-        <td class="hidden" data-row="H" data-col="1"></td>
-        <td class="hidden" data-row="H" data-col="2"></td>
-        <td class="hidden" data-row="H" data-col="3"></td>
-        <td class="hidden" data-row="H" data-col="4"></td>
-        <td class="hidden" data-row="H" data-col="5"></td>
-        <td class="hidden" data-row="H" data-col="6"></td>
-        <td class="hidden" data-row="H" data-col="7"></td>
-        <td class="hidden" data-row="H" data-col="8"></td>
-    </tr>
+
 </table>
 
 <p id="result" style="text-align: center;"></p>
