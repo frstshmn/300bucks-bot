@@ -18,13 +18,13 @@ body {
 }
 
 .tile {
-    width: 100%;
-    padding-top: 100%; /* This creates a square tile */
+    width: 100px;
+    padding-top: 100px; /* This creates a square tile */
     position: relative;
     background-color: #ccc;
     text-align: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 32px;
 }
 
 .tile.hidden {
