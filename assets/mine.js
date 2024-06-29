@@ -72,6 +72,7 @@ $(document).ready(function() {
         $(".tile.hidden").off("click").on("click", cellClickHandler);
         $("#cashout").show();
         $("#restart").hide();
+        $("#start").prop("disabled", true);
     }
 
     function updateBalance() {
@@ -107,6 +108,7 @@ $(document).ready(function() {
             $("#restart").show();
             gameStarted = false;
             gameOver = true;
+            $("#start").prop("disabled", false);
         } else if ($(this).hasClass("gem")) {
             $(this).removeClass("hidden").addClass("revealed gem").text("💎");
             gemsFound++;
@@ -125,6 +127,7 @@ $(document).ready(function() {
             $("#restart").show();
             gameStarted = false;
             gameOver = true;
+            $("#start").prop("disabled", false);
         }
     });
 
