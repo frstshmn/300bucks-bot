@@ -59,17 +59,26 @@ button:hover {
 
 .tile {
     width: 52px;
-    padding-top: 52px;
+    padding-top: 52px; /* This creates a square tile */
     position: relative;
     background-color: #213743;
     text-align: center;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
 }
 
 .tile.hidden {
     background-color: #213743;
+}
+
+.tile.mine {
+    background-color: #213743; /* Color same as hidden */
+    color: white;
+}
+
+.tile.gem {
+    background-color: #213743; /* Color same as hidden */
+    color: white;
 }
 
 .tile.revealed.mine {
