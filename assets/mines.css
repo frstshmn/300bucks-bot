@@ -6,6 +6,78 @@ body {
     font-variation-settings: "wdth" 100, "YTLC" 500;
     background-color: #2f4553;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.menu {
+    background-color: #1e2a38;
+    padding: 20px;
+    border-radius: 8px;
+    margin-right: 20px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.menu-header, .menu-content, .menu-footer {
+    margin-bottom: 20px;
+}
+
+.menu-header a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.menu-content input, .menu-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+.menu-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.menu-content button:hover {
+    background-color: #45a049;
+}
+
+.menu-footer p {
+    font-size: 16px;
+}
+
+.game {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid {
@@ -14,17 +86,16 @@ body {
     grid-gap: 5px;
     width: 100%;
     max-width: 400px;
-    margin: 20px auto;
 }
 
 .tile {
-    width: 100px;
-    padding-top: 100px; /* This creates a square tile */
+    width: 100%;
+    padding-top: 100%; /* This creates a square tile */
     position: relative;
     background-color: #213743;
     text-align: center;
     cursor: pointer;
-    font-size: 32px;
+    font-size: 16px;
 }
 
 .tile.hidden {
@@ -53,9 +124,4 @@ body {
     content: '';
     display: block;
     padding-bottom: 100%;
-}
-
-.previous {
-    background-color: transparent;
-    color: #ffffff;
 }

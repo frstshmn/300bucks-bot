@@ -1,59 +1,85 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="assets/mines.css">
 </head>
 <body>
-
-<a href="app.php" class="previous">&laquo; Back to all Games</a>
-
-<div style="text-align: center; margin-top: 20px;">
-    <label for="bet">Bet Amount: </label>
-    <input type="number" id="bet" min="1" value="1">
-    <label for="mines">Number of Mines: </label>
-    <input type="number" id="mines" min="1" max="24" value="10">
-    <button id="start">Start Game</button>
-    <button id="cashout" style="display: none;">Cash Out</button>
-    <button id="restart" style="display: none;">Restart Game</button>
+<div class="container">
+    <div class="menu">
+        <div class="menu-header">
+            <a href="app.php" class="previous">&laquo; Back to all Games</a>
+        </div>
+        <div class="menu-content">
+            <label for="bet">Bet Amount:</label>
+            <input type="number" id="bet" min="1" value="1">
+            <label for="mines">Number of Mines:</label>
+            <select id="mines">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+            </select>
+            <button id="start">Bet</button>
+        </div>
+        <div class="menu-footer">
+            <p id="balance">Balance: 300</p>
+        </div>
+    </div>
+    <div class="game">
+        <div class="grid">
+            <div class="tile hidden" data-row="A" data-col="1"></div>
+            <div class="tile hidden" data-row="A" data-col="2"></div>
+            <div class="tile hidden" data-row="A" data-col="3"></div>
+            <div class="tile hidden" data-row="A" data-col="4"></div>
+            <div class="tile hidden" data-row="A" data-col="5"></div>
+            <div class="tile hidden" data-row="B" data-col="1"></div>
+            <div class="tile hidden" data-row="B" data-col="2"></div>
+            <div class="tile hidden" data-row="B" data-col="3"></div>
+            <div class="tile hidden" data-row="B" data-col="4"></div>
+            <div class="tile hidden" data-row="B" data-col="5"></div>
+            <div class="tile hidden" data-row="C" data-col="1"></div>
+            <div class="tile hidden" data-row="C" data-col="2"></div>
+            <div class="tile hidden" data-row="C" data-col="3"></div>
+            <div class="tile hidden" data-row="C" data-col="4"></div>
+            <div class="tile hidden" data-row="C" data-col="5"></div>
+            <div class="tile hidden" data-row="D" data-col="1"></div>
+            <div class="tile hidden" data-row="D" data-col="2"></div>
+            <div class="tile hidden" data-row="D" data-col="3"></div>
+            <div class="tile hidden" data-row="D" data-col="4"></div>
+            <div class="tile hidden" data-row="D" data-col="5"></div>
+            <div class="tile hidden" data-row="E" data-col="1"></div>
+            <div class="tile hidden" data-row="E" data-col="2"></div>
+            <div class="tile hidden" data-row="E" data-col="3"></div>
+            <div class="tile hidden" data-row="E" data-col="4"></div>
+            <div class="tile hidden" data-row="E" data-col="5"></div>
+        </div>
+    </div>
 </div>
-
-<div style="text-align: center; margin-top: 10px;">
-    <p id="balance">Balance: 300</p>
-</div>
-
-<div class="grid">
-    <div class="tile hidden" data-row="A" data-col="1"></div>
-    <div class="tile hidden" data-row="A" data-col="2"></div>
-    <div class="tile hidden" data-row="A" data-col="3"></div>
-    <div class="tile hidden" data-row="A" data-col="4"></div>
-    <div class="tile hidden" data-row="A" data-col="5"></div>
-    <div class="tile hidden" data-row="B" data-col="1"></div>
-    <div class="tile hidden" data-row="B" data-col="2"></div>
-    <div class="tile hidden" data-row="B" data-col="3"></div>
-    <div class="tile hidden" data-row="B" data-col="4"></div>
-    <div class="tile hidden" data-row="B" data-col="5"></div>
-    <div class="tile hidden" data-row="C" data-col="1"></div>
-    <div class="tile hidden" data-row="C" data-col="2"></div>
-    <div class="tile hidden" data-row="C" data-col="3"></div>
-    <div class="tile hidden" data-row="C" data-col="4"></div>
-    <div class="tile hidden" data-row="C" data-col="5"></div>
-    <div class="tile hidden" data-row="D" data-col="1"></div>
-    <div class="tile hidden" data-row="D" data-col="2"></div>
-    <div class="tile hidden" data-row="D" data-col="3"></div>
-    <div class="tile hidden" data-row="D" data-col="4"></div>
-    <div class="tile hidden" data-row="D" data-col="5"></div>
-    <div class="tile hidden" data-row="E" data-col="1"></div>
-    <div class="tile hidden" data-row="E" data-col="2"></div>
-    <div class="tile hidden" data-row="E" data-col="3"></div>
-    <div class="tile hidden" data-row="E" data-col="4"></div>
-    <div class="tile hidden" data-row="E" data-col="5"></div>
-</div>
-
 <p id="result" style="text-align: center;"></p>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
