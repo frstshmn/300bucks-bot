@@ -63,3 +63,11 @@ body {
     text-decoration: none;
     margin: 10px;
 }
+.navbar{
+    display: flex;
+}
+
+.nav-buttons{
+    display: flex;
+    flex-wrap: wrap;
+}

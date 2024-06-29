@@ -12,14 +12,19 @@
 
 <a href="app.php" class="previous">&laquo; Previous</a>
 
-<div style="text-align: center; margin-top: 20px;">
+<div class="navbar" style="text-align: center; margin-top: 20px;">
+    <div class="amount">
     <label for="bet">Bet Amount: </label>
     <input type="number" id="bet" min="1" value="1">
+    </div>
+
     <label for="mines">Number of Mines: </label>
     <input type="number" id="mines" min="1" max="24" value="10">
+    <div class="nav-buttons">
     <button id="start">Start Game</button>
     <button id="cashout" style="display: none;">Cash Out</button>
     <button id="restart" style="display: none;">Restart Game</button>
+    </div>
 </div>
 
 <div style="text-align: center; margin-top: 10px;">
