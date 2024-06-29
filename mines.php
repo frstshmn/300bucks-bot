@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/mines.css">
 </head>
 <body>
 <div class="slot-wrapper">
@@ -15,97 +15,110 @@
     <div class="slot-machine">
         <div class="upper-bar"></div>
         <div class="mines-slot">
-            <!-- write a full table for mines 8x8 -->
             <table>
                 <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                </tr>
+                <tr>
                     <th>A</th>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td class="gem">G</td>
-                    <td class="gem">G</td>
-                    <td class="gem">G</td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
+                    <td class="hidden" data-row="A" data-col="1"></td>
+                    <td class="hidden" data-row="A" data-col="2"></td>
+                    <td class="hidden" data-row="A" data-col="3"></td>
+                    <td class="hidden" data-row="A" data-col="4"></td>
+                    <td class="hidden" data-row="A" data-col="5"></td>
+                    <td class="hidden" data-row="A" data-col="6"></td>
+                    <td class="hidden" data-row="A" data-col="7"></td>
+                    <td class="hidden" data-row="A" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>B</th>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
+                    <td class="hidden" data-row="B" data-col="1"></td>
+                    <td class="hidden" data-row="B" data-col="2"></td>
+                    <td class="hidden" data-row="B" data-col="3"></td>
+                    <td class="hidden" data-row="B" data-col="4"></td>
+                    <td class="hidden" data-row="B" data-col="5"></td>
+                    <td class="hidden" data-row="B" data-col="6"></td>
+                    <td class="hidden" data-row="B" data-col="7"></td>
+                    <td class="hidden" data-row="B" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>C</th>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
+                    <td class="hidden" data-row="C" data-col="1"></td>
+                    <td class="hidden" data-row="C" data-col="2"></td>
+                    <td class="hidden" data-row="C" data-col="3"></td>
+                    <td class="hidden" data-row="C" data-col="4"></td>
+                    <td class="hidden" data-row="C" data-col="5"></td>
+                    <td class="hidden" data-row="C" data-col="6"></td>
+                    <td class="hidden" data-row="C" data-col="7"></td>
+                    <td class="hidden" data-row="C" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>D</th>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="hidden" data-row="D" data-col="1"></td>
+                    <td class="hidden" data-row="D" data-col="2"></td>
+                    <td class="hidden" data-row="D" data-col="3"></td>
+                    <td class="hidden" data-row="D" data-col="4"></td>
+                    <td class="hidden" data-row="D" data-col="5"></td>
+                    <td class="hidden" data-row="D" data-col="6"></td>
+                    <td class="hidden" data-row="D" data-col="7"></td>
+                    <td class="hidden" data-row="D" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>E</th>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
+                    <td class="hidden" data-row="E" data-col="1"></td>
+                    <td class="hidden" data-row="E" data-col="2"></td>
+                    <td class="hidden" data-row="E" data-col="3"></td>
+                    <td class="hidden" data-row="E" data-col="4"></td>
+                    <td class="hidden" data-row="E" data-col="5"></td>
+                    <td class="hidden" data-row="E" data-col="6"></td>
+                    <td class="hidden" data-row="E" data-col="7"></td>
+                    <td class="hidden" data-row="E" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>F</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td class="gem">G</td>
+                    <td class="hidden" data-row="F" data-col="1"></td>
+                    <td class="hidden" data-row="F" data-col="2"></td>
+                    <td class="hidden" data-row="F" data-col="3"></td>
+                    <td class="hidden" data-row="F" data-col="4"></td>
+                    <td class="hidden" data-row="F" data-col="5"></td>
+                    <td class="hidden" data-row="F" data-col="6"></td>
+                    <td class="hidden" data-row="F" data-col="7"></td>
+                    <td class="hidden" data-row="F" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>G</th>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="hidden" data-row="G" data-col="1"></td>
+                    <td class="hidden" data-row="G" data-col="2"></td>
+                    <td class="hidden" data-row="G" data-col="3"></td>
+                    <td class="hidden" data-row="G" data-col="4"></td>
+                    <td class="hidden" data-row="G" data-col="5"></td>
+                    <td class="hidden" data-row="G" data-col="6"></td>
+                    <td class="hidden" data-row="G" data-col="7"></td>
+                    <td class="hidden" data-row="G" data-col="8"></td>
                 </tr>
                 <tr>
                     <th>H</th>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="gem">G</td>
-                    <td></td>
-                    <td class="gem">G</td>
+                    <td class="hidden" data-row="H" data-col="1"></td>
+                    <td class="hidden" data-row="H" data-col="2"></td>
+                    <td class="hidden" data-row="H" data-col="3"></td>
+                    <td class="hidden" data-row="H" data-col="4"></td>
+                    <td class="hidden" data-row="H" data-col="5"></td>
+                    <td class="hidden" data-row="H" data-col="6"></td>
+                    <td class="hidden" data-row="H" data-col="7"></td>
+                    <td class="hidden" data-row="H" data-col="8"></td>
                 </tr>
             </table>
+
+            <p id="result"></p>
+
 
         </div>
         <div class="lower-bar"></div>
@@ -157,6 +170,6 @@
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="assets/app.js"></script>
+<script src="assets/mine.js"></script>
 </body>
 </html>
