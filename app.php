@@ -15,10 +15,10 @@
             <div class="games">
 
             <a class="game" href="slots.php">
-                <img src="/assets/images/slot.jpg" alt="">
+                <img src="assets/images/slot.jpg" alt="">
             </a>
             <a class="game" href="mines.php">
-                <img src="/assets/images/mines.jpg" alt="">
+                <img src="assets/images/mines.jpg" alt="">
             </a>
               
             </div>
