@@ -18,8 +18,8 @@ body {
 }
 
 .tile {
-    width: 100%;
-    padding-top: 100%; /* This creates a square tile */
+    width: 52px;
+    padding-top: 52px; /* This creates a square tile */
     position: relative;
     background-color: #213743;
     text-align: center;
