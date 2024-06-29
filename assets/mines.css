@@ -64,7 +64,7 @@ button:hover {
 
 .tile {
     width: 32px; /* Adjusted from 52px to 40px */
-    /*padding-top: 52px; !* Adjusted from 52px to 40px *!*/
+    padding-top: 15px; /* Adjusted from 52px to 40px */
     position: relative;
     background-color: #213743;
     text-align: center;
