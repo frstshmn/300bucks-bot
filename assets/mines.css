@@ -96,3 +96,9 @@ button:hover {
     background-color: transparent;
     color: #ffffff;
 }
+
+#result {
+    height: 20px; /* Set a fixed height */
+    overflow: hidden; /* Ensure text doesn't overflow */
+    margin: 10px 0; /* Adjust as needed */
+}
