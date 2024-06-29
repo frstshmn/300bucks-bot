@@ -15,7 +15,7 @@
     <label for="bet">Bet Amount: </label>
     <input type="number" id="bet" min="1" value="1">
     <label for="mines">Number of Mines: </label>
-    <input type="number" id="mines" min="1" max="64" value="10">
+    <input type="number" id="mines" min="1" max="24" value="10">
     <button id="start">Start Game</button>
     <button id="cashout" style="display: none;">Cash Out</button>
     <button id="restart" style="display: none;">Restart Game</button>
@@ -33,7 +33,6 @@
         <th>3</th>
         <th>4</th>
         <th>5</th>
-
     </tr>
     <tr>
         <th>A</th>
@@ -42,7 +41,6 @@
         <td class="hidden" data-row="A" data-col="3"></td>
         <td class="hidden" data-row="A" data-col="4"></td>
         <td class="hidden" data-row="A" data-col="5"></td>
-
     </tr>
     <tr>
         <th>B</th>
@@ -51,7 +49,6 @@
         <td class="hidden" data-row="B" data-col="3"></td>
         <td class="hidden" data-row="B" data-col="4"></td>
         <td class="hidden" data-row="B" data-col="5"></td>
-
     </tr>
     <tr>
         <th>C</th>
@@ -60,7 +57,6 @@
         <td class="hidden" data-row="C" data-col="3"></td>
         <td class="hidden" data-row="C" data-col="4"></td>
         <td class="hidden" data-row="C" data-col="5"></td>
-
     </tr>
     <tr>
         <th>D</th>
@@ -69,7 +65,6 @@
         <td class="hidden" data-row="D" data-col="3"></td>
         <td class="hidden" data-row="D" data-col="4"></td>
         <td class="hidden" data-row="D" data-col="5"></td>
-
     </tr>
     <tr>
         <th>E</th>
@@ -78,7 +73,7 @@
         <td class="hidden" data-row="E" data-col="3"></td>
         <td class="hidden" data-row="E" data-col="4"></td>
         <td class="hidden" data-row="E" data-col="5"></td>
-
+    </tr>
 </table>
 
 <p id="result" style="text-align: center;"></p>
