@@ -44,7 +44,7 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 650; // Move the slots further down
+var slotY = 550; // Move the slots further down
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = i * (slotWidth + 10) + 45;
@@ -73,7 +73,7 @@ var boundaries = [
 ];
 
 // Add all bodies to the world
-World.add(engine.world, [ground, ...pegs, ...boundaries]);
+World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 
 // Balance and bet variables
 var balance = 300;
@@ -136,6 +136,9 @@ document.getElementById('bet').addEventListener('change', function() {
 // Run the engine
 Engine.run(engine);
 
+// Run the renderer
+Render.run(render);
+
 // Render multiplier texts
 Events.on(render, 'afterRender', function() {
     var context = render.context;
@@ -152,15 +155,5 @@ Events.on(render, 'afterRender', function() {
         var y = slotY + slotHeight + 100; // Adjusted position to be below the slots
 
         context.fillText(text, x, y);
-    }
-
-    // Draw pegs on top of everything
-    for (var i = 0; i < pegs.length; i++) {
-        var peg = pegs[i];
-        context.beginPath();
-        context.arc(peg.position.x, peg.position.y, 5, 0, 2 * Math.PI, false);
-        context.fillStyle = '#ffffff';
-        context.fill();
-        context.closePath();
     }
 });
