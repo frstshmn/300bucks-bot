@@ -41,13 +41,13 @@ var boundaries = [
 World.add(engine.world, [ground, ...pegs, ...boundaries]);
 
 // Balance and multiplier variables
-var balance = 100;
+var balance = 300; // Default balance set to 300 dollars
 var multiplier = 1;
 
 // Function to throw the ball
 function throwBall() {
     if (balance > 0) {
-        balance--;
+        balance -= multiplier;
         updateBalanceDisplay();
         var ball = Bodies.circle(400, 0, 10, {
             restitution: 1,
