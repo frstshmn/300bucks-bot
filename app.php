@@ -20,7 +20,12 @@
             <a class="game" href="mines.php">
                 <img class="game-cover" src="assets/images/mines.jpg" alt="">
             </a>
-              
+
+                <a class="game" href="plinko.php">
+                    <img class="game-cover" src="assets/images/plinko.jpg" alt="">
+                </a>
+
+
             </div>
 
 

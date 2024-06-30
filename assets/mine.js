@@ -1,3 +1,6 @@
+Telegram.WebApp.ready();
+
+
 $(document).ready(function() {
     // Game configuration
     const rows = 5;
