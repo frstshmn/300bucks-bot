@@ -1,3 +1,6 @@
+Telegram.WebApp.ready();
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Matter.js module aliases
     var Engine = Matter.Engine,
@@ -99,22 +102,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Event handling for ball hitting multiplier slots
             Events.on(engine, 'collisionStart', function(event) {
                 var pairs = event.pairs;
-                for (var i = 0; i < pairs.length; i++) {
-                    var pair = pairs[i];
+                pairs.forEach(function(pair) {
                     if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') {
                         var slotMultiplier = pair.bodyB.multiplier;
                         balance += bet * slotMultiplier;
                         updateBalanceDisplay();
                         World.remove(engine.world, ball);
-                        return;
                     } else if (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball') {
                         var slotMultiplier = pair.bodyA.multiplier;
                         balance += bet * slotMultiplier;
                         updateBalanceDisplay();
                         World.remove(engine.world, ball);
-                        return;
                     }
-                }
+                });
             });
 
         } else {
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to update balance display
     function updateBalanceDisplay() {
-        document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
+        document.getElementById('balance').innerText = balance.toFixed(2);
     }
 
     // Event handling for bet input
@@ -150,4 +150,5 @@ document.addEventListener('DOMContentLoaded', function() {
             context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
         }
     });
+
 });
