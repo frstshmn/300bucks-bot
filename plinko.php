@@ -13,10 +13,10 @@
 
 <div class="controls">
     <label for="balance">Balance:</label>
-    <input type="number" id="balance" value="300" readonly>
+    <span id="balance">300</span>
     <br>
-    <label for="multiplier">Multiplier:</label>
-    <input type="number" id="multiplier" value="1">
+    <label for="bet">Bet:</label>
+    <input type="number" id="bet" value="1">
     <br>
     <button onclick="throwBall()">Throw Ball</button>
 </div>

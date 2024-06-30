@@ -30,7 +30,7 @@ var ground = Bodies.rectangle(400, 580, 800, 40, { isStatic: true, render: { fil
 var pegs = [];
 var rows = 12;
 var pegSpacing = 50;
-for (var row = 0; row < rows; row++) {
+for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
     for (var col = 0; col <= row; col++) {
         var x = 400 + col * pegSpacing - row * pegSpacing / 2;
         var y = 100 + row * pegSpacing;
@@ -81,14 +81,14 @@ var boundaries = [
 // Add all bodies to the world
 World.add(engine.world, [ground, ...pegs, ...slots, ...texts, ...boundaries]);
 
-// Balance and multiplier variables
+// Balance and bet variables
 var balance = 300;
-var multiplier = 1;
+var bet = 1;
 
 // Function to throw the ball
 function throwBall() {
-    if (balance > 0) {
-        balance -= multiplier;
+    if (balance >= bet) {
+        balance -= bet;
         updateBalanceDisplay();
         var startX = Common.random(300, 500); // Start the ball at a random position
         var ball = Bodies.circle(startX, 0, 10, {
@@ -111,7 +111,7 @@ function throwBall() {
                     var slotMultiplier = pair.bodyB.multiplier;
                     var slotProbability = pair.bodyB.probability;
                     if (Math.random() < slotProbability) {
-                        balance += slotMultiplier * multiplier;
+                        balance += bet * slotMultiplier;
                     }
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
@@ -120,7 +120,7 @@ function throwBall() {
                     var slotMultiplier = pair.bodyA.multiplier;
                     var slotProbability = pair.bodyA.probability;
                     if (Math.random() < slotProbability) {
-                        balance += slotMultiplier * multiplier;
+                        balance += bet * slotMultiplier;
                     }
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
@@ -129,18 +129,18 @@ function throwBall() {
             }
         });
     } else {
-        alert("Out of balance! Reset to continue playing.");
+        alert("Not enough balance! Reduce your bet or reset to continue playing.");
     }
 }
 
 // Function to update balance display
 function updateBalanceDisplay() {
-    document.getElementById('balance').value = balance;
+    document.getElementById('balance').innerText = balance;
 }
 
-// Event handling for multiplier input
-document.getElementById('multiplier').addEventListener('change', function() {
-    multiplier = parseInt(this.value) || 1;
+// Event handling for bet input
+document.getElementById('bet').addEventListener('change', function() {
+    bet = parseInt(this.value) || 1;
 });
 
 // Run the engine
