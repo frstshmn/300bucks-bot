@@ -22,6 +22,9 @@
 
     <button onclick="throwBall()">Throw Ball</button>
 
+
+    <div id="messageDisplay"></div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>

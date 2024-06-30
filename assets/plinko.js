@@ -17,7 +17,7 @@ var render = Render.create({
     engine: engine,
     options: {
         width: 800,
-        height: 600,
+        height: 700, // Increased height to accommodate additional row
         wireframes: false,
         background: '#1b1b1b'
     }
@@ -28,7 +28,7 @@ var ground = Bodies.rectangle(400, 590, 800, 20, { isStatic: true, render: { fil
 
 // Create pegs in a triangular layout
 var pegs = [];
-var rows = 12;
+var rows = 13; // Increased to 13 rows
 var pegSpacing = 50;
 var pegOffsetY = -100; // Raise the peg grid by adjusting the Y offset
 for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
@@ -41,7 +41,7 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 }
 
 // Create multiplier slots
-var multiplierValues = [29, 16, 8, 4, 2, 0.2, 2, 4, 8, 16, 29]; // Sample multipliers for demonstration
+var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
 var slotY = 550; // Move the slots further down
@@ -84,7 +84,8 @@ function throwBall() {
     if (balance >= bet) {
         balance -= bet;
         updateBalanceDisplay();
-        var startX = 400; // Start the ball at the center
+        // Start the ball slightly above the center
+        var startX = 400 + Math.random() * 10 - 5;
         var ball = Bodies.circle(startX, 0, 10, {
             restitution: 0.5,
             friction: 0,
@@ -117,13 +118,14 @@ function throwBall() {
             }
         });
     } else {
-        alert("Not enough balance! Reduce your bet or reset to continue playing.");
+        document.getElementById('messageDisplay').innerText = "Not enough balance!";
+        document.getElementById('throwBallBtn').classList.add('disabled');
     }
 }
 
 // Function to update balance display
 function updateBalanceDisplay() {
-    document.getElementById('balance').innerText = balance.toFixed(2);
+    document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
 }
 
 // Event handling for bet input
@@ -148,5 +150,3 @@ Events.on(render, 'afterRender', function() {
         context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
     }
 });
-
-
