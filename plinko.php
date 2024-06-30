@@ -8,23 +8,14 @@
 </head>
 <body>
 <a href="app.php" class="previous">&laquo; Back to all Games</a>
-
-<canvas id="plinkoCanvas"></canvas>
-
+<canvas id="plinkoCanvas" width="800" height="700"></canvas>
 <div class="navbar">
-    <div class="amount">
-        <label for="bet">Bet Amount: </label>
-        <input type="number" id="bet" min="1" value="1">
-    </div>
-
-    <label for="balance">Balance:</label>
-    <span id="balanceDisplay">300</span>
-
-    <button onclick="throwBall()">Throw Ball</button>
-
-
+    <span>Bet Amount:</span>
+    <input type="number" id="bet" min="1" value="1">
+    <span>Balance:</span>
+    <span id="balanceDisplay">300.00</span>
+    <button id="throwBallBtn" onclick="throwBall()">Throw Ball</button>
     <div id="messageDisplay"></div>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
