@@ -66,7 +66,7 @@ $(document).ready(function() {
             return;
         }
 
-        $("#result").text('');
+        $("#result").text('Good luck!'); // Display "Good luck" message
         $(".tile").removeClass("mine gem revealed").addClass("hidden").text('');
         placeItems();
         $(".tile.hidden").off("click").on("click", cellClickHandler);
@@ -104,6 +104,9 @@ $(document).ready(function() {
             $("#result").text("You must start the game first.");
             return;
         }
+
+        // Remove click handler from the tile
+        $(this).off("click");
 
         if ($(this).hasClass("mine")) {
             $(this).removeClass("hidden").addClass("revealed mine").text("💣");
