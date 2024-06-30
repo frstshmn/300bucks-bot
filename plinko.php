@@ -11,14 +11,17 @@
 
 <canvas id="plinkoCanvas"></canvas>
 
-<div class="controls">
+<div class="navbar">
+    <div class="amount">
+        <label for="bet">Bet Amount: </label>
+        <input type="number" id="bet" min="1" value="1">
+    </div>
+
     <label for="balance">Balance:</label>
     <span id="balance">300</span>
-    <br>
-    <label for="bet">Bet:</label>
-    <input type="number" id="bet" value="1">
-    <br>
+
     <button onclick="throwBall()">Throw Ball</button>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
