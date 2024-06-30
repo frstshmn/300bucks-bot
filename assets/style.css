@@ -198,9 +198,9 @@ body {
     color: #ffffff;
 }
 
-#controls select,
-#controls input[type="number"],
-#controls button {
+#amount select,
+#amount input[type="number"],
+#amount button {
     width: 120px;
     padding: 10px;
     margin: 5px;
@@ -213,18 +213,18 @@ body {
     cursor: pointer;
 }
 
-#controls select:focus,
-#controls input[type="number"]:focus,
-#controls button:focus {
+#amount select:focus,
+#amount input[type="number"]:focus,
+#amount button:focus {
     outline: none;
     border-color: #ffcc00;
 }
 
-#controls #risk-level{
+#amount #risk-level{
     width: 170px;
 }
 
-#controls button {
+#amount button {
     border: 2px solid #ffffff;
     border-radius: 5px;
     background-color: #213743;
