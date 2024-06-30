@@ -26,6 +26,11 @@
                 </a>
 
 
+                <a class="game" href="aviator.php">
+                    <img class="game-cover" src="assets/images/plinko.jpg" alt="">
+                </a>
+
+
             </div>
 
 
