@@ -112,24 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event handling for bet input (as per your original script)
 
-    // Run the engine
-    Engine.run(engine);
-
-    // Run the renderer
-    Render.run(render);
-
-    // Render multiplier texts
-    Events.on(render, 'afterRender', function() {
-        var context = render.context;
-        context.font = '24px Arial';
-        context.fillStyle = 'black';
-        context.textAlign = 'center';
-        for (var i = 0; i < slots.length; i++) {
-            var slot = slots[i];
-            context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
-        }
-    });
-
     // Button click event listener
     document.getElementById('throwBallBtn').addEventListener('click', throwBall);
 });
