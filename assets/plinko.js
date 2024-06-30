@@ -121,7 +121,7 @@ Render.run(render);
 // Render multiplier texts
 Events.on(render, 'afterRender', function() {
     var context = render.context;
-    context.font = '16px Arial';
+    context.font = '24px Arial';
     context.fillStyle = 'black';
     context.textAlign = 'center';
     for (var i = 0; i < slots.length; i++) {
