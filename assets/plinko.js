@@ -1,5 +1,5 @@
 Telegram.WebApp.ready();
-
+document.addEventListener('DOMContentLoaded', function() {
 // Matter.js module aliases
 var Engine = Matter.Engine,
     Render = Matter.Render,
@@ -128,4 +128,5 @@ Events.on(render, 'afterRender', function() {
         var slot = slots[i];
         context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
     }
+});
 });
