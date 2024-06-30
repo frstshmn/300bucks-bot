@@ -1,3 +1,6 @@
+Telegram.WebApp.ready();
+
+
 $(document).ready(function() {
     var gameStarted = false;
     var multiplier = 1.00;
