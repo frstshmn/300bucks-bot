@@ -47,7 +47,7 @@ var slotHeight = 40;
 var slotY = 750; // Move the slots to the bottom
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 80 + i * (slotWidth + 10); // Adjusted position to align correctly
+    var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
     if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
