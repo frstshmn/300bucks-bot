@@ -5,8 +5,7 @@ var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
     Bodies = Matter.Bodies,
-    Events = Matter.Events,
-    Vertices = Matter.Vertices;
+    Events = Matter.Events;
 
 // Create an engine
 var engine = Engine.create();
@@ -53,11 +52,11 @@ for (var i = 0; i < multiplierChances.length; i++) {
 
 // Create cone-shaped obstacles (bumpers)
 var obstacles = [
-    Bodies.fromVertices(200, 100, Vertices.fromPath('0 0 50 0 25 -50'), { isStatic: true }),
-    Bodies.fromVertices(600, 100, Vertices.fromPath('0 0 -50 0 -25 -50'), { isStatic: true }),
-    Bodies.fromVertices(400, 300, Vertices.fromPath('0 0 100 0 50 -50'), { isStatic: true }),
-    Bodies.fromVertices(200, 500, Vertices.fromPath('0 0 50 0 25 -50'), { isStatic: true }),
-    Bodies.fromVertices(600, 500, Vertices.fromPath('0 0 -50 0 -25 -50'), { isStatic: true })
+    Bodies.circle(250, 100, 30, { isStatic: true, render: { fillStyle: '#ff0000' } }),
+    Bodies.circle(550, 100, 30, { isStatic: true, render: { fillStyle: '#ff0000' } }),
+    Bodies.circle(400, 300, 60, { isStatic: true, render: { fillStyle: '#ff0000' } }),
+    Bodies.circle(250, 500, 30, { isStatic: true, render: { fillStyle: '#ff0000' } }),
+    Bodies.circle(550, 500, 30, { isStatic: true, render: { fillStyle: '#ff0000' } })
 ];
 
 // Boundaries
