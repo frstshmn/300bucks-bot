@@ -5,7 +5,8 @@ var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
     Bodies = Matter.Bodies,
-    Events = Matter.Events;
+    Events = Matter.Events,
+    Common = Matter.Common;
 
 // Create an engine
 var engine = Engine.create();
@@ -41,6 +42,7 @@ for (var row = 0; row < rows; row++) {
 // Create multiplier slots
 var multiplierValues = [3, 1.5, 1, 0.6, 0.3, 1.1, 0.3, 0.6, 1, 1.5, 3];
 var slots = [];
+var texts = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = i * 70 + 65;
     var slot = Bodies.rectangle(x, 560, 70, 20, {
@@ -52,6 +54,19 @@ for (var i = 0; i < multiplierValues.length; i++) {
         multiplier: multiplierValues[i]
     });
     slots.push(slot);
+
+    // Add text labels for multipliers
+    var text = Bodies.rectangle(x, 520, 1, 1, {
+        isStatic: true,
+        isSensor: true,
+        render: {
+            fillStyle: '#ffffff',
+            opacity: 0
+        },
+        label: 'multiplierText',
+        multiplier: multiplierValues[i]
+    });
+    texts.push(text);
 }
 
 // Create boundaries
@@ -62,7 +77,7 @@ var boundaries = [
 ];
 
 // Add all bodies to the world
-World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
+World.add(engine.world, [ground, ...pegs, ...slots, ...texts, ...boundaries]);
 
 // Balance and multiplier variables
 var balance = 300;
@@ -73,7 +88,8 @@ function throwBall() {
     if (balance > 0) {
         balance -= multiplier;
         updateBalanceDisplay();
-        var ball = Bodies.circle(400, 0, 10, {
+        var startX = Common.random(300, 500); // Start the ball at a random position
+        var ball = Bodies.circle(startX, 0, 10, {
             restitution: 0.5,
             friction: 0,
             frictionAir: 0.01,
@@ -124,3 +140,15 @@ Engine.run(engine);
 
 // Run the renderer
 Render.run(render);
+
+// Render multiplier texts
+Events.on(render, 'afterRender', function() {
+    var context = render.context;
+    context.font = '16px Arial';
+    context.fillStyle = 'white';
+    context.textAlign = 'center';
+    for (var i = 0; i < texts.length; i++) {
+        var text = texts[i];
+        context.fillText(text.multiplier + 'x', text.position.x, text.position.y);
+    }
+});
