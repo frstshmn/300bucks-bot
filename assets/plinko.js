@@ -1,14 +1,13 @@
 Telegram.WebApp.ready();
 
 $(document).ready(function() {
-    const { Engine, Render, World, Bodies, Body } = Matter;
+    const { Engine, Render, World, Bodies, Body, Events } = Matter;
 
-    // Matter.js engine
-    const engine = Engine.create();
-
-    // Matter.js renderer
-    const render = Render.create({
-        element: document.getElementById('canvas'),
+    let engine = Engine.create();
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    let render = Render.create({
+        canvas: canvas,
         engine: engine,
         options: {
             width: 800,
@@ -17,7 +16,6 @@ $(document).ready(function() {
         }
     });
 
-    // Constants and variables
     let balance = 300;
     let betAmount = 10;
     let multiplierRange = {
@@ -26,21 +24,17 @@ $(document).ready(function() {
         high: { min: 0.2, max: 1000 }
     };
 
-    // Dropdown change event
     $('#risk-level').change(function() {
         resetGame($(this).val());
     });
 
-    // Button click event
     $('#drop-button').click(function() {
         dropBall();
     });
 
-    // Function to reset the game based on risk level
     function resetGame(riskLevel) {
         World.clear(engine.world);
         Engine.clear(engine);
-        render.canvas.remove();
         render.canvas = null;
         render.context = null;
         render.textures = {};
@@ -63,7 +57,6 @@ $(document).ready(function() {
         Render.run(render);
     }
 
-    // Function to create Plinko pegs
     function createPlinko(numRows) {
         const pegs = [];
         const spacingX = 80;
@@ -93,7 +86,6 @@ $(document).ready(function() {
         World.add(engine.world, pegs);
     }
 
-    // Function to create walls and ground
     function createWallsAndGround() {
         const ground = Bodies.rectangle(400, 600, 800, 40, { isStatic: true });
         const leftWall = Bodies.rectangle(0, 300, 20, 600, { isStatic: true });
@@ -102,7 +94,6 @@ $(document).ready(function() {
         World.add(engine.world, [ground, leftWall, rightWall]);
     }
 
-    // Function to drop the ball
     function dropBall() {
         const ball = Bodies.circle(400, 0, 20, { restitution: 1 });
         World.add(engine.world, ball);
@@ -126,7 +117,6 @@ $(document).ready(function() {
         });
     }
 
-    // Function to calculate multiplier based on ball position
     function calculateMultiplier(x, range) {
         const center = 400; // Center of the canvas
         const maxMultiplier = range.low.max; // Using low risk level max multiplier
@@ -136,6 +126,5 @@ $(document).ready(function() {
         return range.low.min + (multiplierRange * (1 - normalizedDistance));
     }
 
-    // Initialize the game with default settings
     resetGame('low');
 });
