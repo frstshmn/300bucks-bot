@@ -17,56 +17,52 @@ var render = Render.create({
     options: {
         width: 800,
         height: 600,
-        wireframes: false
+        wireframes: false,
+        background: '#1b1b1b'
     }
 });
 
-// Create bodies
-var ground = Bodies.rectangle(400, 600, 800, 50, { isStatic: true });
+// Create ground
+var ground = Bodies.rectangle(400, 580, 800, 40, { isStatic: true, render: { fillStyle: '#ffffff' } });
 
-// Create pegs
+// Create pegs in a triangular layout
 var pegs = [];
-for (var i = 50; i <= 750; i += 50) {
-    for (var j = 75; j <= 300; j += 50) {
-        var peg = Bodies.circle(i + (j % 100 ? 25 : 0), j, 10, { isStatic: true });
+var rows = 12;
+var pegSpacing = 50;
+for (var row = 0; row < rows; row++) {
+    for (var col = 0; col <= row; col++) {
+        var x = 400 + col * pegSpacing - row * pegSpacing / 2;
+        var y = 100 + row * pegSpacing;
+        var peg = Bodies.circle(x, y, 5, { isStatic: true, render: { fillStyle: '#ffffff' } });
         pegs.push(peg);
     }
 }
 
-// Create multiplier tiles with corresponding chances
-var multiplierTiles = [];
-var multiplierChances = [0.125, 0.125, 0.25, 0.25, 0.125, 0.125];
-var multiplierValues = [0, 0, 0, 1, 1, 2];
-var xPos = 40;
-
-for (var i = 0; i < multiplierChances.length; i++) {
-    var tileHeight = 50 + 50 * i;
-    var multiplierTile = Bodies.rectangle(xPos, tileHeight, 60, 40, {
+// Create multiplier slots
+var multiplierValues = [3, 1.5, 1, 0.6, 0.3, 1.1, 0.3, 0.6, 1, 1.5, 3];
+var slots = [];
+for (var i = 0; i < multiplierValues.length; i++) {
+    var x = i * 70 + 65;
+    var slot = Bodies.rectangle(x, 560, 70, 20, {
         isStatic: true,
-        label: 'multiplier',
+        render: {
+            fillStyle: '#ffffff'
+        },
+        label: 'slot',
         multiplier: multiplierValues[i]
     });
-    multiplierTiles.push(multiplierTile);
-    xPos += 80;
+    slots.push(slot);
 }
 
-// Create cone-shaped obstacles (bumpers)
-var obstacles = [
-    Bodies.circle(250, 100, 30, { isStatic: true, render: { fillStyle: '#ff0000' } }),
-    Bodies.circle(550, 100, 30, { isStatic: true, render: { fillStyle: '#ff0000' } }),
-    Bodies.circle(400, 300, 60, { isStatic: true, render: { fillStyle: '#ff0000' } }),
-    Bodies.circle(250, 500, 30, { isStatic: true, render: { fillStyle: '#ff0000' } }),
-    Bodies.circle(550, 500, 30, { isStatic: true, render: { fillStyle: '#ff0000' } })
-];
-
-// Boundaries
+// Create boundaries
 var boundaries = [
-    Bodies.rectangle(0, 300, 20, 600, { isStatic: true }),
-    Bodies.rectangle(800, 300, 20, 600, { isStatic: true })
+    Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
+    Bodies.rectangle(0, 300, 20, 600, { isStatic: true }), // Left boundary
+    Bodies.rectangle(800, 300, 20, 600, { isStatic: true }) // Right boundary
 ];
 
 // Add all bodies to the world
-World.add(engine.world, [ground, ...pegs, ...multiplierTiles, ...obstacles, ...boundaries]);
+World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 
 // Balance and multiplier variables
 var balance = 300;
@@ -78,27 +74,30 @@ function throwBall() {
         balance -= multiplier;
         updateBalanceDisplay();
         var ball = Bodies.circle(400, 0, 10, {
-            restitution: 1,
+            restitution: 0.5,
             friction: 0,
             frictionAir: 0.01,
-            label: 'ball'
+            label: 'ball',
+            render: {
+                fillStyle: '#ff0000'
+            }
         });
         World.add(engine.world, [ball]);
 
-        // Event handling for ball hitting multiplier tiles
+        // Event handling for ball hitting multiplier slots
         Events.on(engine, 'collisionStart', function(event) {
             var pairs = event.pairs;
             for (var i = 0; i < pairs.length; i++) {
                 var pair = pairs[i];
-                if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'multiplier') {
-                    var multiplierValue = pair.bodyB.multiplier;
-                    balance += multiplierValue * multiplier;
+                if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') {
+                    var slotMultiplier = pair.bodyB.multiplier;
+                    balance += slotMultiplier * multiplier;
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
                     return;
-                } else if (pair.bodyA.label === 'multiplier' && pair.bodyB.label === 'ball') {
-                    var multiplierValue = pair.bodyA.multiplier;
-                    balance += multiplierValue * multiplier;
+                } else if (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball') {
+                    var slotMultiplier = pair.bodyA.multiplier;
+                    balance += slotMultiplier * multiplier;
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
                     return;
