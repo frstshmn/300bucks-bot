@@ -40,33 +40,23 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 }
 
 // Create multiplier slots
-var multiplierValues = [3, 1.5, 1, 0.6, 0.3, 1.1, 0.3, 0.6, 1, 1.5, 3];
+var multiplierValues = [29, 16, 8, 4, 2, 1, 2, 4, 8, 16, 29]; // Sample multipliers for demonstration
 var slots = [];
-var texts = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = i * 70 + 65;
     var slot = Bodies.rectangle(x, 560, 70, 20, {
         isStatic: true,
         render: {
-            fillStyle: '#ffffff'
+            fillStyle: '#ffffff',
+            text: {
+                content: multiplierValues[i] + 'x',
+                color: '#000000'
+            }
         },
         label: 'slot',
         multiplier: multiplierValues[i]
     });
     slots.push(slot);
-
-    // Add text labels for multipliers
-    var text = Bodies.rectangle(x, 520, 1, 1, {
-        isStatic: true,
-        isSensor: true,
-        render: {
-            fillStyle: '#ffffff',
-            opacity: 0
-        },
-        label: 'multiplierText',
-        multiplier: multiplierValues[i]
-    });
-    texts.push(text);
 }
 
 // Create boundaries
@@ -77,7 +67,7 @@ var boundaries = [
 ];
 
 // Add all bodies to the world
-World.add(engine.world, [ground, ...pegs, ...slots, ...texts, ...boundaries]);
+World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 
 // Balance and bet variables
 var balance = 300;
@@ -127,7 +117,7 @@ function throwBall() {
 
 // Function to update balance display
 function updateBalanceDisplay() {
-    document.getElementById('balance').innerText = balance;
+    document.getElementById('balance').innerText = balance.toFixed(2);
 }
 
 // Event handling for bet input
@@ -145,10 +135,11 @@ Render.run(render);
 Events.on(render, 'afterRender', function() {
     var context = render.context;
     context.font = '16px Arial';
-    context.fillStyle = 'white';
+    context.fillStyle = 'black';
     context.textAlign = 'center';
-    for (var i = 0; i < texts.length; i++) {
-        var text = texts[i];
-        context.fillText(text.multiplier + 'x', text.position.x, text.position.y);
+    for (var i = 0; i < slots.length; i++) {
+        var slot = slots[i];
+        context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
     }
 });
+
