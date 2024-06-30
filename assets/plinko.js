@@ -146,14 +146,14 @@ Events.on(render, 'afterRender', function() {
     context.fillStyle = 'black';
     context.textAlign = 'center';
 
+    // Draw multiplier texts below the slots
     for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
         var text = slot.multiplier + 'x';
         var textWidth = context.measureText(text).width;
         var x = slot.position.x;
-        var y = slotY + slotHeight + 100; // Adjusted position to be below the slots
+        var y = slotY + slotHeight + 30; // Adjusted position to be below the slots
 
         context.fillText(text, x, y);
     }
 });
-
