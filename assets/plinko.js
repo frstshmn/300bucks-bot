@@ -24,7 +24,7 @@ var render = Render.create({
 });
 
 // Create ground
-var ground = Bodies.rectangle(400, 580, 800, 40, { isStatic: true, render: { fillStyle: '#ffffff' } });
+var ground = Bodies.rectangle(400, 600, 800, 40, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
 
 // Create pegs in a triangular layout
 var pegs = [];
@@ -44,7 +44,7 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 var multiplierValues = [29, 16, 8, 4, 2, 1, 2, 4, 8, 16, 29]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 540;
+var slotY = 520;
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = i * (slotWidth + 10) + 65;
@@ -57,11 +57,7 @@ for (var i = 0; i < multiplierValues.length; i++) {
     var slot = Bodies.rectangle(x, slotY, slotWidth, slotHeight, {
         isStatic: true,
         render: {
-            fillStyle: color,
-            text: {
-                content: multiplierValues[i] + 'x',
-                color: '#000000'
-            }
+            fillStyle: color
         },
         label: 'slot',
         multiplier: multiplierValues[i]
