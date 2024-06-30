@@ -147,6 +147,11 @@ Events.on(render, 'afterRender', function() {
     context.textAlign = 'center';
     for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
-        context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
+        var text = slot.multiplier + 'x';
+        var textWidth = context.measureText(text).width;
+        var x = slot.position.x;
+        var y = slotY + slotHeight + 30; // Adjusted position to be below the slots
+
+        context.fillText(text, x, y);
     }
 });
