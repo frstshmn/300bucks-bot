@@ -18,7 +18,7 @@
     </div>
 
     <label for="balance">Balance:</label>
-    <span id="balance">300</span>
+    <span id="balanceDisplay">300</span>
 
     <button onclick="throwBall()">Throw Ball</button>
 
