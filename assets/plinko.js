@@ -49,7 +49,7 @@ $(document).ready(function() {
 
         for (let i = 0; i < numBuckets; i++) {
             const x = i * 50 + 25;
-            const bucket = Bodies.rectangle(x, 550, 50, 10, { isStatic: true });
+            const bucket = Bodies.rectangle(x, 560, 50, 10, { isStatic: true });
             Composite.add(world, bucket);
         }
     }
@@ -67,7 +67,7 @@ $(document).ready(function() {
             multiplier.className = 'multiplier';
             multiplier.style.position = 'absolute';
             multiplier.style.left = `${index * 50 + 15}px`;
-            multiplier.style.top = '540px';
+            multiplier.style.top = '530px';
             multiplier.textContent = value;
             container.appendChild(multiplier);
         });
@@ -114,17 +114,21 @@ $(document).ready(function() {
         const ball = Bodies.circle(300, 0, 10, { restitution: 0.5 });
         Composite.add(world, ball);
 
-        Events.on(engine, 'afterUpdate', function() {
-            if (ball.position.y >= 550) {
-                const xPos = Math.round(ball.position.x / 50);
-                const bucketIndex = Math.min(Math.max(xPos, 0), numBuckets - 1);
-                const prize = calculatePrize(risk, bucketIndex);
+        Events.on(engine, 'collisionStart', function(event) {
+            const pairs = event.pairs;
+            for (let pair of pairs) {
+                if (pair.bodyA === ball || pair.bodyB === ball) {
+                    if (pair.bodyA.label === 'Bucket' || pair.bodyB.label === 'Bucket') {
+                        const xPos = Math.round(ball.position.x / 50);
+                        const bucketIndex = Math.min(Math.max(xPos, 0), numBuckets - 1);
+                        const prize = calculatePrize(risk, bucketIndex);
 
-                balance += prize;
-                $balanceDisplay.text(balance);
-                $result.text(`You won: ${prize}`);
-                Composite.remove(world, ball);
-                Events.off(engine, 'afterUpdate');
+                        balance += prize;
+                        $balanceDisplay.text(balance);
+                        $result.text(`You won: ${prize}`);
+                        Composite.remove(world, ball);
+                    }
+                }
             }
         });
     });
