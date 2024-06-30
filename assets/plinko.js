@@ -44,10 +44,10 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 680; // Move the slots to the bottom
+var slotY = 750; // Move the slots to the bottom
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
+    var x = 80 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
     if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
@@ -75,12 +75,12 @@ var boundaries = [
 // Add all bodies to the world
 World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 
-// Balance and bet variables
+// Balance variable
 var balance = 300;
-var bet = 1;
 
 // Function to throw the ball
 function throwBall() {
+    var bet = parseInt(document.getElementById('bet').value) || 1;
     if (balance >= bet) {
         balance -= bet;
         updateBalanceDisplay();
@@ -125,13 +125,8 @@ function throwBall() {
 
 // Function to update balance display
 function updateBalanceDisplay() {
-    document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
+    document.getElementById('balanceDisplay').innerText = "Balance: " + balance.toFixed(2);
 }
-
-// Event handling for bet input
-document.getElementById('bet').addEventListener('change', function() {
-    bet = parseInt(this.value) || 1;
-});
 
 // Run the engine
 Engine.run(engine);
@@ -156,6 +151,4 @@ Events.on(render, 'afterRender', function() {
         context.fillText(text, x, y);
     }
 });
-
-
 
