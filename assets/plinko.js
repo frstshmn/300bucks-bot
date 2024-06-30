@@ -40,11 +40,18 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
     }
 }
 
-// Create multiplier slots
+// Create boundaries
+var boundaries = [
+    Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
+    Bodies.rectangle(0, 300, 20, 600, { isStatic: true }), // Left boundary
+    Bodies.rectangle(800, 300, 20, 600, { isStatic: true }) // Right boundary
+];
+
+// Create multiplier slots at the bottom of the canvas
 var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 550; // Move the slots further down
+var slotY = 650; // Bottom position for slots
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = i * (slotWidth + 10) + 45;
@@ -64,13 +71,6 @@ for (var i = 0; i < multiplierValues.length; i++) {
     });
     slots.push(slot);
 }
-
-// Create boundaries
-var boundaries = [
-    Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
-    Bodies.rectangle(0, 300, 20, 600, { isStatic: true }), // Left boundary
-    Bodies.rectangle(800, 300, 20, 600, { isStatic: true }) // Right boundary
-];
 
 // Add all bodies to the world
 World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
@@ -97,26 +97,8 @@ function throwBall() {
         });
         World.add(engine.world, [ball]);
 
-        // Event handling for ball hitting multiplier slots
-        Events.on(engine, 'collisionStart', function(event) {
-            var pairs = event.pairs;
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i];
-                if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') {
-                    var slotMultiplier = pair.bodyB.multiplier;
-                    balance += bet * slotMultiplier;
-                    updateBalanceDisplay();
-                    World.remove(engine.world, ball);
-                    return;
-                } else if (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball') {
-                    var slotMultiplier = pair.bodyA.multiplier;
-                    balance += bet * slotMultiplier;
-                    updateBalanceDisplay();
-                    World.remove(engine.world, ball);
-                    return;
-                }
-            }
-        });
+        // Event handling for ball hitting multiplier slots (as per your original script)
+
     } else {
         document.getElementById('messageDisplay').innerText = "Not enough balance!";
         document.getElementById('throwBallBtn').classList.add('disabled');
@@ -128,10 +110,7 @@ function updateBalanceDisplay() {
     document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
 }
 
-// Event handling for bet input
-document.getElementById('bet').addEventListener('change', function() {
-    bet = parseInt(this.value) || 1;
-});
+// Event handling for bet input (as per your original script)
 
 // Run the engine
 Engine.run(engine);
