@@ -9,20 +9,7 @@
 <body>
 <div id="game-container">
     <div id="plinko-board">
-        <ul class="buckets">
-            <li id="one" class="bucket">0</li>
-            <li id="two" class="bucket">0</li>
-            <li id="three" class="bucket">0</li>
-            <li id="four" class="bucket">0</li>
-            <li id="five" class="bucket">0</li>
-        </ul>
-        <ul class="percents">
-            <li id="one_percent">0.00%</li>
-            <li id="two_percent">0.00%</li>
-            <li id="three_percent">0.00%</li>
-            <li id="four_percent">0.00%</li>
-            <li id="five_percent">0.00%</li>
-        </ul>
+        <canvas id="canvas"></canvas>
     </div>
     <div id="controls">
         <label for="risk-level">Choose Risk Level:</label>
@@ -42,6 +29,8 @@
         Balance: $<span id="balance">300</span>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+
 <script src="assets/plinko.js"></script>
 </body>
 </html>

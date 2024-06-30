@@ -2,7 +2,6 @@ Telegram.WebApp.ready();
 
 $(document).ready(function() {
     let balance = 300;
-    const $board = $('#plinko-board');
     const $dropButton = $('#drop-button');
     const $result = $('#result');
     const $riskLevel = $('#risk-level');
@@ -10,17 +9,47 @@ $(document).ready(function() {
     const $balanceDisplay = $('#balance');
     const numBuckets = 5;
 
+    const Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Bodies = Matter.Bodies,
+        Composite = Matter.Composite,
+        Events = Matter.Events;
+
+    const engine = Engine.create();
+    const world = engine.world;
+    const render = Render.create({
+        element: document.getElementById('plinko-board'),
+        engine: engine,
+        canvas: document.getElementById('canvas'),
+        options: {
+            width: 600,
+            height: 600,
+            wireframes: false
+        }
+    });
+
+    Render.run(render);
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+
     function createPins(numRows) {
-        $board.find('.pin').remove();
+        Composite.clear(world);
+        const pinRadius = 5;
+        const pinSpacing = 40;
         for (let row = 0; row < numRows; row++) {
             for (let col = 0; col <= row; col++) {
-                const $pin = $('<div>', { class: 'pin' });
-                $pin.css({
-                    left: `${50 + col * 50 - row * 25}px`,
-                    top: `${50 + row * 50}px`
-                });
-                $board.append($pin);
+                const x = 300 + col * pinSpacing - row * pinSpacing / 2;
+                const y = 50 + row * pinSpacing;
+                const pin = Bodies.circle(x, y, pinRadius, { isStatic: true });
+                Composite.add(world, pin);
             }
+        }
+
+        for (let i = 0; i < numBuckets; i++) {
+            const x = i * 120 + 90;
+            const bucket = Bodies.rectangle(x, 550, 100, 10, { isStatic: true });
+            Composite.add(world, bucket);
         }
     }
 
@@ -39,17 +68,6 @@ $(document).ready(function() {
             default:
                 return 0;
         }
-    }
-
-    function dropBall(numRows) {
-        let currentPos = Math.floor(Math.random() * numBuckets);
-        for (let i = 0; i < numRows; i++) {
-            const direction = Math.random() < 0.5 ? -1 : 1;
-            currentPos += direction;
-            currentPos = Math.max(0, Math.min(numBuckets - 1, currentPos));
-        }
-
-        return currentPos;
     }
 
     $dropButton.on('click', function() {
@@ -72,12 +90,25 @@ $(document).ready(function() {
         $balanceDisplay.text(balance);
 
         $result.text('');
-        const bucketIndex = dropBall(numRows);
-        const prize = calculatePrize(risk, bucketIndex);
 
-        balance += prize;
-        $balanceDisplay.text(balance);
+        const ball = Bodies.circle(300, 0, 10, { restitution: 0.5 });
+        Composite.add(world, ball);
 
-        $result.text(`You won: ${prize}`);
+        Events.on(engine, 'collisionStart', function(event) {
+            const pairs = event.pairs;
+            for (let pair of pairs) {
+                if (pair.bodyA === ball || pair.bodyB === ball) {
+                    const xPos = Math.round(ball.position.x / 120);
+                    const bucketIndex = Math.min(Math.max(xPos, 0), numBuckets - 1);
+                    const prize = calculatePrize(risk, bucketIndex);
+
+                    balance += prize;
+                    $balanceDisplay.text(balance);
+                    $result.text(`You won: ${prize}`);
+                    Composite.remove(world, ball);
+                }
+            }
+        });
     });
 });
+
