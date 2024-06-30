@@ -64,7 +64,7 @@ button:hover {
     text-align: center;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s; /* Add a smooth transition */
+    transition: background-color 0.3s;
     display: flex; /* Added for flexbox centering */
     align-items: center; /* Added for vertical centering */
     justify-content: center; /* Added for horizontal centering */
