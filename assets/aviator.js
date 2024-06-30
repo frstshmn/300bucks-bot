@@ -1,13 +1,13 @@
 $(document).ready(function() {
     var gameStarted = false;
-    var score = 0;
-    var multiplier = 1; // Початковий мультиплікатор
-    var cashoutValue = 0; // Вартість cashout
+    var multiplier = 1.00;
+    var balance = 300;
+    var betAmount = 10; // You can set this dynamically
 
     $('#start-button').click(function() {
         if (!gameStarted) {
             gameStarted = true;
-            $(this).hide();
+            $('#cashout-button').prop('disabled', false);
             startGame();
         }
     });
@@ -19,49 +19,35 @@ $(document).ready(function() {
     });
 
     function startGame() {
-        var player = $('#player');
-        var obstacle = $('#obstacle');
-        var container = $('#game-container');
-        var containerWidth = container.width();
-        var containerHeight = container.height();
+        var multiplierInterval = setInterval(function() {
+            multiplier += 0.01;
+            $('#multiplier-value').text(multiplier.toFixed(2) + 'x');
+        }, 100);
 
-        // Move the obstacle randomly and update score
-        var moveInterval = setInterval(function() {
-            var obstacleTop = parseInt(obstacle.css('top'));
-            if (obstacleTop > containerHeight) {
-                obstacleTop = -20; // Reset obstacle to top
-                var randomLeft = Math.random() * (containerWidth - 100); // Adjust as needed
-                obstacle.css('left', randomLeft);
-                score += multiplier; // Змінено: додавання мультиплікатора до очків
-                $('#score-value').text(score);
-            }
-            obstacle.css('top', obstacleTop + 5); // Adjust obstacle speed
-        }, 50);
-
-        // Move the player left and right
-        $(document).on('keydown', function(e) {
-            var playerLeft = parseInt(player.css('left'));
-            if (e.keyCode === 37) { // Left arrow key
-                player.css('left', playerLeft - 10);
-            } else if (e.keyCode === 39) { // Right arrow key
-                player.css('left', playerLeft + 10);
-            }
-        });
+        var crashTimeout = setTimeout(function() {
+            clearInterval(multiplierInterval);
+            gameOver();
+        }, Math.random() * 5000 + 2000); // Random crash time between 2-7 seconds
     }
 
     function cashout() {
-        // Реалізація функції cashout
-        var cashoutAmount = score * multiplier;
-        alert('Cashout: ' + cashoutAmount);
+        gameStarted = false;
+        var winnings = betAmount * multiplier;
+        balance += winnings;
+        $('#balance-value').text(balance.toFixed(2));
+        alert('You cashed out: $' + winnings.toFixed(2));
+        resetGame();
+    }
+
+    function gameOver() {
+        gameStarted = false;
+        alert('Game over! Multiplier crashed at ' + multiplier.toFixed(2) + 'x');
         resetGame();
     }
 
     function resetGame() {
-        // Скидання гри до початкових значень
-        gameStarted = false;
-        score = 0;
-        multiplier = 1;
-        $('#score-value').text(score);
-        $('#start-button').show();
+        multiplier = 1.00;
+        $('#multiplier-value').text(multiplier.toFixed(2) + 'x');
+        $('#cashout-button').prop('disabled', true);
     }
 });

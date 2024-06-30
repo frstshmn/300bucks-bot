@@ -276,49 +276,23 @@ canvas {
 
 /* Aviator */
 
-#game-container {
-    position: relative;
-    width: 400px;
-    height: 500px;
-    border: 1px solid #ccc;
+#game-container__aviator {
+    text-align: center;
 }
 
-#player {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 50px;
-    background-color: blue;
+#multiplier {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
-#obstacle {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 20px;
-    background-color: red;
-}
-
-#score {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+#balance {
     font-size: 18px;
+    margin-top: 20px;
 }
 
-#start-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+button {
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    font-size: 16px;
+    margin: 5px;
     cursor: pointer;
 }

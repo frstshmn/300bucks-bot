@@ -8,10 +8,10 @@
 </head>
 <body>
 <div id="game-container__aviator">
-    <div id="player"></div>
-    <div id="obstacle"></div>
-    <div id="score">Score: <span id="score-value">0</span></div>
-    <button id="start-button">Start Game</button>
+    <div id="multiplier">Multiplier: <span id="multiplier-value">1.00x</span></div>
+    <button id="start-button">Start</button>
+    <button id="cashout-button" disabled>Cashout</button>
+    <div id="balance">Balance: $<span id="balance-value">300</span></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
