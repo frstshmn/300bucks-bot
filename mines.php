@@ -15,7 +15,7 @@
 <div class="navbar">
     <div class="amount">
         <label for="bet">Bet Amount: </label>
-        <input type="number" id="bet" min="1" value="1">
+        <input type="number" id="bet" min="1" value="100">
     </div>
 
     <div>

@@ -11,13 +11,14 @@
 
 <canvas id="plinkoCanvas"></canvas>
 
-<label for="balance">Balance:</label>
-<span id="balanceDisplay">300</span>
+
 
 <div class="navbar">
+    <label for="balance">Balance:</label>
+    <span id="balanceDisplay">300</span>
     <div class="amount">
         <label for="bet">Bet Amount: </label>
-        <input type="number" id="bet" min="1" value="1">
+        <input type="number" id="bet" min="1" value="100">
     </div>
 
     <button onclick="throwBall()">Throw Ball</button>
