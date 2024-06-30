@@ -30,10 +30,11 @@ var ground = Bodies.rectangle(400, 580, 800, 40, { isStatic: true, render: { fil
 var pegs = [];
 var rows = 12;
 var pegSpacing = 50;
+var pegOffsetY = -100; // Raise the peg grid by adjusting the Y offset
 for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
     for (var col = 0; col <= row; col++) {
         var x = 400 + col * pegSpacing - row * pegSpacing / 2;
-        var y = 100 + row * pegSpacing;
+        var y = 100 + row * pegSpacing + pegOffsetY;
         var peg = Bodies.circle(x, y, 5, { isStatic: true, render: { fillStyle: '#ffffff' } });
         pegs.push(peg);
     }
@@ -41,13 +42,22 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 
 // Create multiplier slots
 var multiplierValues = [29, 16, 8, 4, 2, 1, 2, 4, 8, 16, 29]; // Sample multipliers for demonstration
+var slotWidth = 60;
+var slotHeight = 40;
+var slotY = 540;
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = i * 70 + 65;
-    var slot = Bodies.rectangle(x, 560, 70, 20, {
+    var x = i * (slotWidth + 10) + 65;
+    var color;
+    if (i === 0 || i === multiplierValues.length - 1) color = '#FF0000'; // Red for edges
+    else if (i === 1 || i === multiplierValues.length - 2) color = '#FF8C00'; // Orange for next to edges
+    else if (i === 2 || i === multiplierValues.length - 3) color = '#FFD700'; // Yellow for next to next edges
+    else color = '#00FF00'; // Green for the middle
+
+    var slot = Bodies.rectangle(x, slotY, slotWidth, slotHeight, {
         isStatic: true,
         render: {
-            fillStyle: '#ffffff',
+            fillStyle: color,
             text: {
                 content: multiplierValues[i] + 'x',
                 color: '#000000'
@@ -142,4 +152,5 @@ Events.on(render, 'afterRender', function() {
         context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
     }
 });
+
 
