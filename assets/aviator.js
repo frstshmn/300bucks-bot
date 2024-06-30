@@ -32,15 +32,19 @@ $(document).ready(function() {
 
     function startGame() {
         var airplane = $('#airplane-placeholder');
+        var trail = $('#trail');
         var multiplierInterval = setInterval(function() {
             multiplier += 0.01;
             $('#multiplier-value').text(multiplier.toFixed(2) + 'x');
-            airplane.css('transform', 'translateY(' + (-multiplier * 10) + 'px)');
+            var x = multiplier * 10;
+            var y = -multiplier * 5;
+            airplane.css('transform', 'translate(' + x + 'px, ' + y + 'px)');
+            trail.css('width', x + 'px');
         }, 100);
 
         var crashTimeout = setTimeout(function() {
             clearInterval(multiplierInterval);
-            gameOver();
+            if (gameStarted) gameOver();
         }, Math.random() * 5000 + 2000); // Random crash time between 2-7 seconds
     }
 
@@ -55,7 +59,7 @@ $(document).ready(function() {
 
     function gameOver() {
         gameStarted = false;
-        $('#round-info').text('Game over! Multiplier crashed at ' + multiplier.toFixed(2) + 'x. You lost $' + betAmount.toFixed(2));
+        $('#round-info').text('Game over! Multiplier crashed at ' + multiplier.toFixed(2) + 'x.');
         resetGame();
     }
 
@@ -63,6 +67,7 @@ $(document).ready(function() {
         multiplier = 1.00;
         $('#multiplier-value').text(multiplier.toFixed(2) + 'x');
         $('#cashout-button').prop('disabled', true);
-        $('#airplane-placeholder').css('transform', 'translateY(0)');
+        $('#airplane-placeholder').css('transform', 'translate(0, 0)');
+        $('#trail').css('width', '0');
     }
 });

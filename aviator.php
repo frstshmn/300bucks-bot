@@ -10,8 +10,10 @@
 <div id="game-container__aviator">
 
     <div id="game-container">
-        <div id="multiplier">Multiplier: <span id="multiplier-value">1.00x</span></div>
+
         <div id="airplane-placeholder">✈️</div>
+
+        <div id="multiplier">Multiplier: <span id="multiplier-value">1.00x</span></div>
         <div id="round-info"></div>
         <input type="number" id="bet-amount" placeholder="Enter bet amount" value="10">
         <button id="start-button">Start</button>

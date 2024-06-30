@@ -219,7 +219,8 @@ body.plinko-body{
     margin: 10px;
 }
 
-.amount input[type="number"] {
+.amount input[type="number"],
+input[type="number"]#bet-amount{
     width: 60px;
     padding: 5px;
     margin: 5px;
@@ -287,8 +288,20 @@ canvas {
 
 #airplane-placeholder {
     font-size: 40px;
-    margin-bottom: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     transition: transform 0.1s linear;
+}
+
+#trail {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    height: 2px;
+    background-color: red;
+    width: 0;
+    transition: width 0.1s linear;
 }
 
 #balance {
