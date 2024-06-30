@@ -12,30 +12,39 @@ $(document).ready(function() {
         engine: engine,
         options: {
             width: 800,
-            height: 600
+            height: 600,
+            wireframes: false  // Turn off wireframes for better visibility
         }
     });
 
     // Constants and variables
     let balance = 300;
     let betAmount = 10;
+    let payoutMultiplier = {
+        low: { min: 0.5, max: 5.6 },
+        medium: { min: 0.3, max: 13 },
+        high: { min: 0.2, max: 1000 }
+    };
 
     // Dropdown change event
     $('#risk-level').change(function() {
         const riskLevel = $(this).val();
-        let numRows = 6; // Default low risk
+        let numRows = 8; // Default rows
+        let multiplierRange = payoutMultiplier.low; // Default multiplier range
+
         switch (riskLevel) {
             case 'medium':
-                numRows = 12;
+                multiplierRange = payoutMultiplier.medium;
                 break;
             case 'high':
-                numRows = 14;
+                numRows = 16;
+                multiplierRange = payoutMultiplier.high;
                 break;
             default:
-                numRows = 6;
                 break;
         }
-        resetGame(numRows);
+
+        resetGame(numRows, multiplierRange);
     });
 
     // Button click event
@@ -43,8 +52,8 @@ $(document).ready(function() {
         dropBall();
     });
 
-    // Function to reset the game based on row count
-    function resetGame(numRows) {
+    // Function to reset the game based on row count and multiplier range
+    function resetGame(numRows, multiplierRange) {
         // Reset Matter.js world
         World.clear(engine.world);
         Engine.clear(engine);
@@ -78,7 +87,10 @@ $(document).ready(function() {
 
         for (let row = 0; row < numRows; row++) {
             for (let col = 0; col < 4; col++) {
-                flanges.push(Bodies.polygon(xStart + col * spacing, yStart + row * 100, 3, 20, flangeOptions));
+                const x = xStart + col * spacing;
+                const y = yStart + row * 100;
+                const multiplier = calculateMultiplier(x, 800, multiplierRange.min, multiplierRange.max);
+                flanges.push({ body: Bodies.polygon(x, y, 3, 20, flangeOptions), multiplier: multiplier });
             }
         }
         return flanges;
@@ -99,6 +111,15 @@ $(document).ready(function() {
         return catches;
     }
 
+    // Function to calculate multiplier based on ball position
+    function calculateMultiplier(x, width, minMultiplier, maxMultiplier) {
+        const center = width / 2;
+        const distanceFromCenter = Math.abs(center - x);
+        const normalizedDistance = distanceFromCenter / (width / 2);
+        const multiplierRange = maxMultiplier - minMultiplier;
+        return parseFloat((minMultiplier + multiplierRange * normalizedDistance).toFixed(2));
+    }
+
     // Function to drop the ball
     function dropBall() {
         const ballOptions = {
@@ -111,21 +132,29 @@ $(document).ready(function() {
         // Apply initial force to the ball
         Body.applyForce(ball, ball.position, { x: Math.random() * 0.002 - 0.001, y: 0.02 });
 
-        // Simulate win/loss based on random chance
-        const winChance = Math.random();
-        let winAmount = 0;
-        if (winChance < 0.1) {
-            winAmount = betAmount * 5; // 10% chance to win 5 times the bet
-        } else if (winChance < 0.3) {
-            winAmount = betAmount * 2; // 20% chance to win 2 times the bet
-        }
+        // Find the corresponding flange for the ball's initial position
+        const initialX = ball.position.x;
+        const flange = findFlangeByPosition(initialX);
+
+        // Determine multiplier and win amount
+        const multiplier = flange ? flange.multiplier : 1;
+        const winAmount = betAmount * multiplier;
 
         // Update balance and display results
         balance += winAmount - betAmount;
         $('#balance').text(balance);
-        $('#result').text(winAmount > 0 ? `You won $${winAmount}` : 'Sorry, you lost');
+        $('#result').text(winAmount > betAmount ? `You won $${winAmount}` : 'Sorry, you lost');
+    }
+
+    // Function to find the corresponding flange by position
+    function findFlangeByPosition(x) {
+        const flanges = engine.world.bodies.filter(body => body.label === 'flange');
+        return flanges.find(flange => {
+            const bounds = flange.bounds;
+            return x >= bounds.min.x && x <= bounds.max.x;
+        });
     }
 
     // Initialize the game with default settings
-    resetGame(6);
+    resetGame(6, payoutMultiplier.low);
 });
