@@ -77,11 +77,15 @@ World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 
 // Balance variable
 var balance = 300;
+var ballInPlay = false; // Flag to check if ball is in play
 
 // Function to throw the ball
 function throwBall() {
+    if (ballInPlay) return; // Prevent throwing a new ball while one is in play
+
     var bet = parseInt(document.getElementById('bet').value) || 1;
     if (balance >= bet) {
+        ballInPlay = true;
         balance -= bet;
         updateBalanceDisplay();
         // Start the ball slightly above the center
@@ -96,30 +100,8 @@ function throwBall() {
             }
         });
         World.add(engine.world, [ball]);
-
-        // Event handling for ball hitting multiplier slots
-        Events.on(engine, 'collisionStart', function(event) {
-            var pairs = event.pairs;
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i];
-                if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') {
-                    var slotMultiplier = pair.bodyB.multiplier;
-                    balance += bet * slotMultiplier;
-                    updateBalanceDisplay();
-                    World.remove(engine.world, ball);
-                    return;
-                } else if (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball') {
-                    var slotMultiplier = pair.bodyA.multiplier;
-                    balance += bet * slotMultiplier;
-                    updateBalanceDisplay();
-                    World.remove(engine.world, ball);
-                    return;
-                }
-            }
-        });
     } else {
         document.getElementById('messageDisplay').innerText = "Not enough balance!";
-        document.getElementById('throwBallBtn').classList.add('disabled');
     }
 }
 
@@ -127,6 +109,23 @@ function throwBall() {
 function updateBalanceDisplay() {
     document.getElementById('balanceDisplay').innerText = "Balance: " + balance.toFixed(2);
 }
+
+// Event handling for ball hitting multiplier slots
+Events.on(engine, 'collisionStart', function(event) {
+    var pairs = event.pairs;
+    for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i];
+        if ((pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') ||
+            (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball')) {
+            var slotMultiplier = (pair.bodyA.label === 'slot') ? pair.bodyA.multiplier : pair.bodyB.multiplier;
+            balance += parseInt(document.getElementById('bet').value) * slotMultiplier;
+            updateBalanceDisplay();
+            World.remove(engine.world, pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB);
+            ballInPlay = false; // Ball is no longer in play
+            return;
+        }
+    }
+});
 
 // Run the engine
 Engine.run(engine);
@@ -151,4 +150,3 @@ Events.on(render, 'afterRender', function() {
         context.fillText(text, x, y);
     }
 });
-

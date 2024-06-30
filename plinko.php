@@ -15,7 +15,7 @@
 <a href="app.php" class="previous">&laquo; Back to all Games</a>
 <div class="navbar">
     <label for="balance">Balance:</label>
-    <span id="balanceDisplay">300</span>
+    <span id="balanceDisplay">300</span> й
     <div class="amount">
         <label for="bet">Bet Amount: </label>
         <input type="number" id="bet" min="1" value="100">
