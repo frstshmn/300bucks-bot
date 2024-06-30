@@ -20,7 +20,7 @@
     <label for="balance">Balance:</label>
     <span id="balance">300</span>
 
-    <button id="throwBallBtn">Throw Ball</button>
+    <button onclick="throwBall()">Throw Ball</button>
 
 
     <div id="messageDisplay"></div>
