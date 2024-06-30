@@ -107,7 +107,7 @@ function throwBall() {
 
 // Function to update balance display
 function updateBalanceDisplay() {
-    document.getElementById('balanceDisplay').innerText = "Balance: " + balance.toFixed(2);
+    document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
 }
 
 // Event handling for ball hitting multiplier slots
