@@ -44,7 +44,10 @@ $(document).ready(function() {
 
         var crashTimeout = setTimeout(function() {
             clearInterval(multiplierInterval);
-            if (gameStarted) gameOver();
+            if (gameStarted) {
+                $('#round-info').text('The airplane flew away at a multiplier of ' + multiplier.toFixed(2) + 'x.');
+                resetGame();
+            }
         }, Math.random() * 5000 + 2000); // Random crash time between 2-7 seconds
     }
 
@@ -54,12 +57,6 @@ $(document).ready(function() {
         balance += winnings;
         $('#balance-value').text(balance.toFixed(2));
         $('#round-info').text('You cashed out: $' + winnings.toFixed(2));
-        resetGame();
-    }
-
-    function gameOver() {
-        gameStarted = false;
-        $('#round-info').text('Game over! Multiplier crashed at ' + multiplier.toFixed(2) + 'x.');
         resetGame();
     }
 
