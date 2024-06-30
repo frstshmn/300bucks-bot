@@ -6,7 +6,7 @@
     <title>Plinko Game</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="plinko-body">
 <a href="app.php" class="previous">&laquo; Back to all Games</a>
 
 <canvas id="plinkoCanvas"></canvas>
