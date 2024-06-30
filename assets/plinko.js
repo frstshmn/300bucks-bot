@@ -41,6 +41,7 @@ for (var row = 0; row < rows; row++) {
 
 // Create multiplier slots
 var multiplierValues = [3, 1.5, 1, 0.6, 0.3, 1.1, 0.3, 0.6, 1, 1.5, 3];
+var slotProbabilities = [0.0009, 0.01, 0.05, 0.1, 0.2, 0.27, 0.2, 0.1, 0.05, 0.01, 0.0009];
 var slots = [];
 var texts = [];
 for (var i = 0; i < multiplierValues.length; i++) {
@@ -51,7 +52,8 @@ for (var i = 0; i < multiplierValues.length; i++) {
             fillStyle: '#ffffff'
         },
         label: 'slot',
-        multiplier: multiplierValues[i]
+        multiplier: multiplierValues[i],
+        probability: slotProbabilities[i]
     });
     slots.push(slot);
 
@@ -107,13 +109,19 @@ function throwBall() {
                 var pair = pairs[i];
                 if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') {
                     var slotMultiplier = pair.bodyB.multiplier;
-                    balance += slotMultiplier * multiplier;
+                    var slotProbability = pair.bodyB.probability;
+                    if (Math.random() < slotProbability) {
+                        balance += slotMultiplier * multiplier;
+                    }
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
                     return;
                 } else if (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball') {
                     var slotMultiplier = pair.bodyA.multiplier;
-                    balance += slotMultiplier * multiplier;
+                    var slotProbability = pair.bodyA.probability;
+                    if (Math.random() < slotProbability) {
+                        balance += slotMultiplier * multiplier;
+                    }
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
                     return;
