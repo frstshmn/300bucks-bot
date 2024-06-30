@@ -133,7 +133,7 @@ $(document).ready(function() {
             let winnings = betAmount * multiplier;
             balance += winnings;
             updateBalance();
-            $("#result").text(`You cashed out with ${winnings.toFixed(2)}. Your balance is now ${balance.toFixed(2)}.`);
+            $("#result").text(`You cashed out with ${winnings.toFixed(2)}`);
             $("#cashout").hide();
             $("#restart").show();
             gameStarted = false;
