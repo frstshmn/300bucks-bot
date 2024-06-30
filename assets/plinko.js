@@ -41,7 +41,6 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 
 // Create multiplier slots
 var multiplierValues = [3, 1.5, 1, 0.6, 0.3, 1.1, 0.3, 0.6, 1, 1.5, 3];
-var slotProbabilities = [0.0009, 0.01, 0.05, 0.1, 0.2, 0.27, 0.2, 0.1, 0.05, 0.01, 0.0009];
 var slots = [];
 var texts = [];
 for (var i = 0; i < multiplierValues.length; i++) {
@@ -52,8 +51,7 @@ for (var i = 0; i < multiplierValues.length; i++) {
             fillStyle: '#ffffff'
         },
         label: 'slot',
-        multiplier: multiplierValues[i],
-        probability: slotProbabilities[i]
+        multiplier: multiplierValues[i]
     });
     slots.push(slot);
 
@@ -90,7 +88,7 @@ function throwBall() {
     if (balance >= bet) {
         balance -= bet;
         updateBalanceDisplay();
-        var startX = Common.random(300, 500); // Start the ball at a random position
+        var startX = 400; // Start the ball at the center
         var ball = Bodies.circle(startX, 0, 10, {
             restitution: 0.5,
             friction: 0,
@@ -109,19 +107,13 @@ function throwBall() {
                 var pair = pairs[i];
                 if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') {
                     var slotMultiplier = pair.bodyB.multiplier;
-                    var slotProbability = pair.bodyB.probability;
-                    if (Math.random() < slotProbability) {
-                        balance += bet * slotMultiplier;
-                    }
+                    balance += bet * slotMultiplier;
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
                     return;
                 } else if (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball') {
                     var slotMultiplier = pair.bodyA.multiplier;
-                    var slotProbability = pair.bodyA.probability;
-                    if (Math.random() < slotProbability) {
-                        balance += bet * slotMultiplier;
-                    }
+                    balance += bet * slotMultiplier;
                     updateBalanceDisplay();
                     World.remove(engine.world, ball);
                     return;
