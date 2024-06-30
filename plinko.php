@@ -31,9 +31,16 @@
             <option value="medium">Medium (12 rows)</option>
             <option value="high">High (14 rows)</option>
         </select>
+
+        <label for="bet">Choose Bet Amount:</label>
+        <input type="number" id="bet" min="1" value="10">
+
         <button id="drop-button">Drop Ball</button>
     </div>
     <div id="result"></div>
+    <div id="balance-container">
+        Balance: $<span id="balance">300</span>
+    </div>
 </div>
 <script src="assets/plinko.js"></script>
 </body>

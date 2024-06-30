@@ -1,11 +1,13 @@
 Telegram.WebApp.ready();
 
 $(document).ready(function() {
+    let balance = 300;
     const $board = $('#plinko-board');
     const $dropButton = $('#drop-button');
     const $result = $('#result');
     const $riskLevel = $('#risk-level');
-
+    const $betInput = $('#bet');
+    const $balanceDisplay = $('#balance');
     const numBuckets = 6;
 
     function createPins(numRows) {
@@ -51,15 +53,31 @@ $(document).ready(function() {
     }
 
     $dropButton.on('click', function() {
+        const bet = parseInt($betInput.val());
+        if (isNaN(bet) || bet <= 0) {
+            alert('Please enter a valid bet amount');
+            return;
+        }
+
+        if (balance < bet) {
+            alert('Not enough balance to place this bet');
+            return;
+        }
+
         const risk = $riskLevel.val();
         const numRows = risk === 'low' ? 6 : risk === 'medium' ? 12 : 14;
         createPins(numRows);
+
+        balance -= bet;
+        $balanceDisplay.text(balance);
 
         $result.text('');
         const bucketIndex = dropBall(numRows);
         const prize = calculatePrize(risk, bucketIndex);
 
+        balance += prize;
+        $balanceDisplay.text(balance);
+
         $result.text(`You won: ${prize}`);
-        $(`#one`).text(parseInt($(`#one`).text()) + 1);  // Example of updating the bucket count
     });
 });
