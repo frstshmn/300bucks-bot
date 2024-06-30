@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a href="app.php" class="previous">&laquo; Back to all Games</a>
+
 <div id="game-container">
     <canvas id="canvas" width="800" height="600"></canvas>
     <div id="controls">

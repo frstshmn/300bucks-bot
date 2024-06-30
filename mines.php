@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<a href="app.php" class="previous">&laquo; Previous</a>
+<a href="app.php" class="previous">&laquo; Back to all Games</a>
 
 <div class="navbar">
     <div class="amount">
