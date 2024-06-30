@@ -10,11 +10,11 @@
 <div id="game-container">
     <div id="plinko-board">
         <ul class="buckets">
-            <li id="one">0</li>
-            <li id="two">0</li>
-            <li id="three">0</li>
-            <li id="four">0</li>
-            <li id="five">0</li>
+            <li id="one" class="bucket">0</li>
+            <li id="two" class="bucket">0</li>
+            <li id="three" class="bucket">0</li>
+            <li id="four" class="bucket">0</li>
+            <li id="five" class="bucket">0</li>
         </ul>
         <ul class="percents">
             <li id="one_percent">0.00%</li>

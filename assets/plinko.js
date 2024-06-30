@@ -8,7 +8,7 @@ $(document).ready(function() {
     const $riskLevel = $('#risk-level');
     const $betInput = $('#bet');
     const $balanceDisplay = $('#balance');
-    const numBuckets = 6;
+    const numBuckets = 5;
 
     function createPins(numRows) {
         $board.find('.pin').remove();
@@ -25,9 +25,9 @@ $(document).ready(function() {
     }
 
     function calculatePrize(risk, bucketIndex) {
-        const lowRiskPrizes = [10, 20, 30, 40, 50, 60];
-        const mediumRiskPrizes = [0, 20, 40, 60, 80, 100];
-        const highRiskPrizes = [0, 0, 50, 100, 150, 200];
+        const lowRiskPrizes = [10, 20, 30, 40, 50];
+        const mediumRiskPrizes = [0, 20, 40, 60, 80];
+        const highRiskPrizes = [0, 0, 50, 100, 150];
 
         switch (risk) {
             case 'low':

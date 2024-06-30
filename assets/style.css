@@ -172,15 +172,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
+    max-width: 600px;
 }
 
 #plinko-board {
-    width: 600px;
-    height: 600px;
+    width: 100%;
+    height: 400px;
     background-color: #fff;
     border: 2px solid #000;
     position: relative;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .pin {
@@ -192,11 +195,11 @@ body {
 }
 
 .bucket {
-    width: 50px;
+    width: 16.66%;
     height: 50px;
     background-color: #ddd;
     border: 1px solid #000;
-    position: absolute;
+    position: relative;
     bottom: 0;
     text-align: center;
     line-height: 50px;
@@ -212,6 +215,7 @@ body {
 #result {
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 ul.buckets, ul.percents {
@@ -230,7 +234,7 @@ ul.percents {
 }
 
 li {
-    width: 50px;
+    width: 16.66%;
     text-align: center;
 }
 
