@@ -44,7 +44,7 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 550; // Move the slots further down
+var slotY = 650; // Move the slots to the new position
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = 80 + i * (slotWidth + 10); // Adjusted position to align correctly
@@ -157,3 +157,4 @@ Events.on(render, 'afterRender', function() {
         context.fillText(text, x, y);
     }
 });
+
