@@ -24,7 +24,7 @@ var render = Render.create({
 });
 
 // Create ground
-var ground = Bodies.rectangle(400, 600, 800, 40, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
+var ground = Bodies.rectangle(400, 590, 800, 20, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
 
 // Create pegs in a triangular layout
 var pegs = [];
@@ -41,18 +41,18 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 }
 
 // Create multiplier slots
-var multiplierValues = [29, 16, 8, 4, 2, 1, 2, 4, 8, 16, 29]; // Sample multipliers for demonstration
+var multiplierValues = [29, 16, 8, 4, 2, 0.2, 2, 4, 8, 16, 29]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 520;
+var slotY = 550; // Move the slots further down
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = i * (slotWidth + 10) + 65;
+    var x = i * (slotWidth + 10) + 45;
     var color;
-    if (i === 0 || i === multiplierValues.length - 1) color = '#FF0000'; // Red for edges
-    else if (i === 1 || i === multiplierValues.length - 2) color = '#FF8C00'; // Orange for next to edges
-    else if (i === 2 || i === multiplierValues.length - 3) color = '#FFD700'; // Yellow for next to next edges
-    else color = '#00FF00'; // Green for the middle
+    if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
+    else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
+    else if (multiplierValues[i] < 4) color = '#FF8C00'; // Orange for less than 4
+    else color = '#FF0000'; // Red for the rest
 
     var slot = Bodies.rectangle(x, slotY, slotWidth, slotHeight, {
         isStatic: true,
