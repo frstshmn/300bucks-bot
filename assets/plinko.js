@@ -7,7 +7,7 @@ $(document).ready(function() {
     const $riskLevel = $('#risk-level');
     const $betInput = $('#bet');
     const $balanceDisplay = $('#balance');
-    const numBuckets = 5;
+    const numBuckets = 12;
 
     const Engine = Matter.Engine,
         Render = Matter.Render,
@@ -25,7 +25,8 @@ $(document).ready(function() {
         options: {
             width: 600,
             height: 600,
-            wireframes: false
+            wireframes: false,
+            background: '#fffff'
         }
     });
 
@@ -47,16 +48,16 @@ $(document).ready(function() {
         }
 
         for (let i = 0; i < numBuckets; i++) {
-            const x = i * 120 + 90;
-            const bucket = Bodies.rectangle(x, 550, 100, 10, { isStatic: true });
+            const x = i * 50 + 25;
+            const bucket = Bodies.rectangle(x, 550, 50, 10, { isStatic: true });
             Composite.add(world, bucket);
         }
     }
 
     function calculatePrize(risk, bucketIndex) {
-        const lowRiskPrizes = [10, 20, 30, 40, 50];
-        const mediumRiskPrizes = [0, 20, 40, 60, 80];
-        const highRiskPrizes = [0, 0, 50, 100, 150];
+        const lowRiskPrizes = [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000];
+        const mediumRiskPrizes = [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000];
+        const highRiskPrizes = [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000];
 
         switch (risk) {
             case 'low':
@@ -94,21 +95,22 @@ $(document).ready(function() {
         const ball = Bodies.circle(300, 0, 10, { restitution: 0.5 });
         Composite.add(world, ball);
 
-        Events.on(engine, 'collisionStart', function(event) {
+        Events.on(engine, 'collisionEnd', function(event) {
             const pairs = event.pairs;
             for (let pair of pairs) {
                 if (pair.bodyA === ball || pair.bodyB === ball) {
-                    const xPos = Math.round(ball.position.x / 120);
-                    const bucketIndex = Math.min(Math.max(xPos, 0), numBuckets - 1);
-                    const prize = calculatePrize(risk, bucketIndex);
+                    if (ball.position.y >= 550) {
+                        const xPos = Math.round(ball.position.x / 50);
+                        const bucketIndex = Math.min(Math.max(xPos, 0), numBuckets - 1);
+                        const prize = calculatePrize(risk, bucketIndex);
 
-                    balance += prize;
-                    $balanceDisplay.text(balance);
-                    $result.text(`You won: ${prize}`);
-                    Composite.remove(world, ball);
+                        balance += prize;
+                        $balanceDisplay.text(balance);
+                        $result.text(`You won: ${prize}`);
+                        Composite.remove(world, ball);
+                    }
                 }
             }
         });
     });
 });
-
