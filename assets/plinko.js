@@ -142,11 +142,12 @@ Render.run(render);
 // Render multiplier texts
 Events.on(render, 'afterRender', function() {
     var context = render.context;
-    context.font = '16px Arial';
+    context.font = '24px Arial';
     context.fillStyle = 'black';
     context.textAlign = 'center';
+
     for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
-        context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + 5);
+        context.fillText(slot.multiplier + 'x', slot.position.x, slot.position.y + slotHeight / 2 + 20); // Adjusted position to be below the slots
     }
 });
