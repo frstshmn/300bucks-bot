@@ -32,13 +32,24 @@ for (var i = 50; i <= 750; i += 50) {
     }
 }
 
+var multiplierTiles = [];
+var multiplierValues = [0, 0, 0, 0, 0, 0, 0, 1, 1, 2]; // Sample chances from Stake.com
+for (var k = 0; k < 10; k++) {
+    var multiplierTile = Bodies.rectangle(50 + k * 80, 450, 60, 40, {
+        isStatic: true,
+        label: "multiplier",
+        multiplier: multiplierValues[k]
+    });
+    multiplierTiles.push(multiplierTile);
+}
+
 var boundaries = [
     Bodies.rectangle(0, 300, 20, 600, { isStatic: true }),
     Bodies.rectangle(800, 300, 20, 600, { isStatic: true })
 ];
 
 // Add all of the bodies to the world
-World.add(engine.world, [ground, ...pegs, ...boundaries]);
+World.add(engine.world, [ground, ...pegs, ...multiplierTiles, ...boundaries]);
 
 // Balance and multiplier variables
 var balance = 300; // Default balance set to 300 dollars
@@ -52,9 +63,31 @@ function throwBall() {
         var ball = Bodies.circle(400, 0, 10, {
             restitution: 1,
             friction: 0,
-            frictionAir: 0.01
+            frictionAir: 0.01,
+            label: 'ball'
         });
         World.add(engine.world, [ball]);
+
+        // Detect when the ball hits a multiplier tile
+        Events.on(engine, 'collisionStart', function(event) {
+            var pairs = event.pairs;
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i];
+                if (pair.bodyA.label === 'ball' && pair.bodyB.label === 'multiplier') {
+                    var multiplierValue = pair.bodyB.multiplier;
+                    balance += multiplierValue * multiplier;
+                    updateBalanceDisplay();
+                    World.remove(engine.world, ball);
+                    return;
+                } else if (pair.bodyA.label === 'multiplier' && pair.bodyB.label === 'ball') {
+                    var multiplierValue = pair.bodyA.multiplier;
+                    balance += multiplierValue * multiplier;
+                    updateBalanceDisplay();
+                    World.remove(engine.world, ball);
+                    return;
+                }
+            }
+        });
     } else {
         alert("Out of balance! Reset to continue playing.");
     }
