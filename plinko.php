@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="plinko-body">
-<a href="app.php" class="previous">&laquo; Back to all Games</a>
+
 
 <canvas id="plinkoCanvas"></canvas>
 
 
-
+<a href="app.php" class="previous">&laquo; Back to all Games</a>
 <div class="navbar">
     <label for="balance">Balance:</label>
     <span id="balanceDisplay">300</span>
