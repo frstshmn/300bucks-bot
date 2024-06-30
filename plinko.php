@@ -30,6 +30,7 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <script src="assets/plinko.js"></script>
 </body>
