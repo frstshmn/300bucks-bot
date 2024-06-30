@@ -54,6 +54,25 @@ $(document).ready(function() {
         }
     }
 
+    function createMultipliers() {
+        const multipliers = [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000];
+        const container = document.getElementById('plinko-board');
+        const multiplierElements = container.getElementsByClassName('multiplier');
+        while (multiplierElements[0]) {
+            multiplierElements[0].parentNode.removeChild(multiplierElements[0]);
+        }
+
+        multipliers.forEach((value, index) => {
+            const multiplier = document.createElement('div');
+            multiplier.className = 'multiplier';
+            multiplier.style.position = 'absolute';
+            multiplier.style.left = `${index * 50 + 15}px`;
+            multiplier.style.top = '560px';
+            multiplier.textContent = value;
+            container.appendChild(multiplier);
+        });
+    }
+
     function calculatePrize(risk, bucketIndex) {
         const lowRiskPrizes = [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000];
         const mediumRiskPrizes = [1000, 130, 26, 9, 4, 2, 0.2, 0.2, 0.2, 2, 4, 9, 26, 130, 1000];
@@ -86,10 +105,10 @@ $(document).ready(function() {
         const risk = $riskLevel.val();
         const numRows = risk === 'low' ? 6 : risk === 'medium' ? 12 : 14;
         createPins(numRows);
+        createMultipliers();
 
         balance -= bet;
         $balanceDisplay.text(balance);
-
         $result.text('');
 
         const ball = Bodies.circle(300, 0, 10, { restitution: 0.5 });
