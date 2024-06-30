@@ -21,7 +21,7 @@
         <input type="number" id="bet" min="1" value="100">
     </div>
 
-    <button onclick="throwBall()">Throw Ball</button>
+    <button class="plinko-btn" onclick="throwBall()">Throw Ball</button>
 
 
     <div id="messageDisplay"></div>
