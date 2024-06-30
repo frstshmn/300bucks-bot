@@ -6,6 +6,10 @@ $(document).ready(function() {
     let particles = [];
     let balance = 300;
     let rows = 6; // Default number of rows
+    const canvas = $('#canvas')[0];
+    const context = canvas.getContext('2d');
+    canvas.width = 600;
+    canvas.height = 400;
 
     $('#risk-level').change(function() {
         switch ($(this).val()) {
@@ -29,10 +33,9 @@ $(document).ready(function() {
             return;
         }
 
-        let x = Math.random() * $('#canvas').width(); // Random x position
+        let x = Math.random() * canvas.width;
         let particle = new Particle(x, 0, 10);
         particles.push(particle);
-        Matter.Engine.update(engine);
 
         setTimeout(() => {
             checkOutcome(particle, bet);
@@ -40,8 +43,8 @@ $(document).ready(function() {
     });
 
     function setupBoard() {
-        // Clear existing pegs and setup new pegs based on the selected rows
-        // This function would need implementation depending on your game setup
+        // Clear and set up new pegs based on the selected rows
+        // Implementation depends on game setup
     }
 
     function checkOutcome(particle, bet) {
@@ -52,16 +55,14 @@ $(document).ready(function() {
         $('#balance').text(balance);
         $('#result').text(reward > bet ? `You won $${reward - bet}!` : `You lost $${bet - reward}!`);
 
-        // Remove the particle from the world and array
         Matter.World.remove(world, particle.body);
         particles.splice(particles.indexOf(particle), 1);
     }
 
     function calculateReward(x) {
-        // Define reward zones based on x position
-        if (x < $('#canvas').width() * 0.25) {
+        if (x < canvas.width * 0.25) {
             return 2; // 2x reward
-        } else if (x < $('#canvas').width() * 0.75) {
+        } else if (x < canvas.width * 0.75) {
             return 1; // no reward
         } else {
             return 3; // 3x reward
@@ -83,18 +84,19 @@ $(document).ready(function() {
     }
 
     Particle.prototype.show = function() {
-        fill(this.hue, 255, 255);
-        noStroke();
-        var pos = this.body.position;
-        push();
-        translate(pos.x, pos.y);
-        ellipse(0, 0, this.r * 2);
-        pop();
+        context.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
+        context.beginPath();
+        const pos = this.body.position;
+        context.arc(pos.x, pos.y, this.r, 0, Math.PI * 2);
+        context.fill();
     };
 
-    Particle.prototype.isOffScreen = function() {
-        var x = this.body.position.x;
-        var y = this.body.position.y;
-        return (x < -50 || x > $('#canvas').width() + 50 || y > $('#canvas').height());
-    };
+    function render() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        Matter.Engine.update(engine);
+        particles.forEach(particle => particle.show());
+        requestAnimationFrame(render);
+    }
+
+    render();
 });
