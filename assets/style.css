@@ -170,12 +170,13 @@ body {
 
 body.plinko-body{
     margin: 0;
-    padding: 0;
+    padding: 40px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+
 }
 
 #game-container {
@@ -268,4 +269,7 @@ canvas {
 .previous {
     background-color: transparent;
     color: #ffffff;
+}
+.plinkoCanvas{
+    display: none;
 }
