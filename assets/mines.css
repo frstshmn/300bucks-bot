@@ -85,11 +85,11 @@ button:hover {
 }
 
 .tile.revealed.mine {
-    background-color: red;
+    background-color: #f55353;
 }
 
 .tile.revealed.gem {
-    background-color: green;
+    background-color: #60e360;
 }
 
 .previous {
