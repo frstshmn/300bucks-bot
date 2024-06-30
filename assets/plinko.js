@@ -17,14 +17,14 @@ var render = Render.create({
     engine: engine,
     options: {
         width: 800,
-        height: 700, // Increased height to accommodate additional row
+        height: 800, // Increased height to accommodate slots at the bottom
         wireframes: false,
         background: '#1b1b1b'
     }
 });
 
 // Create ground
-var ground = Bodies.rectangle(400, 590, 800, 20, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
+var ground = Bodies.rectangle(400, 790, 800, 20, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
 
 // Create pegs in a triangular layout
 var pegs = [];
@@ -44,10 +44,10 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
-var slotY = 670; // Adjusted position to align correctly
+var slotY = 750; // Move the slots to the bottom
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
+    var x = 100 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
     if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
@@ -68,8 +68,8 @@ for (var i = 0; i < multiplierValues.length; i++) {
 // Create boundaries
 var boundaries = [
     Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
-    Bodies.rectangle(0, 300, 20, 600, { isStatic: true }), // Left boundary
-    Bodies.rectangle(800, 300, 20, 600, { isStatic: true }) // Right boundary
+    Bodies.rectangle(0, 400, 20, 800, { isStatic: true }), // Left boundary
+    Bodies.rectangle(800, 400, 20, 800, { isStatic: true }) // Right boundary
 ];
 
 // Add all bodies to the world
@@ -151,10 +151,11 @@ Events.on(render, 'afterRender', function() {
         var slot = slots[i];
         var text = slot.multiplier + 'x';
         var x = slot.position.x;
-        var y = slot.position.y + slotHeight / 2 - 10; // Adjusted position to be on the slots
+        var y = slot.position.y + 10; // Adjusted position to be on the slots
 
         context.fillText(text, x, y);
     }
 });
+
 
 
