@@ -204,11 +204,11 @@ body {
     margin-bottom: 0;
 }
 
-#amount, .nav-buttons {
+.amount, .nav-buttons {
     margin: 10px;
 }
 
-#amount input[type="number"] {
+.amount input[type="number"] {
     width: 60px;
     padding: 5px;
     margin: 5px;
