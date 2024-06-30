@@ -13,14 +13,14 @@ $(document).ready(function() {
         options: {
             width: 800,
             height: 600,
-            wireframes: false  // Turn off wireframes for better visibility
+            wireframes: false
         }
     });
 
     // Constants and variables
     let balance = 300;
     let betAmount = 10;
-    let payoutMultiplier = {
+    let multiplierRange = {
         low: { min: 0.5, max: 5.6 },
         medium: { min: 0.3, max: 13 },
         high: { min: 0.2, max: 1000 }
@@ -28,23 +28,7 @@ $(document).ready(function() {
 
     // Dropdown change event
     $('#risk-level').change(function() {
-        const riskLevel = $(this).val();
-        let numRows = 8; // Default rows
-        let multiplierRange = payoutMultiplier.low; // Default multiplier range
-
-        switch (riskLevel) {
-            case 'medium':
-                multiplierRange = payoutMultiplier.medium;
-                break;
-            case 'high':
-                numRows = 16;
-                multiplierRange = payoutMultiplier.high;
-                break;
-            default:
-                break;
-        }
-
-        resetGame(numRows, multiplierRange);
+        resetGame($(this).val());
     });
 
     // Button click event
@@ -52,109 +36,106 @@ $(document).ready(function() {
         dropBall();
     });
 
-    // Function to reset the game based on row count and multiplier range
-    function resetGame(numRows, multiplierRange) {
-        // Reset Matter.js world
+    // Function to reset the game based on risk level
+    function resetGame(riskLevel) {
         World.clear(engine.world);
         Engine.clear(engine);
         render.canvas.remove();
         render.canvas = null;
         render.context = null;
         render.textures = {};
-        engine.world.gravity.y = 1;
 
-        // Recreate Matter.js objects
-        const flanges = createFlanges(numRows);
-        const catches = createCatches();
-        const ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+        let numRows = 8;
+        switch (riskLevel) {
+            case 'medium':
+                numRows = 8;
+                break;
+            case 'high':
+                numRows = 16;
+                break;
+            default:
+                break;
+        }
 
-        World.add(engine.world, [ground, ...flanges, ...catches]);
-
-        // Re-run the engine and renderer
+        createPlinko(numRows);
+        createWallsAndGround();
         Engine.run(engine);
         Render.run(render);
     }
 
-    // Function to create flanges based on number of rows
-    function createFlanges(numRows) {
-        const flanges = [];
-        const flangeOptions = {
-            isStatic: true
-        };
-        let xStart = 45;
-        const yStart = 150;
-        const spacing = 50;
+    // Function to create Plinko pegs
+    function createPlinko(numRows) {
+        const pegs = [];
+        const spacingX = 80;
+        const spacingY = 80;
+        const startX = 50;
+        const startY = 50;
 
         for (let row = 0; row < numRows; row++) {
-            for (let col = 0; col < 4; col++) {
-                const x = xStart + col * spacing;
-                const y = yStart + row * 100;
-                const multiplier = calculateMultiplier(x, 800, multiplierRange.min, multiplierRange.max);
-                flanges.push({ body: Bodies.polygon(x, y, 3, 20, flangeOptions), multiplier: multiplier });
+            for (let col = 0; col <= row % 2; col++) {
+                const x = startX + col * spacingX;
+                const y = startY + row * spacingY;
+                const peg = Bodies.circle(x, y, 10, {
+                    isStatic: true,
+                    restitution: 1,
+                    friction: 0,
+                    render: {
+                        fillStyle: '#888',
+                        strokeStyle: '#444',
+                        lineWidth: 1
+                    }
+                });
+                peg.label = 'peg';
+                pegs.push(peg);
             }
         }
-        return flanges;
+
+        World.add(engine.world, pegs);
     }
 
-    // Function to create catches
-    function createCatches() {
-        const catches = [];
-        const catchOptions = {
-            isStatic: true
-        };
-        let xStart = 82;
-        const spacing = 45;
+    // Function to create walls and ground
+    function createWallsAndGround() {
+        const ground = Bodies.rectangle(400, 600, 800, 40, { isStatic: true });
+        const leftWall = Bodies.rectangle(0, 300, 20, 600, { isStatic: true });
+        const rightWall = Bodies.rectangle(800, 300, 20, 600, { isStatic: true });
 
-        for (let i = 0; i < 20; i++) {
-            catches.push(Bodies.rectangle(xStart + i * spacing, 560, 2, 40, catchOptions));
-        }
-        return catches;
-    }
-
-    // Function to calculate multiplier based on ball position
-    function calculateMultiplier(x, width, minMultiplier, maxMultiplier) {
-        const center = width / 2;
-        const distanceFromCenter = Math.abs(center - x);
-        const normalizedDistance = distanceFromCenter / (width / 2);
-        const multiplierRange = maxMultiplier - minMultiplier;
-        return parseFloat((minMultiplier + multiplierRange * normalizedDistance).toFixed(2));
+        World.add(engine.world, [ground, leftWall, rightWall]);
     }
 
     // Function to drop the ball
     function dropBall() {
-        const ballOptions = {
-            friction: 0.2,
-            restitution: 1
-        };
-        const ball = Bodies.circle(400, 0, 20, ballOptions);
+        const ball = Bodies.circle(400, 0, 20, { restitution: 1 });
         World.add(engine.world, ball);
 
-        // Apply initial force to the ball
-        Body.applyForce(ball, ball.position, { x: Math.random() * 0.002 - 0.001, y: 0.02 });
+        Body.applyForce(ball, ball.position, { x: 0.005 * (Math.random() - 0.5), y: 0.02 });
 
-        // Find the corresponding flange for the ball's initial position
-        const initialX = ball.position.x;
-        const flange = findFlangeByPosition(initialX);
+        ball.label = 'ball';
 
-        // Determine multiplier and win amount
-        const multiplier = flange ? flange.multiplier : 1;
-        const winAmount = betAmount * multiplier;
-
-        // Update balance and display results
-        balance += winAmount - betAmount;
-        $('#balance').text(balance);
-        $('#result').text(winAmount > betAmount ? `You won $${winAmount}` : 'Sorry, you lost');
-    }
-
-    // Function to find the corresponding flange by position
-    function findFlangeByPosition(x) {
-        const flanges = engine.world.bodies.filter(body => body.label === 'flange');
-        return flanges.find(flange => {
-            const bounds = flange.bounds;
-            return x >= bounds.min.x && x <= bounds.max.x;
+        Events.on(engine, 'collisionStart', function(event) {
+            event.pairs.forEach(pair => {
+                const { bodyA, bodyB } = pair;
+                if ((bodyA.label === 'ball' && bodyB.label === 'peg') ||
+                    (bodyA.label === 'peg' && bodyB.label === 'ball')) {
+                    const multiplier = calculateMultiplier(ball.position.x, multiplierRange);
+                    const winAmount = betAmount * multiplier;
+                    balance += winAmount - betAmount;
+                    $('#balance').text(balance);
+                    $('#result').text(winAmount > betAmount ? `You won $${winAmount}` : 'Sorry, you lost');
+                }
+            });
         });
     }
 
+    // Function to calculate multiplier based on ball position
+    function calculateMultiplier(x, range) {
+        const center = 400; // Center of the canvas
+        const maxMultiplier = range.low.max; // Using low risk level max multiplier
+        const distanceFromCenter = Math.abs(center - x);
+        const normalizedDistance = distanceFromCenter / center;
+        const multiplierRange = maxMultiplier - range.low.min;
+        return range.low.min + (multiplierRange * (1 - normalizedDistance));
+    }
+
     // Initialize the game with default settings
-    resetGame(6, payoutMultiplier.low);
+    resetGame('low');
 });

@@ -8,20 +8,16 @@
 </head>
 <body>
 <div id="game-container">
-    <div id="plinko-board" style="position: relative;">
-        <canvas id="canvas"></canvas>
-    </div>
+    <canvas id="canvas" width="800" height="600"></canvas>
     <div id="controls">
         <label for="risk-level">Choose Risk Level:</label>
         <select id="risk-level">
-            <option value="low">Low (6 rows)</option>
-            <option value="medium">Medium (12 rows)</option>
-            <option value="high">High (14 rows)</option>
+            <option value="low">Low (8 rows)</option>
+            <option value="medium">Medium (8 rows)</option>
+            <option value="high">High (16 rows)</option>
         </select>
-
         <label for="bet">Choose Bet Amount:</label>
         <input type="number" id="bet" min="1" value="10">
-
         <button id="drop-button">Drop Ball</button>
     </div>
     <div id="result"></div>
