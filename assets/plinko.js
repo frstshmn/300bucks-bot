@@ -79,36 +79,35 @@ World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 var balance = 300;
 var bet = 1;
 
-// Function to throw the ball
-function throwBall() {
-    if (balance >= bet) {
-        balance -= bet;
-        updateBalanceDisplay();
-        // Start the ball slightly above the center
-        var startX = 400 + Math.random() * 10 - 5;
-        var ball = Bodies.circle(startX, 0, 10, {
-            restitution: 0.5,
-            friction: 0,
-            frictionAir: 0.01,
-            label: 'ball',
-            render: {
-                fillStyle: '#ff0000'
-            }
-        });
-        World.add(engine.world, [ball]);
+    function throwBall() {
+        if (balance >= bet) {
+            balance -= bet;
+            updateBalanceDisplay();
+            // Початкові координати м'яча
+            var startX = 400 + Math.random() * 10 - 5;
+            var ball = Bodies.circle(startX, 0, 10, {
+                restitution: 0.5,
+                friction: 0,
+                frictionAir: 0.01,
+                label: 'ball',
+                render: {
+                    fillStyle: '#ff0000'
+                }
+            });
+            World.add(engine.world, [ball]);
 
-        // Event handling for ball hitting multiplier slots (as per your original script)
+            // Обробка події, коли м'яч потрапляє в мультиплікатор
 
-    } else {
-        document.getElementById('messageDisplay').innerText = "Not enough balance!";
-        document.getElementById('throwBallBtn').classList.add('disabled');
+        } else {
+            document.getElementById('messageDisplay').innerText = "Недостатньо коштів!";
+            document.getElementById('throwBallBtn').classList.add('disabled');
+        }
     }
-}
 
-// Function to update balance display
-function updateBalanceDisplay() {
-    document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
-}
+// Оновлення відображення балансу
+    function updateBalanceDisplay() {
+        document.getElementById('balanceDisplay').innerText = balance.toFixed(2);
+    }
 
 // Event handling for bet input (as per your original script)
 
