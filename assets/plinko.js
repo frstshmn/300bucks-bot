@@ -13,18 +13,16 @@ var engine = Engine.create();
 
 // Create a renderer
 var render = Render.create({
-    element: document.body,
+    element: document.getElementById('plinkoCanvas'),
     engine: engine,
     options: {
-        width: 800,
-        height: 700, // Increased height to accommodate additional row
         wireframes: false,
         background: '#1b1b1b'
     }
 });
 
 // Create ground
-var ground = Bodies.rectangle(400, 590, 800, 20, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
+var ground = Bodies.rectangle(400, 690, 800, 20, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
 
 // Create pegs in a triangular layout
 var pegs = [];
@@ -68,8 +66,8 @@ for (var i = 0; i < multiplierValues.length; i++) {
 // Create boundaries
 var boundaries = [
     Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
-    Bodies.rectangle(0, 300, 20, 600, { isStatic: true }), // Left boundary
-    Bodies.rectangle(800, 300, 20, 600, { isStatic: true }) // Right boundary
+    Bodies.rectangle(0, 350, 20, 700, { isStatic: true }), // Left boundary
+    Bodies.rectangle(800, 350, 20, 700, { isStatic: true }) // Right boundary
 ];
 
 // Add all bodies to the world
@@ -146,14 +144,18 @@ Events.on(render, 'afterRender', function() {
     context.fillStyle = 'black';
     context.textAlign = 'center';
 
+    // Render slots and multiplier texts
     for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
-        var text = slot.multiplier + 'x';
-        var textWidth = context.measureText(text).width;
         var x = slot.position.x;
-        var y = slotY + slotHeight + 100; // Adjusted position to be below the slots
+        var y = slotY; // Adjusted position for slots
 
-        context.fillText(text, x, y);
+        context.fillStyle = slot.render.fillStyle;
+        context.fillRect(x - slotWidth / 2, y - slotHeight / 2, slotWidth, slotHeight);
+
+        // Render multiplier text
+        var text = slot.multiplier + 'x';
+        context.fillStyle = 'black';
+        context.fillText(text, x, y + slotHeight / 2 + 20); // Adjusted position for text
     }
 });
-
