@@ -124,7 +124,7 @@ $(document).ready(function() {
             $(this).removeClass("hidden").addClass("revealed gem").text("💎");
             gemsFound++;
             multiplier = getMultiplier(gemsFound, minesCount);
-            $("#result").text(`Gems found: ${gemsFound}. Current multiplier: ${multiplier.toFixed(2)}`);
+            $("#result").text(`Gems found: ${gemsFound}. Current multiplier: x ${multiplier.toFixed(2)}`);
         }
     }
 
