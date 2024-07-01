@@ -13,24 +13,24 @@
         <div class="wrap">
             <div class="slider-indicators">
                 <div class="content" style="left: 0%;">
+                    <div class="line"></div>
                     <div class="value">0</div>
-                    <div class="pin"></div>
                 </div>
                 <div class="content" style="left: 25%;">
+                    <div class="line"></div>
                     <div class="value">25</div>
-                    <div class="pin"></div>
                 </div>
                 <div class="content" style="left: 50%;">
+                    <div class="line"></div>
                     <div class="value">50</div>
-                    <div class="pin"></div>
                 </div>
                 <div class="content" style="left: 75%;">
+                    <div class="line"></div>
                     <div class="value">75</div>
-                    <div class="pin"></div>
                 </div>
                 <div class="content" style="left: 100%;">
+                    <div class="line"></div>
                     <div class="value">100</div>
-                    <div class="pin"></div>
                 </div>
             </div>
             <div class="range">
