@@ -1,3 +1,5 @@
+Telegram.WebApp.ready();
+
 $(document).ready(function() {
     const $winChanceSlider = $("#winChanceSlider");
     const $winChanceDisplay = $("#winChance");
@@ -7,7 +9,7 @@ $(document).ready(function() {
     const $betButton = $("#betButton");
     const $resultDisplay = $("#result");
     const $balanceDisplay = $("#balance");
-    const $diceFace = $("#diceFace");
+    const $resultIndicator = $("#resultIndicator");
 
     let balance = 100.00;
 
@@ -40,17 +42,7 @@ $(document).ready(function() {
         const win = Math.random() * 100 < winChance;
         const multiplier = (100 / winChance).toFixed(2);
 
-        animateDice();
-
-        if (win) {
-            const profit = betAmount * multiplier;
-            balance += profit;
-            $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
-        } else {
-            $resultDisplay.text("You lose.");
-        }
-
-        updateBalance();
+        animateResult(winChance, win, betAmount, multiplier);
     });
 
     function updateWinChance() {
@@ -59,6 +51,7 @@ $(document).ready(function() {
 
         $winChanceDisplay.text(winChance);
         $multiplierDisplay.text(multiplier);
+        updateSliderTrack(winChance);
     }
 
     function updateExpectedProfit() {
@@ -74,12 +67,26 @@ $(document).ready(function() {
         $balanceDisplay.text(balance.toFixed(2));
     }
 
-    function animateDice() {
-        const randomValue = Math.floor(Math.random() * 6) + 1;
-        const diceSymbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
-        $diceFace.text(diceSymbols[randomValue - 1]);
+    function updateSliderTrack(winChance) {
+        const percentage = winChance + "%";
+        $(".slider-track").css("background", `linear-gradient(to right, red ${percentage}, green ${percentage})`);
     }
 
-    updateWinChance();
-    updateExpectedProfit();
+    function animateResult(winChance, win, betAmount, multiplier) {
+        const randomValue = Math.floor(Math.random() * 100);
+        $resultIndicator.css("left", randomValue + "%").fadeIn(200);
+
+        setTimeout(() => {
+            if (win) {
+                const profit = betAmount * multiplier;
+                balance += profit;
+                $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
+            } else {
+                $resultDisplay.text("You lose.");
+            }
+
+            updateBalance();
+            $resultIndicator.fadeOut(200);
+        }, 1000);
+    }
 });

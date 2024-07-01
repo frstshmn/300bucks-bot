@@ -339,6 +339,51 @@ button {
 
 .slider-container {
     margin-bottom: 20px;
+    position: relative;
+}
+
+.slider-wrapper {
+    position: relative;
+}
+
+.slider-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 6px;
+    transform: translateY(-50%);
+    background: linear-gradient(to right, red 50%, green 50%);
+    border-radius: 3px;
+    z-index: -1;
+}
+
+input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    z-index: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: blue;
+    cursor: pointer;
+}
+
+.result-indicator {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: yellow;
+    transform: translateY(-50%);
+    display: none;
+    z-index: 2;
 }
 
 .bet-container {
@@ -357,14 +402,4 @@ input[type="number"] {
 button {
     padding: 5px 10px;
     cursor: pointer;
-}
-
-.dice {
-    margin-top: 20px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.dice-face {
-    font-size: 48px;
 }
