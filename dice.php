@@ -10,7 +10,7 @@
 <div class="game-container__dice">
     <h1>Betting Game</h1>
     <div class="slider-container">
-        <input type="range" min="1" max="99" value="50" id="winChanceSlider">
+        <input type="range" min="1" max="99" value="50" id="winChanceSlider" disabled>
         <p>Win Chance: <span id="winChance">50</span>%</p>
         <p>Multiplier: <span id="multiplier">1.98</span>x</p>
         <p>Expected Profit: <span id="expectedProfit">0.00</span> BTC</p>
@@ -22,7 +22,7 @@
     </div>
     <div class="result-container">
         <p>Result: <span id="result">Place your bet!</span></p>
-        <p>Balance: <span id="balance">300.00</span> BTC</p>
+        <p>Balance: <span id="balance">100.00</span> BTC</p>
     </div>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>

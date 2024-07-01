@@ -10,19 +10,11 @@ $(document).ready(function() {
 
     let balance = 100.00;
 
-    $winChanceSlider.on("input", function() {
-        const winChance = parseFloat($winChanceSlider.val());
-        const multiplier = (100 / winChance).toFixed(2);
-        const betAmount = parseFloat($betAmountInput.val()) || 0;
-        const expectedProfit = (betAmount * multiplier).toFixed(2);
-
-        $winChanceDisplay.text(winChance);
-        $multiplierDisplay.text(multiplier);
-        $expectedProfitDisplay.text(expectedProfit);
+    $betAmountInput.on("input", function() {
+        updateExpectedProfit();
     });
 
     $betButton.on("click", function() {
-        const winChance = parseFloat($winChanceSlider.val());
         const betAmount = parseFloat($betAmountInput.val());
 
         if (isNaN(betAmount) || betAmount <= 0) {
@@ -38,6 +30,7 @@ $(document).ready(function() {
         balance -= betAmount;
         updateBalance();
 
+        const winChance = parseFloat($winChanceSlider.val());
         const win = Math.random() * 100 < winChance;
         const multiplier = (100 / winChance).toFixed(2);
 
@@ -49,10 +42,30 @@ $(document).ready(function() {
             $resultDisplay.text("You lose.");
         }
 
+        animateSlider();
         updateBalance();
     });
+
+    function updateExpectedProfit() {
+        const winChance = parseFloat($winChanceSlider.val());
+        const multiplier = (100 / winChance).toFixed(2);
+        const betAmount = parseFloat($betAmountInput.val()) || 0;
+        const expectedProfit = (betAmount * multiplier).toFixed(2);
+
+        $winChanceDisplay.text(winChance);
+        $multiplierDisplay.text(multiplier);
+        $expectedProfitDisplay.text(expectedProfit);
+    }
 
     function updateBalance() {
         $balanceDisplay.text(balance.toFixed(2));
     }
+
+    function animateSlider() {
+        const randomValue = Math.floor(Math.random() * 99) + 1;
+        $winChanceSlider.val(randomValue);
+        $winChanceSlider.css("background", `linear-gradient(to right, #4caf50 ${randomValue}%, #fff ${randomValue}%)`);
+    }
+
+    updateExpectedProfit();
 });
