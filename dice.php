@@ -13,7 +13,7 @@
         <div class="slider-wrapper">
             <input type="range" min="1" max="99" value="50" id="winChanceSlider">
             <div class="slider-track"></div>
-            <div class="result-indicator" id="resultIndicator"></div>
+            <div class="result-indicator" id="resultIndicator"><span id="indicatorValue"></span></div>
         </div>
         <p>Win Chance: <span id="winChance">50</span>%</p>
         <p>Multiplier: <span id="multiplier">1.98</span>x</p>

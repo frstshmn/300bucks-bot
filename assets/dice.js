@@ -10,6 +10,7 @@ $(document).ready(function() {
     const $resultDisplay = $("#result");
     const $balanceDisplay = $("#balance");
     const $resultIndicator = $("#resultIndicator");
+    const $indicatorValue = $("#indicatorValue");
 
     let balance = 100.00;
 
@@ -74,6 +75,7 @@ $(document).ready(function() {
 
     function animateResult(winChance, win, betAmount, multiplier) {
         const randomValue = Math.floor(Math.random() * 100);
+        $indicatorValue.text(randomValue);
         $resultIndicator.css("left", randomValue + "%").fadeIn(200);
 
         setTimeout(() => {
@@ -89,4 +91,7 @@ $(document).ready(function() {
             $resultIndicator.fadeOut(200);
         }, 1000);
     }
+
+    updateWinChance();
+    updateExpectedProfit();
 });
