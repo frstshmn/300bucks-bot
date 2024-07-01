@@ -357,7 +357,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #3b6986;
     border-radius: 0;
     cursor: pointer;
-    transform: translateX(-15px);
+    transform: translateY(-15px);
 }
 
 .result-indicator {
