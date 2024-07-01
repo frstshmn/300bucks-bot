@@ -7,8 +7,14 @@ $(document).ready(function() {
     const $betButton = $("#betButton");
     const $resultDisplay = $("#result");
     const $balanceDisplay = $("#balance");
+    const $diceFace = $("#diceFace");
 
     let balance = 100.00;
+
+    $winChanceSlider.on("input", function() {
+        updateWinChance();
+        updateExpectedProfit();
+    });
 
     $betAmountInput.on("input", function() {
         updateExpectedProfit();
@@ -34,6 +40,8 @@ $(document).ready(function() {
         const win = Math.random() * 100 < winChance;
         const multiplier = (100 / winChance).toFixed(2);
 
+        animateDice();
+
         if (win) {
             const profit = betAmount * multiplier;
             balance += profit;
@@ -42,9 +50,16 @@ $(document).ready(function() {
             $resultDisplay.text("You lose.");
         }
 
-        animateSlider();
         updateBalance();
     });
+
+    function updateWinChance() {
+        const winChance = parseFloat($winChanceSlider.val());
+        const multiplier = (100 / winChance).toFixed(2);
+
+        $winChanceDisplay.text(winChance);
+        $multiplierDisplay.text(multiplier);
+    }
 
     function updateExpectedProfit() {
         const winChance = parseFloat($winChanceSlider.val());
@@ -52,8 +67,6 @@ $(document).ready(function() {
         const betAmount = parseFloat($betAmountInput.val()) || 0;
         const expectedProfit = (betAmount * multiplier).toFixed(2);
 
-        $winChanceDisplay.text(winChance);
-        $multiplierDisplay.text(multiplier);
         $expectedProfitDisplay.text(expectedProfit);
     }
 
@@ -61,11 +74,12 @@ $(document).ready(function() {
         $balanceDisplay.text(balance.toFixed(2));
     }
 
-    function animateSlider() {
-        const randomValue = Math.floor(Math.random() * 99) + 1;
-        $winChanceSlider.val(randomValue);
-        $winChanceSlider.css("background", `linear-gradient(to right, #4caf50 ${randomValue}%, #fff ${randomValue}%)`);
+    function animateDice() {
+        const randomValue = Math.floor(Math.random() * 6) + 1;
+        const diceSymbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+        $diceFace.text(diceSymbols[randomValue - 1]);
     }
 
+    updateWinChance();
     updateExpectedProfit();
 });
