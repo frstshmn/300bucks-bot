@@ -383,11 +383,10 @@ input[type="range"]::-webkit-slider-thumb {
     height: 40px;
     background-color:  #3b6986;
     color: #fff;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 500;
     text-align: center;
     line-height: 30px;
-    border-radius: 50%;
     transform: translate(-50%, 50%);
     display: none;
 }

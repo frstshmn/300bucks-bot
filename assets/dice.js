@@ -82,10 +82,10 @@ $(document).ready(function() {
             const profit = betAmount * multiplier;
             balance += profit;
             $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
-            $resultIndicator.css('background-color', '#60e360');
+            $resultIndicator.css('background-color', '#3b6986');
         } else {
             $resultDisplay.text("You lose.");
-            $resultIndicator.css('background-color', '#f55353');
+            $resultIndicator.css('background-color', '#3b6986');
         }
 
         updateBalance();
