@@ -356,7 +356,7 @@ button {
     transform: translateY(-50%);
     background: linear-gradient(to right, green 50%, red 50%);
     border-radius: 3px;
-    z-index: -1;
+    z-index: 0;
 }
 
 input[type="range"] {
@@ -373,6 +373,7 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     background: blue;
     cursor: pointer;
+    z-index: 2;
 }
 
 .result-indicator {
