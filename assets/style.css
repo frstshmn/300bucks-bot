@@ -276,7 +276,6 @@ canvas {
 }
 
 /* Dice */
-/* Dice */
 .game-container__dice {
     text-align: center;
     background-color: #34495e;
@@ -356,7 +355,6 @@ input[type="range"]::-webkit-slider-thumb {
     width: 20px;
     height: 20px;
     background-color: #3b6986;
-    border-radius: 50%;
     cursor: pointer;
 }
 
