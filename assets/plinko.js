@@ -28,10 +28,10 @@ var ground = Bodies.rectangle(400, 790, 800, 20, { isStatic: true, render: { fil
 
 // Create pegs in a triangular layout
 var pegs = [];
-var rows = 13;
-var pegSpacing = 50;
-var pegOffsetY = -100;
-for (var row = 1; row < rows; row++) {
+var rows = 15; // Increased rows for better coverage
+var pegSpacing = 40; // Reduced spacing for more pegs
+var pegOffsetY = 50; // Adjusted Y offset to move the grid down
+for (var row = 0; row < rows; row++) {
     for (var col = 0; col <= row; col++) {
         var x = 400 + col * pegSpacing - row * pegSpacing / 2;
         var y = 100 + row * pegSpacing + pegOffsetY;
@@ -42,13 +42,12 @@ for (var row = 1; row < rows; row++) {
 
 // Create multiplier slots with controlled probabilities
 var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16];
-var probabilities = [0.0009, 0.0045, 0.009, 0.09, 0.09, 0.09, 0.009, 0.0045, 0.0009];
-var slotWidth = 40;
+var slotWidth = 60; // Adjust slot width to cover the entire bottom area
 var slotHeight = 60;
-var slotY = 750;
+var slotY = 750; // Move the slots to the bottom
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 200 + i * (slotWidth + 10); // Adjusted position to align correctly
+    var x = 80 + i * slotWidth + slotWidth / 2; // Adjusted position to align correctly
     var color;
     if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
@@ -61,8 +60,7 @@ for (var i = 0; i < multiplierValues.length; i++) {
             fillStyle: color
         },
         label: 'slot',
-        multiplier: multiplierValues[i],
-        probability: probabilities[i]
+        multiplier: multiplierValues[i]
     });
     slots.push(slot);
 }
@@ -91,8 +89,8 @@ function throwBall() {
         balance -= bet;
         updateBalanceDisplay();
 
-        // Adjust initial position and apply force to influence the path
-        var startX = 400;
+        // Adjust initial position to be random within the center area
+        var startX = 400 + Math.random() * 20 - 10;
         var ball = Bodies.circle(startX, 0, 10, {
             restitution: 0.5,
             friction: 0,
@@ -104,8 +102,8 @@ function throwBall() {
         });
         World.add(engine.world, [ball]);
 
-        // Apply force to influence the path towards higher probability slots
-        Matter.Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: Common.random(-0.03, 0.03), y: 0 });
+        // Apply a random force to the ball to ensure it doesn't always go to the left
+        Matter.Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: Common.random(-0.02, 0.02), y: 0 });
     } else {
         document.getElementById('messageDisplay').innerText = "Not enough balance!";
     }
