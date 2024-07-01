@@ -354,7 +354,7 @@ button {
     right: 0;
     height: 6px;
     transform: translateY(-50%);
-    background: linear-gradient(to right, red 50%, green 50%);
+    background: linear-gradient(to right, green 50%, red 50%);
     border-radius: 3px;
     z-index: -1;
 }

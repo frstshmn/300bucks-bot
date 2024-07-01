@@ -70,7 +70,7 @@ $(document).ready(function() {
 
     function updateSliderTrack(winChance) {
         const percentage = winChance + "%";
-        $(".slider-track").css("background", `linear-gradient(to right, red ${percentage}, green ${percentage})`);
+        $(".slider-track").css("background", `linear-gradient(to right, green ${percentage}, red ${percentage})`);
     }
 
     function animateResult(winChance, win, betAmount, multiplier) {
@@ -78,18 +78,15 @@ $(document).ready(function() {
         $indicatorValue.text(randomValue);
         $resultIndicator.css("left", randomValue + "%").fadeIn(200);
 
-        setTimeout(() => {
-            if (win) {
-                const profit = betAmount * multiplier;
-                balance += profit;
-                $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
-            } else {
-                $resultDisplay.text("You lose.");
-            }
+        if (win) {
+            const profit = betAmount * multiplier;
+            balance += profit;
+            $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
+        } else {
+            $resultDisplay.text("You lose.");
+        }
 
-            updateBalance();
-            $resultIndicator.fadeOut(200);
-        }, 1000);
+        updateBalance();
     }
 
     updateWinChance();
