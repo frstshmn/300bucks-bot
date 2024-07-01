@@ -40,14 +40,15 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
     }
 }
 
-// Create multiplier slots
-var multiplierValues = [16, 9, 2, 1.4, 1.2, 1.1, 0.5, 1.1, 1.2, 1.4, 2, 9, 16]; // Adjusted multipliers
-var slotWidth = 60;
-var slotHeight = 40;
+// Create multiplier slots with controlled probabilities
+var multiplierValues = [16, 9, 4, 2, 1.4, 1.2, 1.1, 1, 0.5, 1, 1.1, 1.2, 1.4, 2, 4, 9, 16]; // Sample multipliers for demonstration
+var probabilities = [0.0009, 0.0045, 0.009, 0.045, 0.09, 0.135, 0.18, 0.225, 0.25, 0.225, 0.18, 0.135, 0.09, 0.045, 0.009, 0.0045, 0.0009];
+var slotWidth = 40;
+var slotHeight = 60;
 var slotY = 750; // Move the slots to the bottom
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
+    var x = 40 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
     if (multiplierValues[i] === 0.5) color = '#00FF00'; // Green for 0.5
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
@@ -60,10 +61,12 @@ for (var i = 0; i < multiplierValues.length; i++) {
             fillStyle: color
         },
         label: 'slot',
-        multiplier: multiplierValues[i]
+        multiplier: multiplierValues[i],
+        probability: probabilities[i]
     });
     slots.push(slot);
 }
+
 // Create boundaries
 var boundaries = [
     Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
@@ -149,3 +152,4 @@ Events.on(render, 'afterRender', function() {
         context.fillText(text, x, y);
     }
 });
+
