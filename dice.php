@@ -12,7 +12,7 @@
     <div class="slider-container">
         <div class="wrap">
             <div class="slider-indicators">
-                <div class="content" style="left: 0%;">
+                <div class="content" style="left: 0;">
                     <div class="value">0</div>
                     <div class="pin"></div>
                 </div>

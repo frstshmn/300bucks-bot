@@ -243,7 +243,6 @@ button.plinko-btn {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 button:hover {
     background-color: #1a2c3a;
 }
