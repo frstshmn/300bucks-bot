@@ -40,8 +40,17 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
     }
 }
 
+// Stake chances (example data)
+var stakeChances = {
+    '16x': 0.01,
+    '8x': 0.05,
+    '4x': 0.1,
+    '1x': 0.5,
+    '0.2x': 0.34
+};
+
 // Create multiplier slots
-var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
+var multiplierValues = ['16x', '8x', '4x', '1x', '0.2x', '0.2x', '0.2x', '1x', '4x', '8x', '16x']; // Use keys for stakeChances
 var slotWidth = 60;
 var slotHeight = 40;
 var slotY = 750; // Move the slots to the bottom
@@ -49,10 +58,12 @@ var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
-    if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
-    else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
-    else if (multiplierValues[i] < 4) color = '#FF8C00'; // Orange for less than 4
-    else color = '#FF0000'; // Red for the rest
+    switch(multiplierValues[i]) {
+        case '0.2x': color = '#00FF00'; break; // Green for 0.2
+        case '1x': color = '#FFD700'; break; // Yellow for 1
+        case '4x': color = '#FF8C00'; break; // Orange for 4
+        default: color = '#FF0000'; // Red for the rest
+    }
 
     var slot = Bodies.rectangle(x, slotY, slotWidth, slotHeight, {
         isStatic: true,
@@ -91,9 +102,10 @@ function throwBall() {
         // Start the ball slightly above the center
         var startX = 400 + Math.random() * 10 - 5;
         var ball = Bodies.circle(startX, 0, 10, {
-            restitution: 0.5,
-            friction: 0,
-            frictionAir: 0.01,
+            restitution: 0.3, // Lower restitution for less bounce
+            friction: 0.005, // Slight friction
+            frictionAir: 0.02, // Increase air friction to slow down the ball
+            density: 0.001, // Adjust density for slower fall
             label: 'ball',
             render: {
                 fillStyle: '#ff0000'
@@ -110,6 +122,17 @@ function updateBalanceDisplay() {
     document.getElementById('balanceDisplay').innerText = balance.toFixed(0);
 }
 
+// Function to get multiplier from stake chances
+function getMultiplier() {
+    var random = Math.random();
+    var sum = 0;
+    for (var key in stakeChances) {
+        sum += stakeChances[key];
+        if (random <= sum) return key;
+    }
+    return '0.2x'; // Fallback in case of rounding errors
+}
+
 // Event handling for ball hitting multiplier slots
 Events.on(engine, 'collisionStart', function(event) {
     var pairs = event.pairs;
@@ -118,7 +141,8 @@ Events.on(engine, 'collisionStart', function(event) {
         if ((pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') ||
             (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball')) {
             var slotMultiplier = (pair.bodyA.label === 'slot') ? pair.bodyA.multiplier : pair.bodyB.multiplier;
-            balance += parseInt(document.getElementById('bet').value) * slotMultiplier;
+            var realMultiplier = getMultiplier();
+            balance += parseInt(document.getElementById('bet').value) * parseFloat(realMultiplier);
             updateBalanceDisplay();
             World.remove(engine.world, pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB);
             ballInPlay = false; // Ball is no longer in play
@@ -143,7 +167,7 @@ Events.on(render, 'afterRender', function() {
     // Draw multiplier texts on the slots
     for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
-        var text = slot.multiplier + 'x';
+        var text = slot.multiplier;
         var x = slot.position.x;
         var y = slot.position.y + 10; // Adjusted position to be on the slots
 
