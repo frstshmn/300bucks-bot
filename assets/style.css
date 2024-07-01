@@ -275,57 +275,6 @@ canvas {
     display: none;
 }
 
-/* Aviator */
-
-#game-container__aviator {
-    text-align: center;
-}
-
-#multiplier {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-#airplane-placeholder {
-    font-size: 40px;
-    position: absolute;
-    bottom: 0;
-    left: 50px;
-    transition: transform 0.1s linear;
-}
-
-#trail {
-    position: absolute;
-    bottom: 20px;
-    left: 50px;
-    height: 2px;
-    background-color: red;
-    width: 0;
-    transition: width 0.1s linear;
-}
-
-#balance {
-    font-size: 18px;
-    margin-top: 20px;
-}
-
-#round-info {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-input {
-    padding: 5px;
-    margin: 10px 0;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-}
-
 /* Dice */
 .game-container__dice {
     text-align: center;
