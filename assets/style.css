@@ -361,10 +361,10 @@ input[type="range"]::-webkit-slider-thumb {
 
 .result-indicator {
     position: absolute;
-    top: -50px;
+    top: -38px;
     width: 40px;
     height: 40px;
-    background-color: green;
+    background-color:#3b6986 ;
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     display: none;
     justify-content: center;
@@ -377,11 +377,11 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .win {
-    background-color: green;
+    color: #60e360;
 }
 
 .lose {
-    background-color: red;
+    color: #f55353;
 }
 
 button {

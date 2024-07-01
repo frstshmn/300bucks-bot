@@ -78,6 +78,7 @@ $(document).ready(function() {
     function animateResult(winChance, win, betAmount, multiplier, randomValue) {
         $indicatorValue.text(randomValue);
         $resultIndicator.css("left", randomValue + "%").fadeIn(200);
+        $resultIndicator.css('display', 'flex');
 
         if (win) {
             const profit = betAmount * multiplier;
