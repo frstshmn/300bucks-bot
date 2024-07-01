@@ -44,10 +44,10 @@
         </div>
     </div>
     <p>Win Chance: <span id="winChance">50</span>%</p>
-    <p>Multiplier: <span id="multiplier">2.00</span></p>
+    <p>Multiplier: <span id="multiplier">2.00</span>x</p>
     <p>Expected Profit: <span id="expectedProfit">0.00</span> $</p>
     <p>Balance: <span id="balance">300.00</span> $</p>
-    <input type="number" id="betAmount" value="1">
+    <input type="number" id="bet-amount" value="1">
     <button id="betButton">Bet</button>
     <p id="result"></p>
 </div>
