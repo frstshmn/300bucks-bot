@@ -28,7 +28,7 @@ var ground = Bodies.rectangle(400, 790, 800, 20, { isStatic: true, render: { fil
 
 // Create pegs in a triangular layout
 var pegs = [];
-var rows = 13; // Increased to 13 rows
+var rows = 12; // Increased to 13 rows
 var pegSpacing = 50;
 var pegOffsetY = -100; // Raise the peg grid by adjusting the Y offset
 for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
