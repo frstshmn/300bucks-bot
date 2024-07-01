@@ -41,7 +41,7 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 }
 
 // Create multiplier slots
-var multiplierValues = [16, 9, 2, 1.4, 1.2, 1.1, 0.5, 1.1, 1.2, 1.4, 2, 9, 16]; // Adjusted multipliers
+var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
 var slotY = 750; // Move the slots to the bottom
@@ -49,7 +49,7 @@ var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
     var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
-    if (multiplierValues[i] === 0.5) color = '#00FF00'; // Green for 0.5
+    if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
     else if (multiplierValues[i] < 4) color = '#FF8C00'; // Orange for less than 4
     else color = '#FF0000'; // Red for the rest
