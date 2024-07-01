@@ -330,22 +330,45 @@ button {
 
 .game-container__dice {
     background-color: #213743;
+    max-width: 350px;
+    margin: 50px auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .slider-container {
-    margin-bottom: 20px;
-    position: relative;
+    margin: 20px 0;
 }
 
 .slider-wrapper {
     position: relative;
     width: 100%;
-    z-index: 0;
+    margin: 20px 0;
+}
+
+input[type="range"] {
+    width: 100%;
+    z-index: 1;
+    background: transparent;
+    appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .slider-track {
@@ -360,57 +383,43 @@ button {
     z-index: 0;
 }
 
-input[type="range"] {
-    width: 100%;
-    -webkit-appearance: none;
-    background: none;
-    position: relative;
-    z-index: 1;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 0;
-    background: blue;
-    cursor: pointer;
-    z-index: 9999;
-}
-
 .result-indicator {
     position: absolute;
-    top: 50%;
-    width: 50px;
-    height: 50px;
-    border-radius: 0;
-    background: #213743;
-    -webkit-box-shadow: 0px 0px 47px 14px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 47px 14px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 47px 14px rgba(0,0,0,0.75);;
-    transform: translateY(-50%);
-    display: none;
-    z-index: 2;
+    bottom: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
     text-align: center;
-    line-height: 20px;
-    font-size: 12px;
-    color: black;
+    line-height: 30px;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    display: none;
 }
 
-.bet-container {
-    margin-bottom: 20px;
-}
-
-.result-container {
-    margin-top: 20px;
-}
-
-input[type="number"] {
-    width: 80px;
-    padding: 5px;
+.result-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #007bff;
 }
 
 button {
-    padding: 5px 10px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

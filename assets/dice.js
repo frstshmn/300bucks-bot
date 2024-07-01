@@ -70,7 +70,7 @@ $(document).ready(function() {
 
     function updateSliderTrack(winChance) {
         const percentage = winChance + "%";
-        $(".slider-track").css("background", `linear-gradient(to right, green ${percentage}, red ${percentage})`);
+        $(".slider-track").css("background", `linear-gradient(to right, #60e360 ${percentage}, #f55353 ${percentage})`);
     }
 
     function animateResult(winChance, win, betAmount, multiplier) {
@@ -82,8 +82,10 @@ $(document).ready(function() {
             const profit = betAmount * multiplier;
             balance += profit;
             $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
+            $resultIndicator.css('background-color', 'green');
         } else {
             $resultDisplay.text("You lose.");
+            $resultIndicator.css('background-color', 'red');
         }
 
         updateBalance();
@@ -92,4 +94,3 @@ $(document).ready(function() {
     updateWinChance();
     updateExpectedProfit();
 });
-
