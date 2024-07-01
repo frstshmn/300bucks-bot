@@ -64,7 +64,6 @@ for (var i = 0; i < multiplierValues.length; i++) {
     });
     slots.push(slot);
 }
-
 // Create boundaries
 var boundaries = [
     Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
