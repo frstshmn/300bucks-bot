@@ -40,8 +40,11 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
     }
 }
 
+// Multiplier values and corresponding probabilities
+var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Multipliers
+var multiplierProbabilities = [0.01, 0.02, 0.05, 0.12, 0.3, 0.3, 0.3, 0.12, 0.05, 0.02, 0.01]; // Probabilities
+
 // Create multiplier slots
-var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
 var slotWidth = 60;
 var slotHeight = 40;
 var slotY = 750; // Move the slots to the bottom
@@ -79,6 +82,19 @@ World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 var balance = 300;
 var ballInPlay = false; // Flag to check if ball is in play
 
+// Function to get a random multiplier based on the defined probabilities
+function getRandomMultiplier() {
+    var random = Math.random();
+    var cumulativeProbability = 0;
+    for (var i = 0; i < multiplierProbabilities.length; i++) {
+        cumulativeProbability += multiplierProbabilities[i];
+        if (random < cumulativeProbability) {
+            return multiplierValues[i];
+        }
+    }
+    return 1; // Default case (shouldn't reach here if probabilities sum to 1)
+}
+
 // Function to throw the ball
 function throwBall() {
     if (ballInPlay) return; // Prevent throwing a new ball while one is in play
@@ -88,6 +104,7 @@ function throwBall() {
         ballInPlay = true;
         balance -= bet;
         updateBalanceDisplay();
+
         // Start the ball slightly above the center
         var startX = 400 + Math.random() * 10 - 5;
         var ball = Bodies.circle(startX, 0, 10, {
@@ -117,7 +134,7 @@ Events.on(engine, 'collisionStart', function(event) {
         var pair = pairs[i];
         if ((pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') ||
             (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball')) {
-            var slotMultiplier = (pair.bodyA.label === 'slot') ? pair.bodyA.multiplier : pair.bodyB.multiplier;
+            var slotMultiplier = getRandomMultiplier();
             balance += parseInt(document.getElementById('bet').value) * slotMultiplier;
             updateBalanceDisplay();
             World.remove(engine.world, pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB);
