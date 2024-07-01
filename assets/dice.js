@@ -78,14 +78,14 @@ $(document).ready(function() {
         $indicatorValue.text(randomValue);
         $resultIndicator.css("left", randomValue + "%").fadeIn(200);
 
-        if (win) {
+        if (randomValue < winChance) {
             const profit = betAmount * multiplier;
             balance += profit;
             $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
-            $resultIndicator.css('background-color', 'green');
+            $resultIndicator.css('background-color', '#60e360');
         } else {
             $resultDisplay.text("You lose.");
-            $resultIndicator.css('background-color', 'red');
+            $resultIndicator.css('background-color', '#f55353');
         }
 
         updateBalance();

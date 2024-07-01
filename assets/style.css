@@ -349,25 +349,18 @@ button {
 
 input[type="range"] {
     width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    position: relative;
     z-index: 1;
-    background: transparent;
-    appearance: none;
 }
 
 input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    background-color: #007bff;
-    border-radius: 50%;
-    cursor: pointer;
-    appearance: none;
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background-color: #007bff;
-    border-radius: 50%;
+    border-radius: 0;
+    background: #3b6986;
     cursor: pointer;
 }
 
@@ -385,11 +378,13 @@ input[type="range"]::-moz-range-thumb {
 
 .result-indicator {
     position: absolute;
-    bottom: 10px;
+    top: -50px;
     width: 40px;
     height: 40px;
-    background-color: #007bff;
+    background-color:  #3b6986;
     color: #fff;
+    font-size: 24px;
+    font-weight: bold;
     text-align: center;
     line-height: 30px;
     border-radius: 50%;
@@ -407,7 +402,7 @@ input[type="range"]::-moz-range-thumb {
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid #007bff;
+    border-top: 10px solid  #3b6986;
 }
 
 button {
