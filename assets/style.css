@@ -327,7 +327,6 @@ button {
 }
 
 /* Dice */
-
 .game-container__dice {
     text-align: center;
     background-color: #34495e;
@@ -340,21 +339,10 @@ button {
     margin: 20px 0;
 }
 
-#winChanceSlider {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 10px;
-    margin: 0;
-    transform: translateY(-50%);
-    z-index: 1;
-}
-
 .slider-wrapper {
     position: relative;
     width: 100%;
+    height: 60px; /* Adjusted to fit indicators and slider */
     margin: 20px 0;
 }
 
@@ -362,7 +350,7 @@ button {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 70%;
+    top: -20px; /* Position indicators above slider */
     width: 100%;
     font-size: 12px;
     color: white;
@@ -370,13 +358,14 @@ button {
     z-index: 2;
 }
 
-
 input[type="range"] {
     width: 100%;
     -webkit-appearance: none;
     background: none;
     position: relative;
     z-index: 1;
+    margin: 0;
+    height: 10px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -405,14 +394,16 @@ input[type="range"]::-webkit-slider-thumb {
     top: -50px;
     width: 40px;
     height: 40px;
-    background-color:  #3b6986;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-    line-height: 30px;
-    transform: translate(-50%, 50%);
+    background-color: green;
+    border-radius: 50%;
     display: none;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    z-index: 3;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .result-indicator::after {
@@ -425,7 +416,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid  #3b6986;
+    border-top: 10px solid green;
 }
 
 button {
@@ -441,6 +432,3 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-
-
-
