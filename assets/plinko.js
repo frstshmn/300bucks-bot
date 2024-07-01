@@ -17,7 +17,7 @@ var render = Render.create({
     engine: engine,
     options: {
         width: 800,
-        height: 800, // Increased height to accommodate slots at the bottom
+        height: 800,
         wireframes: false,
         background: '#1b1b1b'
     }
@@ -28,10 +28,10 @@ var ground = Bodies.rectangle(400, 790, 800, 20, { isStatic: true, render: { fil
 
 // Create pegs in a triangular layout
 var pegs = [];
-var rows = 13; // Increased to 13 rows
+var rows = 13;
 var pegSpacing = 50;
-var pegOffsetY = -100; // Raise the peg grid by adjusting the Y offset
-for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
+var pegOffsetY = -100;
+for (var row = 1; row < rows; row++) {
     for (var col = 0; col <= row; col++) {
         var x = 400 + col * pegSpacing - row * pegSpacing / 2;
         var y = 100 + row * pegSpacing + pegOffsetY;
@@ -41,16 +41,16 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 }
 
 // Create multiplier slots with controlled probabilities
-var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
+var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16];
 var probabilities = [0.0009, 0.0045, 0.009, 0.09, 0.09, 0.09, 0.009, 0.0045, 0.0009];
 var slotWidth = 40;
 var slotHeight = 60;
-var slotY = 750; // Move the slots to the bottom
+var slotY = 750;
 var slots = [];
 for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 400 + i * (slotWidth + 10); // Adjusted position to align correctly
+    var x = 200 + i * (slotWidth + 10); // Adjusted position to align correctly
     var color;
-    if (multiplierValues[i] === 0.5) color = '#00FF00'; // Green for 0.5
+    if (multiplierValues[i] === 0.2) color = '#00FF00'; // Green for 0.2
     else if (multiplierValues[i] < 1) color = '#FFD700'; // Yellow for less than 1
     else if (multiplierValues[i] < 4) color = '#FF8C00'; // Orange for less than 4
     else color = '#FF0000'; // Red for the rest
@@ -79,19 +79,20 @@ World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
 
 // Balance variable
 var balance = 300;
-var ballInPlay = false; // Flag to check if ball is in play
+var ballInPlay = false;
 
 // Function to throw the ball
 function throwBall() {
-    if (ballInPlay) return; // Prevent throwing a new ball while one is in play
+    if (ballInPlay) return;
 
     var bet = parseInt(document.getElementById('bet').value) || 1;
     if (balance >= bet) {
         ballInPlay = true;
         balance -= bet;
         updateBalanceDisplay();
-        // Start the ball slightly above the center
-        var startX = 400 + Math.random() * 10 - 5;
+
+        // Adjust initial position and apply force to influence the path
+        var startX = 400;
         var ball = Bodies.circle(startX, 0, 10, {
             restitution: 0.5,
             friction: 0,
@@ -102,6 +103,9 @@ function throwBall() {
             }
         });
         World.add(engine.world, [ball]);
+
+        // Apply force to influence the path towards higher probability slots
+        Matter.Body.applyForce(ball, { x: ball.position.x, y: ball.position.y }, { x: Common.random(-0.03, 0.03), y: 0 });
     } else {
         document.getElementById('messageDisplay').innerText = "Not enough balance!";
     }
@@ -123,7 +127,7 @@ Events.on(engine, 'collisionStart', function(event) {
             balance += parseInt(document.getElementById('bet').value) * slotMultiplier;
             updateBalanceDisplay();
             World.remove(engine.world, pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB);
-            ballInPlay = false; // Ball is no longer in play
+            ballInPlay = false;
             return;
         }
     }
@@ -142,14 +146,12 @@ Events.on(render, 'afterRender', function() {
     context.fillStyle = 'black';
     context.textAlign = 'center';
 
-    // Draw multiplier texts on the slots
     for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
         var text = slot.multiplier + 'x';
         var x = slot.position.x;
-        var y = slot.position.y + 10; // Adjusted position to be on the slots
+        var y = slot.position.y + 10;
 
         context.fillText(text, x, y);
     }
 });
-
