@@ -26,8 +26,8 @@
                 </a>
 
 
-                <a class="game" href="aviator.php">
-                    <img class="game-cover" src="assets/images/aviator.jpg" alt="">
+                <a class="game" href="dice.php">
+                    <img class="game-cover" src="assets/images/dice.jpg.jpg" alt="">
                 </a>
 
 
