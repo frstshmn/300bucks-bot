@@ -62,6 +62,8 @@ for (var i = 0; i < multiplierValues.length; i++) {
         case '0.2x': color = '#00FF00'; break; // Green for 0.2
         case '1x': color = '#FFD700'; break; // Yellow for 1
         case '4x': color = '#FF8C00'; break; // Orange for 4
+        case '8x': color = '#FF4500'; break; // OrangeRed for 8
+        case '16x': color = '#FF0000'; break; // Red for 16
         default: color = '#FF0000'; // Red for the rest
     }
 
@@ -142,7 +144,8 @@ Events.on(engine, 'collisionStart', function(event) {
             (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball')) {
             var slotMultiplier = (pair.bodyA.label === 'slot') ? pair.bodyA.multiplier : pair.bodyB.multiplier;
             var realMultiplier = getMultiplier();
-            balance += parseInt(document.getElementById('bet').value) * parseFloat(realMultiplier);
+            var multiplierValue = parseFloat(realMultiplier.replace('x', '')); // Extract numeric part from the multiplier
+            balance += parseInt(document.getElementById('bet').value) * multiplierValue;
             updateBalanceDisplay();
             World.remove(engine.world, pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB);
             ballInPlay = false; // Ball is no longer in play
