@@ -83,12 +83,10 @@ $(document).ready(function() {
             const profit = betAmount * multiplier;
             balance += profit;
             $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} $`);
-            $resultIndicator.css('background-color', 'green');
-            $resultIndicator.find('::after').css('border-top-color', 'green');
+            $resultIndicator.find('::after').css('text-color', 'green');
         } else {
             $resultDisplay.text("You lose.");
-            $resultIndicator.css('background-color', 'red');
-            $resultIndicator.find('::after').css('border-top-color', 'red');
+            $resultIndicator.find('::after').css('text-color', 'red');
         }
 
         updateBalance();
