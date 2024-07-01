@@ -12,11 +12,21 @@
     <div class="slider-container">
         <div class="wrap">
             <div class="slider-indicators">
-                <div class="content" style="left: 0%;"><div class="value">0</div></div>
-                <div class="content" style="left: 25%;"><div class="value">25</div></div>
-                <div class="content" style="left: 50%;"><div class="value">50</div></div>
-                <div class="content" style="left: 75%;"><div class="value">75</div></div>
-                <div class="content" style="left: 100%;"><div class="value">100</div></div>
+                <div class="content" style="left: 0%;">
+                    <div class="hexagon">0</div>
+                </div>
+                <div class="content" style="left: 25%;">
+                    <div class="hexagon">25</div>
+                </div>
+                <div class="content" style="left: 50%;">
+                    <div class="hexagon">50</div>
+                </div>
+                <div class="content" style="left: 75%;">
+                    <div class="hexagon">75</div>
+                </div>
+                <div class="content" style="left: 100%;">
+                    <div class="hexagon">100</div>
+                </div>
             </div>
             <div class="range">
                 <div class="lower" style="width: 50%;"></div>
