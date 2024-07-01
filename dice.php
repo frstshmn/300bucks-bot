@@ -19,7 +19,7 @@
                 <div class="content" style="left: 100%;"><div class="value">100</div></div>
             </div>
             <div class="range">
-                <div class="lower"></div>
+                <div class="lower" style="width: 50%;"></div>
                 <div class="higher" style="width: 50%;"></div>
             </div>
             <input min="2" max="98" type="range" id="winChanceSlider" class="classic-slider" value="50">

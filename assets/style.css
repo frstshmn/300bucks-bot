@@ -333,6 +333,7 @@ button {
     padding: 20px;
     border-radius: 10px;
     width: 300px;
+    margin: 0 auto;
 }
 
 .slider-container {
@@ -368,22 +369,15 @@ button {
     background-color: #3b6986;
     border-radius: 5px;
     margin-top: 20px;
+    display: flex;
 }
 
 .range .lower {
-    position: absolute;
-    left: 0;
-    width: 50%;
-    height: 100%;
     background-color: #60e360;
     border-radius: 5px 0 0 5px;
 }
 
 .range .higher {
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 100%;
     background-color: #f55353;
     border-radius: 0 5px 5px 0;
 }
@@ -400,8 +394,8 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: var(--drag-size);
-    height: var(--drag-size);
+    width: 20px;
+    height: 20px;
     background-color: #3b6986;
     border-radius: 50%;
     cursor: pointer;
@@ -445,6 +439,7 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 button:hover {

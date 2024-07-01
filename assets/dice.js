@@ -71,7 +71,8 @@ $(document).ready(function() {
 
     function updateSliderTrack(winChance) {
         const percentage = winChance + "%";
-        $(".slider-track").css("background", `linear-gradient(to right, #60e360 ${percentage}, #f55353 ${percentage})`);
+        $(".lower").css("width", percentage);
+        $(".higher").css("width", (100 - winChance) + "%");
     }
 
     function animateResult(winChance, win, betAmount, multiplier, randomValue) {
