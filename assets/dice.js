@@ -40,10 +40,11 @@ $(document).ready(function() {
         updateBalance();
 
         const winChance = parseFloat($winChanceSlider.val());
-        const win = Math.random() * 100 < winChance;
+        const randomValue = Math.floor(Math.random() * 100);
+        const win = randomValue < winChance;
         const multiplier = (100 / winChance).toFixed(2);
 
-        animateResult(winChance, win, betAmount, multiplier);
+        animateResult(winChance, win, betAmount, multiplier, randomValue);
     });
 
     function updateWinChance() {
@@ -73,19 +74,18 @@ $(document).ready(function() {
         $(".slider-track").css("background", `linear-gradient(to right, #60e360 ${percentage}, #f55353 ${percentage})`);
     }
 
-    function animateResult(winChance, win, betAmount, multiplier) {
-        const randomValue = Math.floor(Math.random() * 100);
+    function animateResult(winChance, win, betAmount, multiplier, randomValue) {
         $indicatorValue.text(randomValue);
         $resultIndicator.css("left", randomValue + "%").fadeIn(200);
 
-        if (randomValue < winChance) {
+        if (win) {
             const profit = betAmount * multiplier;
             balance += profit;
             $resultDisplay.text(`You win! Profit: ${profit.toFixed(2)} BTC`);
-            $resultIndicator.css('background-color', '#3b6986');
+            $resultIndicator.css('background-color', '#60e360');
         } else {
             $resultDisplay.text("You lose.");
-            $resultIndicator.css('background-color', '#3b6986');
+            $resultIndicator.css('background-color', '#60e360');
         }
 
         updateBalance();
