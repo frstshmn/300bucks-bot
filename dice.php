@@ -10,16 +10,19 @@
 <div class="game-container__dice">
     <h1>Dice Game</h1>
     <div class="slider-container">
-        <div class="slider-wrapper">
-            <input type="range" id="winChanceSlider" min="1" max="100" value="50">
-            <div class="slider-track"></div>
+        <div class="wrap">
             <div class="slider-indicators">
-                <span>0</span>
-                <span>25</span>
-                <span>50</span>
-                <span>75</span>
-                <span>100</span>
+                <div class="content" style="left: 0%;"><div class="value">0</div></div>
+                <div class="content" style="left: 25%;"><div class="value">25</div></div>
+                <div class="content" style="left: 50%;"><div class="value">50</div></div>
+                <div class="content" style="left: 75%;"><div class="value">75</div></div>
+                <div class="content" style="left: 100%;"><div class="value">100</div></div>
             </div>
+            <div class="range">
+                <div class="lower"></div>
+                <div class="higher" style="width: 50%;"></div>
+            </div>
+            <input min="2" max="98" type="range" id="winChanceSlider" class="classic-slider" value="50">
             <div class="result-indicator" id="resultIndicator">
                 <span id="indicatorValue"></span>
             </div>
