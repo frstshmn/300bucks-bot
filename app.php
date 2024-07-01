@@ -27,7 +27,7 @@
 
 
                 <a class="game" href="dice.php">
-                    <img class="game-cover" src="assets/images/dice.jpg.jpg" alt="">
+                    <img class="game-cover" src="assets/images/dice.jpg" alt="">
                 </a>
 
 
