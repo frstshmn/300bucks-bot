@@ -41,8 +41,8 @@ for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
 }
 
 // Create multiplier slots with controlled probabilities
-var multiplierValues = [16, 9, 4, 2, 1.4, 1.2, 1.1, 1, 0.5, 1, 1.1, 1.2, 1.4, 2, 4, 9, 16]; // Sample multipliers for demonstration
-var probabilities = [0.0009, 0.0045, 0.009, 0.045, 0.09, 0.135, 0.18, 0.225, 0.25, 0.225, 0.18, 0.135, 0.09, 0.045, 0.009, 0.0045, 0.0009];
+var multiplierValues = [16, 8, 4, 1, 0.2, 0.2, 0.2, 1, 4, 8, 16]; // Sample multipliers for demonstration
+var probabilities = [0.0009, 0.0045, 0.009, 0.09, 0.09, 0.09, 0.009, 0.0045, 0.0009];
 var slotWidth = 40;
 var slotHeight = 60;
 var slotY = 750; // Move the slots to the bottom
