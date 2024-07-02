@@ -93,9 +93,9 @@ $(document).ready(function() {
 
         // Запуск анімації
         $resultIndicator.css("animation", "none");
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             $resultIndicator.css("animation", "");
-        }, 10);
+        });
 
         updateBalance();
     }
