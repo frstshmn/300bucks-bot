@@ -291,7 +291,7 @@ canvas {
 }
 
 .slider-container {
-    margin: 20px 0;
+    margin: 50px 0 20px 0;
     border: 6px solid #7498cc;
     border-radius: 25px;
 }
@@ -327,6 +327,7 @@ canvas {
     align-items: center;
     gap: 7px;
     top: -14px;
+    font-weight: 600;
 }
 
 .slider-indicators .pin {

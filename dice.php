@@ -14,11 +14,11 @@
     <div class="slider-container">
         <div class="slider-outer">
         <div class="slider-indicators">
-            <div class="content" style="left: 0;">
+            <div class="content" style="left: 10px;">
                 <div class="value">0</div>
                 <div class="pin"></div>
             </div>
-            <div class="content" style="left: 25%;">
+            <div class="content" style="left: 66px;">
                 <div class="value">25</div>
                 <div class="pin"></div>
             </div>
@@ -26,11 +26,11 @@
                 <div class="value">50</div>
                 <div class="pin"></div>
             </div>
-            <div class="content" style="left: 75%;">
+            <div class="content" style="left: 189px;">
                 <div class="value">75</div>
                 <div class="pin"></div>
             </div>
-            <div class="content" style="left: 100%;">
+            <div class="content" style="left: 248px;">
                 <div class="value">100</div>
                 <div class="pin"></div>
             </div>
