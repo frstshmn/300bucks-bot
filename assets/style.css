@@ -221,7 +221,7 @@ body.plinko-body{
 
 .amount input[type="number"],
 #bet-amount input[type="number"],
-#betAmount__blackJack input[type="number"]{
+input[type="number"]#betAmount__blackJack {
     width: 60px;
     padding: 5px;
     margin: 5px;
