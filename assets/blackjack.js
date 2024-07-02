@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const hitButton = document.getElementById("hitButton");
     const standButton = document.getElementById("standButton");
     const balanceDisplay = document.getElementById("balance");
-    const betAmountInput = document.getElementById("betAmount");
+    const betAmountInput = document.getElementById("betAmount__blackJack");
     const resultDisplay = document.getElementById("resultDisplay");
     const dealerHand = document.getElementById("dealerHand");
     const playerHand = document.getElementById("playerHand");
