@@ -458,5 +458,9 @@ button:hover {
 #gameSection{
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    gap: 20px;
+}
+.hand-value{
+    text-align: center;
+    font-weight: 600;
 }
