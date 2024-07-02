@@ -292,9 +292,13 @@ canvas {
 
 .slider-container {
     margin: 20px 0;
-    border: 5px solid #7498cc;
-    padding: 18px;
+    border: 6px solid #7498cc;
     border-radius: 25px;
+}
+.slider-outer{
+    border: 10px solid #131d28;
+    padding: 0 5px;
+    border-radius: 19px;
 }
 
 .wrap {
