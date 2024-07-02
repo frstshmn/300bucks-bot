@@ -412,18 +412,6 @@ button:hover {
     margin: 10px 0;
 }
 
-.hand-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hand-value {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #fff;
-}
-
 .hand {
     display: flex;
     justify-content: center;
@@ -437,26 +425,19 @@ button:hover {
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0 5px;
-
-}
-
-.card-back {
-    border-radius: 5px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0 5px;
-    scale(1.2);
 }
 
 .deal-animation {
-    animation: deal 0.5s forwards;
+    animation: dealCard 0.5s forwards;
 }
 
-@keyframes deal {
+@keyframes dealCard {
     from {
-        transform: translate(0, -150px) rotate(0deg);
+        transform: translateY(-100px);
+        opacity: 0;
     }
     to {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translateY(0);
+        opacity: 1;
     }
 }

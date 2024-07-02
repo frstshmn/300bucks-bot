@@ -55,31 +55,19 @@ document.addEventListener("DOMContentLoaded", function() {
         playerHand.innerHTML = '';
         dealerCards.forEach((card, index) => {
             if (index === 0 && !showDealerFullHand) {
-                if (initialRender) {
-                    setTimeout(() => {
-                        dealerHand.appendChild(renderCardBack(index));
-                    }, index * 500);
-                } else {
+                setTimeout(() => {
                     dealerHand.appendChild(renderCardBack(index));
-                }
+                }, index * 500);
             } else {
-                if (initialRender) {
-                    setTimeout(() => {
-                        dealerHand.appendChild(renderCard(card, index, true));
-                    }, index * 500);
-                } else {
-                    dealerHand.appendChild(renderCard(card, index, false));
-                }
+                setTimeout(() => {
+                    dealerHand.appendChild(renderCard(card, index, initialRender));
+                }, index * 500);
             }
         });
         playerCards.forEach((card, index) => {
-            if (initialRender) {
-                setTimeout(() => {
-                    playerHand.appendChild(renderCard(card, index, true));
-                }, index * 500);
-            } else {
-                playerHand.appendChild(renderCard(card, index, false));
-            }
+            setTimeout(() => {
+                playerHand.appendChild(renderCard(card, index, initialRender));
+            }, index * 500);
         });
     }
 
@@ -194,4 +182,3 @@ document.addEventListener("DOMContentLoaded", function() {
         endGame();
     });
 });
-
