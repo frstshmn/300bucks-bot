@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         playerCards = [drawCard(), drawCard()];
         renderHands();
         resultDisplay.textContent = '';
+        updateHandValues();
     }
 
     function drawCard() {
@@ -62,20 +63,19 @@ document.addEventListener("DOMContentLoaded", function() {
         playerCards.forEach(card => {
             playerHand.appendChild(renderCard(card));
         });
-        updateHandValues();
     }
 
     function renderCard(card) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
+        cardDiv.style.backgroundImage = `url(images/${card.value}_of_${card.suit}.png)`;
         return cardDiv;
     }
 
     function renderCardBack() {
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
+        cardDiv.className = 'card-back';
+        cardDiv.style.backgroundImage = 'url(images/card-back.png)';
         return cardDiv;
     }
 
@@ -100,22 +100,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateHandValues() {
-        const dealerValue = calculateHandValue(dealerCards);
+        const dealerValue = calculateHandValue(dealerCards.slice(1)); // Відображаємо значення руки без перевернутої карти
         const playerValue = calculateHandValue(playerCards);
-        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`;
+        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue} + ?`;
         playerValueDisplay.textContent = `Your Hand: ${playerValue}`;
+        if (playerValue === 21) {
+            endGame(true);
+        }
     }
 
     function checkForBust(hand) {
         return calculateHandValue(hand) > 21;
     }
 
-    function endGame() {
+    function endGame(playerBlackjack = false) {
         const playerValue = calculateHandValue(playerCards);
         const dealerValue = calculateHandValue(dealerCards);
         if (playerValue > 21) {
             resultDisplay.textContent = 'You bust!';
-        } else if (dealerValue > 21 || playerValue > dealerValue) {
+        } else if (playerBlackjack || dealerValue > 21 || playerValue > dealerValue) {
             resultDisplay.textContent = 'You win!';
             balance += betAmount * 2;
         } else if (playerValue < dealerValue) {
@@ -126,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         balanceDisplay.textContent = balance.toFixed(2);
         betAmount = 0;
-        updateHandValues();
+        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Показуємо повне значення руки дилера
     }
 
     betButton.addEventListener('click', function() {
@@ -149,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (betAmount === 0) return;
         playerCards.push(drawCard());
         renderHands();
+        updateHandValues();
         if (checkForBust(playerCards)) {
             endGame();
         }
