@@ -14,7 +14,7 @@
     <a href="app.php" class="previous">&laquo; Back to all Games</a>
     </br>
     <div id="balanceDisplay">Balance: $<span id="balance">300.00</span></div>
-    <div id="betSection">
+    <div id="betSection__blackJack">
         <input type="number" id="betAmount__blackJack" placeholder="Bet Amount">
         <button id="betButton">Bet</button>
     </div>

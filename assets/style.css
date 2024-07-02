@@ -238,6 +238,11 @@ body.plinko-body{
     height: 22px;
 }
 
+#betSection__blackJack input[type="number"]{
+    width: 280px;
+    height: 22px;
+}
+
 button.plinko-btn {
     padding: 15px 25px;
     margin: 5px;
@@ -464,10 +469,17 @@ button:hover {
     background-color: #34495e;
 }
 
-#balanceDisplay, #betSection, #gameSection, #actionButtons, #resultDisplay {
+ #betSection, #gameSection, #actionButtons, #resultDisplay {
     margin: 10px 0;
 }
-
+#betSection{
+    display: flex;
+    flex-direction: column;
+}
+#balanceDisplay{
+    margin: 20px 0;
+    font-weight: bold;
+}
 .hand {
     display: flex;
     justify-content: center;
