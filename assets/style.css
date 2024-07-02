@@ -295,8 +295,7 @@ canvas {
     border: 6px solid #7498cc;
     border-radius: 25px;
 }
-
-.slider-outer {
+.slider-outer{
     border: 10px solid #131d28;
     padding: 0 5px;
     border-radius: 19px;
@@ -375,7 +374,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #3b6986;
     border-radius: 0;
     cursor: pointer;
-    transform: translateY(-6px); /* Adjusted */
+    transform: translateY(-10px);
 }
 
 .result-indicator {
@@ -383,7 +382,7 @@ input[type="range"]::-webkit-slider-thumb {
     top: -38px;
     width: 40px;
     height: 40px;
-    background-color: #3b6986;
+    background-color:#3b6986 ;
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     display: none;
     justify-content: center;
