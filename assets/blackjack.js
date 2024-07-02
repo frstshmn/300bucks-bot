@@ -86,6 +86,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
         cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
+        cardDiv.style.width = '85px';
+        cardDiv.style.height = '124px';
         cardDiv.classList.add('deal-animation');
         cardDiv.style.animationDelay = `${index * 0.5}s`;
         return cardDiv;
@@ -128,11 +130,20 @@ document.addEventListener("DOMContentLoaded", function() {
     function endGame(playerBlackjack = false) {
         const playerValue = calculateHandValue(playerCards);
         let dealerValue = calculateHandValue(dealerCards);
-        while (dealerValue < 17) {
-            dealerCards.push(drawCard());
-            renderHands(false, true); // Показуємо повну руку дилера під час взяття додаткових карт
-            dealerValue = calculateHandValue(dealerCards);
-        }
+
+        const dealerInterval = setInterval(() => {
+            if (dealerValue >= 17) {
+                clearInterval(dealerInterval);
+                finalizeGame(playerBlackjack, playerValue, dealerValue);
+            } else {
+                dealerCards.push(drawCard());
+                renderHands(false, true); // Показуємо повну руку дилера під час взяття додаткових карт
+                dealerValue = calculateHandValue(dealerCards);
+            }
+        }, 1000);
+    }
+
+    function finalizeGame(playerBlackjack, playerValue, dealerValue) {
         if (playerValue > 21) {
             resultDisplay.textContent = 'You bust!';
         } else if (playerBlackjack || dealerValue > 21 || playerValue > dealerValue) {
@@ -144,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
             resultDisplay.textContent = 'Push.';
             balance += betAmount;
         }
+
         balanceDisplay.textContent = balance.toFixed(2);
         betAmount = 0;
         dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Показуємо повне значення руки дилера
