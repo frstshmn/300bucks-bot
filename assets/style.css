@@ -322,17 +322,16 @@ canvas {
     flex-direction: column;
     align-items: center;
     gap: 7px;
-    top: -6px;
+    top: -14px;
 }
 
 .slider-indicators .pin {
     width: 0;
     height: 0;
     border: 0 solid transparent;
-    top: -8px;
-    border-left-width: 6px;
     border-right-width: 6px;
-    border-top: 15px solid #7498cc;
+    border-left-width: 6px;
+    border-bottom: 15px solid #7498cc;
 }
 
 .range {
