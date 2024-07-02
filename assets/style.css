@@ -450,5 +450,9 @@ button:hover {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
+#resultDisplay{
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+}
 
