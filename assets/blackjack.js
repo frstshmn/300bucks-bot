@@ -70,12 +70,18 @@ document.addEventListener("DOMContentLoaded", function() {
         cardDiv.className = 'card deal-animation';
         cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
         cardDiv.style.animationDelay = `${index * 0.5}s`;
+        cardDiv.style.width = '85px';
+        cardDiv.style.height = '124px';
+        cardDiv.classList.add('deal-animation');
+        cardDiv.style.animationDelay = `${index * 0.5}s`;
         return cardDiv;
     }
 
     function renderCardBack() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card-back deal-animation';
+        cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
+
         cardDiv.style.animationDelay = `0s`;
         return cardDiv;
     }
