@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a href="app.php" class="previous">&laquo; Back to all Games</a>
 <div class="game-container__dice">
     <h1>Dice Game</h1>
     <div class="slider-container">
