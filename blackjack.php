@@ -12,7 +12,7 @@
     <h1>Blackjack Game</h1>
     <div id="balanceDisplay">Balance: $<span id="balance">300.00</span></div>
     <div id="betSection">
-        <input type="number" id="betAmount" placeholder="Bet Amount">
+        <input type="number" id="betAmount__blackJack" placeholder="Bet Amount">
         <button id="betButton">Bet</button>
     </div>
     <div id="gameSection">
