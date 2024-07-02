@@ -292,6 +292,9 @@ canvas {
 
 .slider-container {
     margin: 20px 0;
+    border: 5px solid #7498cc;
+    padding: 18px;
+    border-radius: 25px;
 }
 
 .wrap {
@@ -318,12 +321,18 @@ canvas {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 7px;
+    top: -6px;
 }
 
 .slider-indicators .pin {
-    width: 2px;
-    height: 10px;
-    background-color: white;
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    top: -8px;
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-top: 15px solid #7498cc;
 }
 
 .range {
