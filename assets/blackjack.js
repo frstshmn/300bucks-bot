@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", function() {
         return deck.pop();
     }
 
-    function renderHands() {
+    function renderHands(showDealerFullHand = false) {
         dealerHand.innerHTML = '';
         playerHand.innerHTML = '';
         dealerCards.forEach((card, index) => {
-            if (index === 0) {
+            if (index === 0 && !showDealerFullHand) {
                 dealerHand.appendChild(renderCardBack());
             } else {
                 dealerHand.appendChild(renderCard(card));
@@ -115,7 +115,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function endGame(playerBlackjack = false) {
         const playerValue = calculateHandValue(playerCards);
-        const dealerValue = calculateHandValue(dealerCards);
+        let dealerValue = calculateHandValue(dealerCards);
+        while (dealerValue < 17) {
+            dealerCards.push(drawCard());
+            dealerValue = calculateHandValue(dealerCards);
+        }
         if (playerValue > 21) {
             resultDisplay.textContent = 'You bust!';
         } else if (playerBlackjack || dealerValue > 21 || playerValue > dealerValue) {
@@ -130,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
         balanceDisplay.textContent = balance.toFixed(2);
         betAmount = 0;
         dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Показуємо повне значення руки дилера
+        renderHands(true); // Показуємо повну руку дилера
     }
 
     betButton.addEventListener('click', function() {
@@ -160,10 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     standButton.addEventListener('click', function() {
         if (betAmount === 0) return;
-        while (calculateHandValue(dealerCards) < 17) {
-            dealerCards.push(drawCard());
-        }
-        renderHands();
+        renderHands(true); // Показуємо повну руку дилера після натискання stand
         endGame();
     });
 });
