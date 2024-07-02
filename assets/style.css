@@ -246,6 +246,7 @@ body.plinko-body{
 #betSection__blackJack{
     display: flex;
     flex-direction: column;
+    flex-direction: column;
 }
 
 button.plinko-btn {
@@ -395,7 +396,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #3b6986;
     border-radius: 0;
     cursor: pointer;
-    transform: translateY(-10px);
+    transform: translateY(-15px);
 }
 
 @keyframes slideIn {
