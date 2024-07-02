@@ -57,25 +57,26 @@ document.addEventListener("DOMContentLoaded", function() {
             if (index === 0 && !showDealerFullHand) {
                 dealerHand.appendChild(renderCardBack());
             } else {
-                dealerHand.appendChild(renderCard(card));
+                dealerHand.appendChild(renderCard(card, index));
             }
         });
-        playerCards.forEach(card => {
-            playerHand.appendChild(renderCard(card));
+        playerCards.forEach((card, index) => {
+            playerHand.appendChild(renderCard(card, index));
         });
     }
 
-    function renderCard(card) {
+    function renderCard(card, index) {
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'card';
+        cardDiv.className = 'card deal-animation';
         cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
+        cardDiv.style.animationDelay = `${index * 0.5}s`;
         return cardDiv;
     }
 
     function renderCardBack() {
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'card-back';
-        cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
+        cardDiv.className = 'card-back deal-animation';
+        cardDiv.style.animationDelay = `0s`;
         return cardDiv;
     }
 

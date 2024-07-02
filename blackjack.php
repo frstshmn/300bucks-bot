@@ -14,6 +14,10 @@
         <input type="number" id="betAmount" placeholder="Bet Amount">
         <button id="betButton">Bet</button>
     </div>
+    <div id="actionButtons">
+        <button id="hitButton">Hit</button>
+        <button id="standButton">Stand</button>
+    </div>
     <div id="gameSection">
         <div class="hand-container">
             <div id="dealerValue" class="hand-value"></div>
@@ -24,10 +28,7 @@
             <div id="playerHand" class="hand"></div>
         </div>
     </div>
-    <div id="actionButtons">
-        <button id="hitButton">Hit</button>
-        <button id="standButton">Stand</button>
-    </div>
+
     <div id="resultDisplay"></div>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>

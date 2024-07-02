@@ -446,3 +446,16 @@ button:hover {
     margin: 0 5px;
     transform: scale(1.2); /* Збільшення розміру перевернутої карти */
 }
+
+.deal-animation {
+    animation: deal 0.5s forwards;
+}
+
+@keyframes deal {
+    from {
+        transform: translate(0, -1000px) rotate(0deg);
+    }
+    to {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
