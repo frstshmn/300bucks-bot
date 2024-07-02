@@ -7,16 +7,13 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
 <div class="blackJack_container">
     <h1>Blackjack Game</h1>
     <div id="balanceDisplay">Balance: $<span id="balance">300.00</span></div>
     <div id="betSection">
         <input type="number" id="betAmount" placeholder="Bet Amount">
         <button id="betButton">Bet</button>
-    </div>
-    <div id="actionButtons">
-        <button id="hitButton">Hit</button>
-        <button id="standButton">Stand</button>
     </div>
     <div id="gameSection">
         <div class="hand-container">
@@ -28,7 +25,10 @@
             <div id="playerHand" class="hand"></div>
         </div>
     </div>
-
+    <div id="actionButtons">
+        <button id="hitButton">Hit</button>
+        <button id="standButton">Stand</button>
+    </div>
     <div id="resultDisplay"></div>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>

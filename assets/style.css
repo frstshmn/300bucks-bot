@@ -441,7 +441,7 @@ button:hover {
 
 .card-back {
     background-image: url('assets/images/cards/card-back.png');
-    transform: scale(1.2); /* Збільшення розміру перевернутої карти */
+    transform: scale(1.2);
 }
 
 .deal-animation {
@@ -450,7 +450,7 @@ button:hover {
 
 @keyframes deal {
     from {
-        transform: translate(0, -1000px) rotate(0deg);
+        transform: translate(0, -150px) rotate(0deg);
     }
     to {
         transform: translate(0, 0) rotate(0deg);
