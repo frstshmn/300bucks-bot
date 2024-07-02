@@ -15,8 +15,14 @@
         <button id="betButton">Bet</button>
     </div>
     <div id="gameSection">
-        <div id="dealerHand" class="hand"></div>
-        <div id="playerHand" class="hand"></div>
+        <div class="hand-container">
+            <div id="dealerValue" class="hand-value"></div>
+            <div id="dealerHand" class="hand"></div>
+        </div>
+        <div class="hand-container">
+            <div id="playerValue" class="hand-value"></div>
+            <div id="playerHand" class="hand"></div>
+        </div>
     </div>
     <div id="actionButtons">
         <button id="hitButton">Hit</button>

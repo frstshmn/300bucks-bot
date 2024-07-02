@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const resultDisplay = document.getElementById("resultDisplay");
     const dealerHand = document.getElementById("dealerHand");
     const playerHand = document.getElementById("playerHand");
+    const dealerValueDisplay = document.getElementById("dealerValue");
+    const playerValueDisplay = document.getElementById("playerValue");
 
     let balance = 300.00;
     let betAmount = 0;
@@ -60,19 +62,20 @@ document.addEventListener("DOMContentLoaded", function() {
         playerCards.forEach(card => {
             playerHand.appendChild(renderCard(card));
         });
+        updateHandValues();
     }
 
     function renderCard(card) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
+        cardDiv.style.backgroundImage = `url(images/${card.value}_of_${card.suit}.png)`;
         return cardDiv;
     }
 
     function renderCardBack() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = 'url(images/card/card-back.png)';
+        cardDiv.style.backgroundImage = 'url(images/card-back.png)';
         return cardDiv;
     }
 
@@ -96,6 +99,13 @@ document.addEventListener("DOMContentLoaded", function() {
         return value;
     }
 
+    function updateHandValues() {
+        const dealerValue = calculateHandValue(dealerCards);
+        const playerValue = calculateHandValue(playerCards);
+        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`;
+        playerValueDisplay.textContent = `Your Hand: ${playerValue}`;
+    }
+
     function checkForBust(hand) {
         return calculateHandValue(hand) > 21;
     }
@@ -116,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         balanceDisplay.textContent = balance.toFixed(2);
         betAmount = 0;
+        updateHandValues();
     }
 
     betButton.addEventListener('click', function() {

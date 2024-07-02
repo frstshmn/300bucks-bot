@@ -398,9 +398,7 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-
-/* Blackjack*/
-
+/* Blackjack */
 .blackJack_container {
     margin: 50px auto;
     width: 300px;
@@ -414,6 +412,18 @@ button:hover {
     margin: 10px 0;
 }
 
+.hand-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hand-value {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #fff;
+}
+
 .hand {
     display: flex;
     justify-content: center;
@@ -421,8 +431,8 @@ button:hover {
 }
 
 .card {
-    width: 50px;
-    height: 75px;
+    width: 85px;
+    height: 124px;
     border-radius: 5px;
     background-size: cover;
     background-repeat: no-repeat;
