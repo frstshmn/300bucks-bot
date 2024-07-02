@@ -394,7 +394,7 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #2f4553;
     color: white;
     border: none;
     border-radius: 5px;
@@ -402,7 +402,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2f4553;
 }
 
 /* Blackjack */
@@ -437,4 +437,16 @@ button:hover {
 .deal-animation {
     animation: dealCard 0.5s forwards;
 }
+.hitButton, .standButton{
+    padding: 5px 10px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    background-color: #213743;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 
