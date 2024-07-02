@@ -455,4 +455,8 @@ button:hover {
     font-weight: 600;
     font-size: 24px;
 }
-
+#gameSection{
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
