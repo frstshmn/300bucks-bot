@@ -6,8 +6,7 @@
     <title>Betting Game</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-<a href="app.php" class="previous">&laquo; Back to all Games</a>
+<body><a href="app.php" class="previous">&laquo; Back to all Games</a>
 <div class="game-container__dice">
     <h1>Dice Game</h1>
     <div class="slider-container">
@@ -45,12 +44,12 @@
         </div>
     </div>
     <div class="controls-dice">
-    <p>Win Chance: <span id="winChance">50</span>%</p>
-    <p>Multiplier: <span id="multiplier">2.00</span>x</p>
-    <p>Expected Profit: <span id="expectedProfit">0.00</span> $</p>
-    <p>Balance: <span id="balance">300.00</span> $</p>
-    <input type="number" id="bet-amount" value="1">
-    <button id="betButton">Bet</button>
+        <p>Win Chance: <span id="winChance">50</span>%</p>
+        <p>Multiplier: <span id="multiplier">2.00</span>x</p>
+        <p>Expected Profit: <span id="expectedProfit">0.00</span> $</p>
+        <p>Balance: <span id="balance">300.00</span> $</p>
+        <input type="number" id="bet-amount" value="1">
+        <button id="betButton">Bet</button>
     </div>
     <p id="result"></p>
 </div>

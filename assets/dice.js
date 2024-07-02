@@ -5,7 +5,7 @@ $(document).ready(function() {
     const $winChanceDisplay = $("#winChance");
     const $multiplierDisplay = $("#multiplier");
     const $expectedProfitDisplay = $("#expectedProfit");
-    const $betAmountInput = $("#betAmount");
+    const $betAmountInput = $("#bet-amount"); // Updated ID
     const $betButton = $("#betButton");
     const $resultDisplay = $("#result");
     const $balanceDisplay = $("#balance");
