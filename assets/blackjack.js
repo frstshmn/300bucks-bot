@@ -68,14 +68,14 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderCard(card) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = `url(assets/images/${card.value}_of_${card.suit}.png)`;
+        cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
         return cardDiv;
     }
 
     function renderCardBack() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = 'url(assets/images/card-back.png)';
+        cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
         return cardDiv;
     }
 
