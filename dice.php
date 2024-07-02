@@ -43,12 +43,14 @@
             </div>
         </div>
     </div>
+    <div class="controls-dice">
     <p>Win Chance: <span id="winChance">50</span>%</p>
     <p>Multiplier: <span id="multiplier">2.00</span>x</p>
     <p>Expected Profit: <span id="expectedProfit">0.00</span> $</p>
     <p>Balance: <span id="balance">300.00</span> $</p>
     <input type="number" id="bet-amount" value="1">
     <button id="betButton">Bet</button>
+    </div>
     <p id="result"></p>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
