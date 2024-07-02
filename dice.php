@@ -56,7 +56,7 @@
         <p>Balance: <span id="balance">300.00</span> $</p>
         <div class="bet-buttons">
             <input type="number" id="bet-amount" value="1">
-            <button id="betButton">Bet</button>
+            <button id="betButton" style="margin-top: 2px;">Bet</button>
         </div>
     </div>
     <p id="result"></p>

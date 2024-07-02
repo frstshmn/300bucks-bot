@@ -330,7 +330,10 @@ canvas {
     --drag-size: 36px;
     --max-game-board-width: 730px;
 }
-
+.bet-buttons{
+    display: flex;
+    flex-direction: column;
+}
 .slider-indicators {
     display: flex;
     justify-content: space-between;
