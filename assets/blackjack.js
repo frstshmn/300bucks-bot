@@ -72,8 +72,6 @@ document.addEventListener("DOMContentLoaded", function() {
         cardDiv.style.animationDelay = `${index * 0.5}s`;
         cardDiv.style.width = '85px';
         cardDiv.style.height = '124px';
-        cardDiv.classList.add('deal-animation');
-        cardDiv.style.animationDelay = `${index * 0.5}s`;
         return cardDiv;
     }
 
@@ -81,7 +79,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card-back deal-animation';
         cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
-
+        cardDiv.style.width = '85px';
+        cardDiv.style.height = '124px';
         cardDiv.style.animationDelay = `0s`;
         return cardDiv;
     }
