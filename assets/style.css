@@ -233,6 +233,11 @@ body.plinko-body{
     text-align: center;
 }
 
+#betSection input[type="number"]{
+    width: 165px;
+    height: 22px;
+}
+
 button.plinko-btn {
     padding: 15px 25px;
     margin: 5px;
