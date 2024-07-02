@@ -281,6 +281,11 @@ canvas {
 }
 
 /* Dice */
+.wrapper-dice{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+}
 .game-container__dice {
     text-align: center;
     background-color: #34495e;
@@ -288,6 +293,11 @@ canvas {
     border-radius: 10px;
     width: 300px;
     margin: 0 auto;
+}
+
+.controls-dice input[type="number"]{
+    width: 280px;
+    height: 20px;
 }
 
 .slider-container {

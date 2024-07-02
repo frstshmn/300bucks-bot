@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<div class="wrapper-dice">
 <div class="game-container__dice">
     <a href="app.php" class="previous">&laquo; Back to all Games</a>
     <h1>Dice Game</h1>
@@ -59,6 +60,7 @@
         </div>
     </div>
     <p id="result"></p>
+</div>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
