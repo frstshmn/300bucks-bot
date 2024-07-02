@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderCard(card) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.style.backgroundImage = `url(images/cards/${card.value}_of_${card.suit}.png)`;
+        cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
         return cardDiv;
     }
 
