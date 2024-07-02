@@ -432,13 +432,3 @@ button:hover {
     animation: dealCard 0.5s forwards;
 }
 
-@keyframes dealCard {
-    from {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
