@@ -430,16 +430,21 @@ button:hover {
     margin: 10px 0;
 }
 
-.card-back, .card {
+.card {
     width: 85px;
     height: 124px;
     border-radius: 5px;
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0 5px;
+
 }
 
 .card-back {
+    border-radius: 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 5px;
     background-image: url('./images/cards/card-back.png');
     transform: scale(1.2);
 }
