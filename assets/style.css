@@ -425,7 +425,7 @@ button:hover {
     margin: 10px 0;
 }
 
-.card {
+.card-back,.card {
     width: 85px;
     height: 124px;
     border-radius: 5px;
@@ -433,6 +433,8 @@ button:hover {
     background-repeat: no-repeat;
     margin: 0 5px;
 }
+
+
 
 .deal-animation {
     animation: dealCard 0.5s forwards;

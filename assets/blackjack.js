@@ -1,5 +1,7 @@
 Telegram.WebApp.ready();
 
+Telegram.WebApp.ready();
+
 document.addEventListener("DOMContentLoaded", function() {
     const betButton = document.getElementById("betButton");
     const hitButton = document.getElementById("hitButton");
@@ -72,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
         cardDiv.style.animationDelay = `${index * 0.5}s`;
         cardDiv.style.width = '85px';
         cardDiv.style.height = '124px';
+        console.log(`Rendering card: ${card.value} of ${card.suit}`);
         return cardDiv;
     }
 
@@ -82,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
         cardDiv.style.width = '85px';
         cardDiv.style.height = '124px';
         cardDiv.style.animationDelay = `0s`;
+        console.log('Rendering card back');
         return cardDiv;
     }
 
@@ -175,3 +179,4 @@ document.addEventListener("DOMContentLoaded", function() {
         endGame();
     });
 });
+
