@@ -53,8 +53,10 @@
         <p>Multiplier: <span id="multiplier">2.00</span>x</p>
         <p>Expected Profit: <span id="expectedProfit">0.00</span> $</p>
         <p>Balance: <span id="balance">300.00</span> $</p>
-        <input type="number" id="bet-amount" value="1">
-        <button id="betButton">Bet</button>
+        <div class="bet-buttons">
+            <input type="number" id="bet-amount" value="1">
+            <button id="betButton">Bet</button>
+        </div>
     </div>
     <p id="result"></p>
 </div>
