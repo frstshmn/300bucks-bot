@@ -243,6 +243,10 @@ body.plinko-body{
     width: 280px;
     height: 22px;
 }
+#betSection__blackJack{
+    display: flex;
+    flex-direction: column;
+}
 
 button.plinko-btn {
     padding: 15px 25px;
