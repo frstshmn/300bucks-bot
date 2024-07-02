@@ -1,6 +1,5 @@
 Telegram.WebApp.ready();
 
-
 document.addEventListener("DOMContentLoaded", function() {
     const betButton = document.getElementById("betButton");
     const hitButton = document.getElementById("hitButton");
@@ -51,8 +50,12 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderHands() {
         dealerHand.innerHTML = '';
         playerHand.innerHTML = '';
-        dealerCards.forEach(card => {
-            dealerHand.appendChild(renderCard(card));
+        dealerCards.forEach((card, index) => {
+            if (index === 0) {
+                dealerHand.appendChild(renderCardBack());
+            } else {
+                dealerHand.appendChild(renderCard(card));
+            }
         });
         playerCards.forEach(card => {
             playerHand.appendChild(renderCard(card));
@@ -62,7 +65,14 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderCard(card) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        cardDiv.textContent = `${card.value} ${card.suit}`;
+        cardDiv.style.backgroundImage = `url(images/${card.value}_of_${card.suit}.png)`;
+        return cardDiv;
+    }
+
+    function renderCardBack() {
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'card';
+        cardDiv.style.backgroundImage = 'url(images/card-back.png)';
         return cardDiv;
     }
 

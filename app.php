@@ -30,6 +30,10 @@
                     <img class="game-cover" src="assets/images/dice.jpg" alt="">
                 </a>
 
+                <a class="game" href="blackjack.php">
+                    <img class="game-cover" src="assets/images/blackjack.jpg" alt="">
+                </a>
+
 
             </div>
 
