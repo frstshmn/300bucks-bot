@@ -400,6 +400,29 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translateY(-15px);
 }
 
+input[type="range"]::before,
+input[type="range"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #ffffff; /* Колір ліній */
+}
+
+input[type="range"]::before {
+    top: 10px;
+}
+
+input[type="range"]::after {
+    top: 30px;
+}
+
+input[type="range"].middle::before,
+input[type="range"].middle::after {
+    top: 20px;
+}
+
 @keyframes slideIn {
     from {
         left: 0;
