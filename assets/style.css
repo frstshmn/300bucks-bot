@@ -445,7 +445,7 @@ button:hover {
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0 5px;
-    background-image: url('./images/cards/card-back.png');
+    scale(1.2);
 }
 
 .deal-animation {

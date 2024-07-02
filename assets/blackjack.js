@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function startGame() {
         dealerCards = [drawCard(), drawCard()];
         playerCards = [drawCard(), drawCard()];
-        renderHands();
+        renderHands(true);
         resultDisplay.textContent = '';
         updateHandValues();
     }
@@ -50,33 +50,56 @@ document.addEventListener("DOMContentLoaded", function() {
         return deck.pop();
     }
 
-    function renderHands(showDealerFullHand = false) {
+    function renderHands(initialRender = false, showDealerFullHand = false) {
         dealerHand.innerHTML = '';
         playerHand.innerHTML = '';
         dealerCards.forEach((card, index) => {
             if (index === 0 && !showDealerFullHand) {
-                dealerHand.appendChild(renderCardBack());
+                if (initialRender) {
+                    setTimeout(() => {
+                        dealerHand.appendChild(renderCardBack(index));
+                    }, index * 500);
+                } else {
+                    dealerHand.appendChild(renderCardBack(index));
+                }
             } else {
-                dealerHand.appendChild(renderCard(card, index));
+                if (initialRender) {
+                    setTimeout(() => {
+                        dealerHand.appendChild(renderCard(card, index, true));
+                    }, index * 500);
+                } else {
+                    dealerHand.appendChild(renderCard(card, index, false));
+                }
             }
         });
         playerCards.forEach((card, index) => {
-            playerHand.appendChild(renderCard(card, index));
+            if (initialRender) {
+                setTimeout(() => {
+                    playerHand.appendChild(renderCard(card, index, true));
+                }, index * 500);
+            } else {
+                playerHand.appendChild(renderCard(card, index, false));
+            }
         });
     }
 
-    function renderCard(card, index) {
+    function renderCard(card, index, isNew) {
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'card deal-animation';
+        cardDiv.className = 'card';
         cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
-        cardDiv.style.animationDelay = `${index * 0.5}s`;
+        if (isNew) {
+            cardDiv.classList.add('deal-animation');
+            cardDiv.style.animationDelay = `${index * 0.5}s`;
+        }
         return cardDiv;
     }
 
-    function renderCardBack() {
+    function renderCardBack(index) {
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'card-back deal-animation';
-        cardDiv.style.animationDelay = `0s`;
+        cardDiv.className = 'card';
+        cardDiv.style.backgroundImage = 'url(assets/images/cards/card-back.png)';
+        cardDiv.classList.add('deal-animation');
+        cardDiv.style.animationDelay = `${index * 0.5}s`;
         return cardDiv;
     }
 
@@ -103,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateHandValues() {
         const dealerValue = calculateHandValue(dealerCards.slice(1)); // Відображаємо значення руки без перевернутої карти
         const playerValue = calculateHandValue(playerCards);
-        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`;
+        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue} + ?`;
         playerValueDisplay.textContent = `Your Hand: ${playerValue}`;
         if (playerValue === 21) {
             endGame(true);
@@ -119,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let dealerValue = calculateHandValue(dealerCards);
         while (dealerValue < 17) {
             dealerCards.push(drawCard());
+            renderHands(false, true); // Показуємо повну руку дилера під час взяття додаткових карт
             dealerValue = calculateHandValue(dealerCards);
         }
         if (playerValue > 21) {
@@ -135,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
         balanceDisplay.textContent = balance.toFixed(2);
         betAmount = 0;
         dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Показуємо повне значення руки дилера
-        renderHands(true); // Показуємо повну руку дилера
+        renderHands(false, true); // Показуємо повну руку дилера
     }
 
     betButton.addEventListener('click', function() {
@@ -157,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function() {
     hitButton.addEventListener('click', function() {
         if (betAmount === 0) return;
         playerCards.push(drawCard());
-        renderHands();
+        renderHands(false);
         updateHandValues();
         if (checkForBust(playerCards)) {
             endGame();
@@ -166,7 +190,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     standButton.addEventListener('click', function() {
         if (betAmount === 0) return;
-        renderHands(true); // Показуємо повну руку дилера після натискання stand
+        renderHands(false, true); // Показуємо повну руку дилера після натискання stand
         endGame();
     });
 });
+
