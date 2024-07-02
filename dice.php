@@ -11,6 +11,7 @@
     <h1>Dice Game</h1>
 
     <div class="slider-container">
+        <div class="slider-outer">
         <div class="slider-indicators">
             <div class="content" style="left: 0;">
                 <div class="value">0</div>
@@ -43,6 +44,7 @@
             <div class="result-indicator" id="resultIndicator">
                 <span id="indicatorValue"></span>
             </div>
+        </div>
         </div>
     </div>
     <div class="controls-dice">
