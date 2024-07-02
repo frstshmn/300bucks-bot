@@ -430,7 +430,7 @@ button:hover {
     margin: 10px 0;
 }
 
-.card {
+.card-back, .card {
     width: 85px;
     height: 124px;
     border-radius: 5px;
@@ -438,12 +438,9 @@ button:hover {
     background-repeat: no-repeat;
     margin: 0 5px;
 }
+
 .card-back {
-    width: 85px;
-    height: 124px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0 5px;
+    background-image: url('assets/images/cards/card-back.png');
     transform: scale(1.2); /* Збільшення розміру перевернутої карти */
 }
 
