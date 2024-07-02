@@ -313,13 +313,14 @@ canvas {
 
 .slider-container {
     margin: 50px 0 20px 0;
-    border: 6px solid #7498cc;
+    border: 6px solid #4c5d77;
     border-radius: 25px;
 }
 .slider-outer{
     border: 10px solid #131d28;
     padding: 0 5px;
     border-radius: 19px;
+    background: #2f3b4d;
 }
 
 .wrap {
@@ -357,7 +358,7 @@ canvas {
     border: 0 solid transparent;
     border-right-width: 6px;
     border-left-width: 6px;
-    border-bottom: 15px solid #7498cc;
+    border-bottom: 15px solid #4c5d77;
 }
 
 .range {
