@@ -5,7 +5,7 @@ $(document).ready(function() {
     const $winChanceDisplay = $("#winChance");
     const $multiplierDisplay = $("#multiplier");
     const $expectedProfitDisplay = $("#expectedProfit");
-    const $betAmountInput = $("#bet-amount"); // Updated ID
+    const $betAmountInput = $("#bet-amount");
     const $betButton = $("#betButton");
     const $resultDisplay = $("#result");
     const $balanceDisplay = $("#balance");
@@ -76,8 +76,9 @@ $(document).ready(function() {
     }
 
     function animateResult(winChance, win, betAmount, multiplier, randomValue) {
+        const randomPercentage = randomValue + "%";
         $indicatorValue.text(randomValue);
-        $resultIndicator.css("left", randomValue + "%").fadeIn(200);
+        $resultIndicator.css("left", randomPercentage).fadeIn(200);
         $resultIndicator.css('display', 'flex');
 
         if (win) {
@@ -89,6 +90,12 @@ $(document).ready(function() {
             $resultDisplay.text("You lose.");
             $resultIndicator.addClass('lose').removeClass('win');
         }
+
+        // Запуск анімації
+        $resultIndicator.css("animation", "none");
+        setTimeout(() => {
+            $resultIndicator.css("animation", "");
+        }, 10);
 
         updateBalance();
     }

@@ -378,12 +378,22 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translateY(-10px);
 }
 
+@keyframes slideIn {
+    from {
+        left: 0;
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .result-indicator {
     position: absolute;
     top: -31px;
     width: 32px;
     height: 32px;
-    background-color:#3b6986 ;
+    background-color: #3b6986;
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     display: none;
     justify-content: center;
@@ -393,8 +403,24 @@ input[type="range"]::-webkit-slider-thumb {
     color: white;
     font-weight: bold;
     font-size: 14px;
+    transition: left 0.5s, opacity 0.5s;
+    animation: slideIn 0.5s forwards;
 }
 
+.result-indicator.win {
+    color: #60e360;
+}
+
+.result-indicator.lose {
+    color: #f55353;
+}
+.result-indicator.win {
+    color: #60e360;
+}
+
+.result-indicator.lose {
+    color: #f55353;
+}
 .win {
     color: #60e360;
 }
