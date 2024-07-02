@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateHandValues() {
         const dealerValue = calculateHandValue(dealerCards.slice(1)); // Відображаємо значення руки без перевернутої карти
         const playerValue = calculateHandValue(playerCards);
-        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue} + ?`;
+        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`;
         playerValueDisplay.textContent = `Your Hand: ${playerValue}`;
         if (playerValue === 21) {
             endGame(true);
