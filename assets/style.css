@@ -549,35 +549,13 @@ button:hover {
 
 #wheel-wrapper {
     position: relative;
-    width: 300px;
-    height: 300px;
-    margin-bottom: 20px;
-}
-
-#wheel {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    width: 500px;
+    height: 500px;
 }
 
 #wheel img {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
-#pointer {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid red;
-    z-index: 10;
+    height: auto;
 }
 
 #ball {
@@ -586,76 +564,31 @@ button:hover {
     height: 20px;
     background-color: white;
     border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    top: 240px; /* Adjust to position the ball at the center */
+    left: 240px; /* Adjust to position the ball at the center */
+    transition: transform 4s ease-out;
 }
 
 #betting-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: 20px;
 }
 
-#chips {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.chip {
+.betting-cell {
+    display: inline-block;
     width: 40px;
     height: 40px;
-    margin: 0 5px;
-    background-color: gold;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #333;
+    margin: 2px;
+    text-align: center;
+    line-height: 40px;
     cursor: pointer;
 }
 
-#total-bet {
-    margin-bottom: 10px;
-}
-
-#bet-button {
-    background-color: green;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 20px;
+.betting-cell.selected {
+    background-color: #ff0000;
 }
 
 #result-message {
-    margin-bottom: 10px;
-}
-
-#table {
-    display: grid;
-    grid-template-columns: repeat(12, 40px);
-    gap: 5px;
-}
-
-.cell {
-    width: 40px;
-    height: 40px;
-    background-color: #444;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.cell.red {
-    background-color: red;
-}
-
-.cell.black {
-    background-color: black;
-}
-
-.cell.green {
-    background-color: green;
+    margin-top: 20px;
+    font-size: 20px;
 }

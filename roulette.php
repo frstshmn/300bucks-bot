@@ -11,9 +11,8 @@
     <div id="wheel-wrapper">
         <div id="wheel">
             <img src="assets/images/wheel.png" alt="Roulette Wheel">
+            <div id="ball"></div>
         </div>
-        <div id="pointer"></div>
-        <div id="ball"></div>
     </div>
     <div id="betting-area">
         <div id="chips">
@@ -23,7 +22,7 @@
             <div class="chip" data-value="0.00001000">1K</div>
             <div class="chip" data-value="0.00010000">10K</div>
         </div>
-        <div id="total-bet">Total Bet: <span id="total-bet-amount">0.00000000</span> BTC</div>
+        <div id="total-bet">Total Bet: <span id="total-bet-amount">0</span> $</div>
         <button id="bet-button">Bet</button>
         <div id="result-message"></div>
         <div id="table">
