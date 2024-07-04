@@ -8,7 +8,13 @@
 </head>
 <body>
 <div id="roulette-container">
-    <div id="wheel"></div>
+    <div id="wheel-wrapper">
+        <div id="wheel">
+            <img src="assets/images/wheel.png" alt="Roulette Wheel">
+        </div>
+        <div id="pointer"></div>
+        <div id="ball"></div>
+    </div>
     <div id="betting-area">
         <div id="chips">
             <div class="chip" data-value="0.00000001">1</div>
@@ -19,6 +25,7 @@
         </div>
         <div id="total-bet">Total Bet: <span id="total-bet-amount">0.00000000</span> BTC</div>
         <button id="bet-button">Bet</button>
+        <div id="result-message"></div>
         <div id="table">
             <div class="row">
                 <div class="cell green" data-number="0">0</div>
@@ -71,8 +78,8 @@
             <div class="row">
                 <div class="cell" data-bet="1to18">1 to 18</div>
                 <div class="cell" data-bet="even">Even</div>
-                <div class="cell" data-bet="red">Red</div>
-                <div class="cell" data-bet="black">Black</div>
+                <div class="cell red" data-bet="red">Red</div>
+                <div class="cell black" data-bet="black">Black</div>
                 <div class="cell" data-bet="odd">Odd</div>
                 <div class="cell" data-bet="19to36">19 to 36</div>
             </div>
