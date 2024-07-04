@@ -539,98 +539,103 @@ button:hover {
 }
 
 /* Roulette */
-#roulette-container {
-  margin-top: 20px;
-  position: relative;
-  width: 400px;
-  height: 400px;
-  border: 5px solid #34495e;
-  border-radius: 50%;
-  overflow: hidden;
+.roulette-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-#roulette-wheel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+.roulette-wheel {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border: 2px solid #fff;
     border-radius: 50%;
-    background: conic-gradient(red 0 18deg, black 18deg 36deg, red 36deg 54deg, black 54deg 72deg, red 72deg 90deg, black 90deg 108deg, red 108deg 126deg, black 126deg 144deg, red 144deg 162deg, black 162deg 180deg, red 180deg 198deg, black 198deg 216deg, red 216deg 234deg, black 234deg 252deg, red 252deg 270deg, black 270deg 288deg, red 288deg 306deg, black 306deg 324deg, red 324deg 342deg, black 342deg 360deg);
-    transition: transform 4s ease-out;
-}
-
-#ball {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 4s ease-out;
+    background-color: #333;
+    overflow: hidden;
 }
 
 .number {
     position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    transform-origin: center center;
+}
+
+.ball {
+    position: absolute;
     width: 20px;
     height: 20px;
     background-color: white;
-    color: black;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-origin: center -180px;
+    left: 190px;
+    top: 190px;
 }
 
-#betting-area {
-    margin-top: 20px;
+.bets-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#numbers-grid {
+.bet-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 5px;
+    grid-template-columns: repeat(12, 40px);
+    grid-gap: 2px;
+    margin-bottom: 20px;
 }
 
 .bet {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
     cursor: pointer;
+    border-radius: 5px;
+    background-color: grey;
 }
 
 .bet.selected {
-    background-color: yellow;
+    outline: 2px solid yellow;
 }
 
-#chips {
-    margin-top: 10px;
+.bet-options {
     display: flex;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .chip {
-    background-color: #3498db;
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.chip.selected {
+    outline: 2px solid yellow;
+}
+
+#placeBetButton {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
     border: none;
-    padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-#balance, #result {
-    margin-top: 10px;
-}
-
-#place-bet {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #e74c3c;
-    border: none;
-    cursor: pointer;
+#resultDisplay {
+    margin-top: 20px;
+    font-size: 18px;
 }
