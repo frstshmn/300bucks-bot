@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 resultDisplay.innerHTML = `Winning Number: ${winningNumber}. You lose. Balance: ${balance}`;
             }
+            balanceDisplay.textContent = balance;
             bets = [];
             document.querySelectorAll(".bet").forEach(bet => bet.classList.remove("selected"));
         }, 4000);

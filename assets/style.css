@@ -598,7 +598,6 @@ button:hover {
     align-items: center;
     cursor: pointer;
     border-radius: 5px;
-    background-color: grey;
 }
 
 .bet.selected {

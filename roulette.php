@@ -14,6 +14,7 @@
 </div>
 <div class="bets-container">
     <div class="bet-grid">
+        <!-- Add more numbers as needed -->
         <div class="bet" data-number="0" style="background-color: green;">0</div>
         <div class="bet" data-number="32" style="background-color: black;">32</div>
         <div class="bet" data-number="15" style="background-color: red;">15</div>
