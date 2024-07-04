@@ -1,104 +1,79 @@
-body {
-    font-family: "Nunito Sans", sans-serif;
-    background-color: #2f4553;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
+/* Roulette */
+
+#roulette-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    padding: 20px;
+    background-color: #1e2a38;
+    color: white;
 }
 
-.navbar {
-    text-align: center;
-    margin-top: 20px; /* Adjusted to ensure visibility */
-    margin-bottom: 0;
-}
-
-.amount, .nav-buttons {
-    margin: 10px;
-}
-
-input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    margin: 5px;
-    border: 2px solid #ffffff;
-    border-radius: 5px;
-    background-color: #213743;
-    color: #ffffff;
-    font-size: 14px;
-    text-align: center;
-}
-
-button {
-    padding: 5px 10px;
-    margin: 5px;
-    border: 2px solid #ffffff;
-    border-radius: 5px;
-    background-color: #213743;
-    color: #ffffff;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #1a2c3a;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(5, 52px); /* Adjusted to 42px */
-    grid-template-rows: repeat(5, 52px); /* Adjusted to 42px */
-    gap: 5px 5px;
-}
-
-.tile {
-    width: 52px; /* Adjusted to your desired width */
-    height: 52px; /* Set an explicit height */
+#wheel-wrapper {
     position: relative;
-    background-color: #213743;
-    text-align: center;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+#wheel img {
+    width: 100%;
+    height: auto;
+}
+
+#ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 140px; /* Adjust to position the ball at the center */
+    left: 140px; /* Adjust to position the ball at the center */
+}
+
+#betting-area {
+    display: grid;
+    gap: 5px;
+    background-color: #1e2a38;
+}
+
+.betting-row {
+    display: flex;
+    justify-content: center;
+}
+
+.betting-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    background-color: #333;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    display: flex; /* Added for flexbox centering */
-    align-items: center; /* Added for vertical centering */
-    justify-content: center; /* Added for horizontal centering */
-}
-
-.tile.hidden {
-    background-color: #213743;
-}
-
-.tile.mine {
-    background-color: #213743; /* Color same as hidden */
+    border: 1px solid #444;
     color: white;
+    font-size: 18px;
 }
 
-.tile.gem {
-    background-color: #213743; /* Color same as hidden */
+.betting-cell.red {
+    background-color: red;
+}
+
+.betting-cell.black {
+    background-color: black;
+}
+
+.betting-cell.green {
+    background-color: green;
+}
+
+.betting-cell.selected {
+    border: 2px solid yellow;
+}
+
+#result-message {
+    margin-top: 20px;
+    font-size: 20px;
     color: white;
-}
-
-.tile.revealed.mine {
-    background-color: #f55353;
-}
-
-.tile.revealed.gem {
-    background-color: #60e360;
-}
-
-.previous {
-    background-color: transparent;
-    color: #ffffff;
-}
-
-#result {
-    height: 20px; /* Set a fixed height */
-    overflow: hidden; /* Ensure text doesn't overflow */
-    margin: 10px 0; /* Adjust as needed */
 }

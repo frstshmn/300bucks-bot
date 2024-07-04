@@ -27,7 +27,8 @@ $(document).ready(function() {
         const ballAngle = randomAngle % 360; // Ball position relative to the wheel
 
         wheel.css('transform', `rotate(${randomAngle}deg)`);
-        ball.css('transform', `rotate(${randomAngle * 4}deg)`); // Ball spins faster
+        // Ball remains at the center
+        ball.css('transform', `rotate(${0}deg)`); // Ball stays in place
 
         // Calculate the winning number after the animation
         setTimeout(function() {
