@@ -10,19 +10,63 @@
 <div id="roulette-container">
     <div id="roulette-wheel">
         <div id="ball"></div>
-        <div class="number" data-number="0" style="transform: rotate(0deg);">0</div>
-        <div class="number" data-number="32" style="transform: rotate(9.7297297297deg);">32</div>
-        <!-- Add more numbers here with appropriate rotation -->
-        <div class="number" data-number="26" style="transform: rotate(350.2702702703deg);">26</div>
+        <!-- Roulette numbers will be added here via JavaScript -->
     </div>
 </div>
 <div id="betting-area">
     <div id="numbers-grid">
+        <div class="number red">3</div>
+        <div class="number black">6</div>
+        <div class="number red">9</div>
+        <div class="number red">12</div>
+        <div class="number black">15</div>
+        <div class="number red">18</div>
+        <div class="number red">21</div>
+        <div class="number black">24</div>
+        <div class="number red">27</div>
+        <div class="number red">30</div>
+        <div class="number black">33</div>
+        <div class="number red">36</div>
 
-        <div class="bet" data-number="1">1</div>
-        <div class="bet" data-number="2">3</div>
-        <div class="bet" data-number="2">2</div>
-        <!-- Add more bets here -->
+        <div class="number black">2</div>
+        <div class="number red">5</div>
+        <div class="number black">8</div>
+        <div class="number black">11</div>
+        <div class="number red">14</div>
+        <div class="number black">17</div>
+        <div class="number black">20</div>
+        <div class="number red">23</div>
+        <div class="number black">26</div>
+        <div class="number black">29</div>
+        <div class="number red">32</div>
+        <div class="number black">35</div>
+
+        <div class="number red">1</div>
+        <div class="number black">4</div>
+        <div class="number red">7</div>
+        <div class="number black">10</div>
+        <div class="number black">13</div>
+        <div class="number red">16</div>
+        <div class="number red">19</div>
+        <div class="number black">22</div>
+        <div class="number red">25</div>
+        <div class="number black">28</div>
+        <div class="number black">31</div>
+        <div class="number red">34</div>
+
+        <div class="number zero">0</div>
+
+        <div class="bet">1 to 12</div>
+        <div class="bet">13 to 24</div>
+        <div class="bet">25 to 36</div>
+        <div class="bet">1 to 18</div>
+        <div class="bet">Even</div>
+        <div class="bet red">Red</div>
+        <div class="bet black">Odd</div>
+        <div class="bet">19 to 36</div>
+        <div class="bet">2:1</div>
+        <div class="bet">2:1</div>
+        <div class="bet">2:1</div>
     </div>
     <div id="chips">
         <button class="chip" data-value="1">1</button>
