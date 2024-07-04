@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Chip selection logic
     chips.forEach(chip => {
         chip.addEventListener('click', function() {
-            const chipValue = parseFloat(this.getAttribute('data-value'));
+            const chips = parseFloat(this.getAttribute('data-value'));
             betAmountInput.value = chipValue;
         });
     });
