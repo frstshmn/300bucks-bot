@@ -1,11 +1,10 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const numbers = document.querySelectorAll('.number');
     const balanceDisplay = document.getElementById('balance');
     const betAmountInput = document.getElementById('bet-amount');
     const placeBetButton = document.getElementById('place-bet');
     const resultDisplay = document.getElementById('result');
+    const wheel = document.getElementById('wheel');
     const ball = document.getElementById('ball');
 
     let balance = 1000;
@@ -40,28 +39,35 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBalance();
 
         const winningNumber = Math.floor(Math.random() * 37);
-        moveBall(winningNumber);
+        spinWheel(winningNumber);
+        setTimeout(() => {
+            if (bets.includes(winningNumber.toString())) {
+                const profit = betAmount * 35;
+                balance += profit;
+                resultDisplay.textContent = `You win! Number: ${winningNumber}. Profit: ${profit.toFixed(2)} $`;
+            } else {
+                resultDisplay.textContent = `You lose. Number: ${winningNumber}`;
+            }
 
-        if (bets.includes(winningNumber.toString())) {
-            const profit = betAmount * 35;
-            balance += profit;
-            resultDisplay.textContent = `You win! Number: ${winningNumber}. Profit: ${profit.toFixed(2)} $`;
-        } else {
-            resultDisplay.textContent = `You lose. Number: ${winningNumber}`;
-        }
-
-        updateBalance();
-        bets = [];
-        document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
+            updateBalance();
+            bets = [];
+            document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
+        }, 4000); // Wait for the wheel to stop spinning
     });
 
     function updateBalance() {
         balanceDisplay.textContent = balance.toFixed(2);
     }
 
+    function spinWheel(number) {
+        const rotations = Math.floor(Math.random() * 5) + 5; // Random rotations between 5 and 10
+        const angle = rotations * 360 + number * (360 / 37);
+        wheel.style.transform = `rotate(${angle}deg)`;
+        moveBall(number);
+    }
+
     function moveBall(number) {
-        // Simplified animation for the ball
-        const angle = number * 360 / 37;
+        const angle = number * (360 / 37);
         ball.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
     }
 });

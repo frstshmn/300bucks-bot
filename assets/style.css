@@ -543,14 +543,24 @@ button:hover {
     text-align: center;
 }
 
-#wheel {
+#wheel-container {
     position: relative;
     width: 300px;
     height: 300px;
+    margin: 20px auto;
+}
+
+#wheel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border: 10px solid #333;
     border-radius: 50%;
-    margin: 20px auto;
-    background-image: conic-gradient(red 0 10%, black 10% 20%, red 20% 30%, black 30% 40%, red 40% 50%, black 50% 60%, red 60% 70%, black 70% 80%, red 80% 90%, black 90% 100%);
+    background-image: conic-gradient(
+            red 0 10%, black 10% 20%, red 20% 30%, black 30% 40%,
+            red 40% 50%, black 50% 60%, red 60% 70%, black 70% 80%,
+            red 80% 90%, black 90% 100%);
+    transition: transform 4s ease-out;
 }
 
 #ball {
@@ -562,6 +572,8 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: transform 4s ease-out;
 }
 
 #betting-area {
@@ -585,8 +597,22 @@ td {
     background-color: green;
 }
 
-.number[data-number="1"], .number[data-number="2"] {
+.number[data-number="1"], .number[data-number="3"], .number[data-number="5"],
+.number[data-number="7"], .number[data-number="9"], .number[data-number="12"],
+.number[data-number="14"], .number[data-number="16"], .number[data-number="18"],
+.number[data-number="19"], .number[data-number="21"], .number[data-number="23"],
+.number[data-number="25"], .number[data-number="27"], .number[data-number="30"],
+.number[data-number="32"], .number[data-number="34"], .number[data-number="36"] {
     background-color: red;
+}
+
+.number[data-number="2"], .number[data-number="4"], .number[data-number="6"],
+.number[data-number="8"], .number[data-number="10"], .number[data-number="11"],
+.number[data-number="13"], .number[data-number="15"], .number[data-number="17"],
+.number[data-number="20"], .number[data-number="22"], .number[data-number="24"],
+.number[data-number="26"], .number[data-number="28"], .number[data-number="29"],
+.number[data-number="31"], .number[data-number="33"], .number[data-number="35"] {
+    background-color: black;
 }
 
 #controls {
