@@ -539,56 +539,64 @@ button:hover {
 }
 
 /* Roulette */
-
-#roulette-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+#roulette {
+    text-align: center;
 }
 
-#wheel-wrapper {
+#wheel {
     position: relative;
-    width: 500px;
-    height: 500px;
-}
-
-#wheel img {
-    width: 100%;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    border: 10px solid #333;
+    border-radius: 50%;
+    margin: 20px auto;
+    background-image: conic-gradient(red 0 10%, black 10% 20%, red 20% 30%, black 30% 40%, red 40% 50%, black 50% 60%, red 60% 70%, black 70% 80%, red 80% 90%, black 90% 100%);
 }
 
 #ball {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: white;
+    background-color: #fff;
     border-radius: 50%;
-    top: 240px; /* Adjust to position the ball at the center */
-    left: 240px; /* Adjust to position the ball at the center */
-    transition: transform 4s ease-out;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #betting-area {
-    margin-top: 20px;
+    margin: 20px auto;
 }
 
-.betting-cell {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    margin: 2px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    width: 30px;
+    height: 30px;
     text-align: center;
-    line-height: 40px;
+    border: 1px solid #555;
     cursor: pointer;
 }
 
-.betting-cell.selected {
-    background-color: #ff0000;
+.number[data-number="0"] {
+    background-color: green;
 }
 
-#result-message {
-    margin-top: 20px;
-    font-size: 20px;
+.number[data-number="1"], .number[data-number="2"] {
+    background-color: red;
+}
+
+#controls {
+    margin: 20px auto;
+}
+
+#bet-amount {
+    width: 100px;
+}
+
+#results {
+    margin: 20px auto;
 }

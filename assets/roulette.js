@@ -1,63 +1,67 @@
-$(document).ready(function() {
-    let totalBet = 0;
+// script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    const numbers = document.querySelectorAll('.number');
+    const balanceDisplay = document.getElementById('balance');
+    const betAmountInput = document.getElementById('bet-amount');
+    const placeBetButton = document.getElementById('place-bet');
+    const resultDisplay = document.getElementById('result');
+    const ball = document.getElementById('ball');
+
+    let balance = 1000;
     let bets = [];
-    const numbers = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 
-    $('.betting-cell').on('click', function() {
-        $(this).toggleClass('selected');
-        const number = $(this).data('number');
-        const betType = $(this).data('bet');
-        if ($(this).hasClass('selected')) {
-            if (number !== undefined) {
-                bets.push({ type: 'number', value: number });
-            } else if (betType) {
-                bets.push({ type: 'bet', value: betType });
-            }
-        } else {
-            bets = bets.filter(bet => bet.value !== number && bet.value !== betType);
-        }
-        console.log('Bets:', bets);
-    });
-
-    $('#bet-button').on('click', function() {
-        const wheel = $('#wheel');
-        const ball = $('#ball');
-
-        const randomAngle = Math.floor(Math.random() * 360) + 3600; // Spin at least 10 full rotations
-        const ballAngle = randomAngle % 360; // Ball position relative to the wheel
-
-        wheel.css('transform', `rotate(${randomAngle}deg)`);
-        // Ball remains at the center
-        ball.css('transform', `rotate(${0}deg)`); // Ball stays in place
-
-        // Calculate the winning number after the animation
-        setTimeout(function() {
-            const index = Math.floor(ballAngle / (360 / numbers.length));
-            const winningNumber = numbers[index];
-
-            $('#result-message').text(`The winning number is ${winningNumber}`);
-
-            // Determine if the player won or lost
-            let won = false;
-            for (const bet of bets) {
-                if (bet.type === 'number' && bet.value === winningNumber) {
-                    won = true;
-                    break;
-                }
-                // Add additional checks for other bet types (red/black, odd/even, etc.) here
-            }
-
-            if (won) {
-                $('#result-message').append('<br>Congratulations, you won!');
+    numbers.forEach(number => {
+        number.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            const number = this.getAttribute('data-number');
+            if (bets.includes(number)) {
+                bets = bets.filter(bet => bet !== number);
             } else {
-                $('#result-message').append('<br>Sorry, you lost.');
+                bets.push(number);
             }
-
-            // Reset bets
-            totalBet = 0;
-            bets = [];
-            $('.betting-cell').removeClass('selected');
-
-        }, 4000); // Duration of the spin animation
+        });
     });
+
+    placeBetButton.addEventListener('click', function() {
+        const betAmount = parseFloat(betAmountInput.value);
+
+        if (isNaN(betAmount) || betAmount <= 0) {
+            resultDisplay.textContent = 'Please enter a valid bet amount.';
+            return;
+        }
+
+        if (betAmount > balance) {
+            resultDisplay.textContent = 'Insufficient balance.';
+            return;
+        }
+
+        balance -= betAmount;
+        updateBalance();
+
+        const winningNumber = Math.floor(Math.random() * 37);
+        moveBall(winningNumber);
+
+        if (bets.includes(winningNumber.toString())) {
+            const profit = betAmount * 35;
+            balance += profit;
+            resultDisplay.textContent = `You win! Number: ${winningNumber}. Profit: ${profit.toFixed(2)} $`;
+        } else {
+            resultDisplay.textContent = `You lose. Number: ${winningNumber}`;
+        }
+
+        updateBalance();
+        bets = [];
+        document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
+    });
+
+    function updateBalance() {
+        balanceDisplay.textContent = balance.toFixed(2);
+    }
+
+    function moveBall(number) {
+        // Simplified animation for the ball
+        const angle = number * 360 / 37;
+        ball.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+    }
 });
