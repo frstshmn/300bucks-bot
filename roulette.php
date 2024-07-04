@@ -73,6 +73,16 @@
             <div class="betting-cell" data-bet="odd">Odd</div>
             <div class="betting-cell" data-bet="19to36">19 to 36</div>
         </div>
+        <div id="betting-area">
+            <div id="chips">
+                <div class="chip" data-value="0.00000001">1</div>
+                <div class="chip" data-value="0.00000010">10</div>
+                <div class="chip" data-value="0.00000100">100</div>
+                <div class="chip" data-value="0.00001000">1K</div>
+                <div class="chip" data-value="0.00010000">10K</div>
+            </div>
+            <div id="total-bet">Total Bet: <span id="total-bet-amount">0</span> $</div>
+            <button id="bet-button">Bet</button>
         <div id="result-message"></div>
     </div>
 </div>
