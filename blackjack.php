@@ -7,87 +7,32 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div id="roulette">
-    <div id="wheel-container">
-        <div id="wheel">
-            <div id="ball"></div>
+
+
+
+<div class="blackJack_container">
+    <a href="app.php" class="previous">&laquo; Back to all Games</a>
+    </br>
+    <div id="balanceDisplay">Balance: $<span id="balance">300.00</span></div>
+    <div id="betSection__blackJack">
+        <input type="number" id="betAmount__blackJack" placeholder="Bet Amount">
+        <button id="betButton">Bet</button>
+    </div>
+    <div id="gameSection">
+        <div class="hand-container">
+            <div id="dealerValue" class="hand-value"></div>
+            <div id="dealerHand" class="hand"></div>
+        </div>
+        <div class="hand-container">
+            <div id="playerValue" class="hand-value"></div>
+            <div id="playerHand" class="hand"></div>
         </div>
     </div>
-    <div id="betting-area">
-        <table>
-            <!-- Row 1 -->
-            <tr>
-                <td class="number" data-number="3">3</td>
-                <td class="number" data-number="6">6</td>
-                <td class="number" data-number="9">9</td>
-                <td class="number" data-number="12">12</td>
-                <td class="number" data-number="15">15</td>
-                <td class="number" data-number="18">18</td>
-                <td class="number" data-number="21">21</td>
-                <td class="number" data-number="24">24</td>
-                <td class="number" data-number="27">27</td>
-                <td class="number" data-number="30">30</td>
-                <td class="number" data-number="33">33</td>
-                <td class="number" data-number="36">36</td>
-                <td class="bet-column" rowspan="3" data-bet="2to1">2:1</td>
-            </tr>
-            <!-- Row 2 -->
-            <tr>
-                <td class="number" data-number="2">2</td>
-                <td class="number" data-number="5">5</td>
-                <td class="number" data-number="8">8</td>
-                <td class="number" data-number="11">11</td>
-                <td class="number" data-number="14">14</td>
-                <td class="number" data-number="17">17</td>
-                <td class="number" data-number="20">20</td>
-                <td class="number" data-number="23">23</td>
-                <td class="number" data-number="26">26</td>
-                <td class="number" data-number="29">29</td>
-                <td class="number" data-number="32">32</td>
-                <td class="number" data-number="35">35</td>
-            </tr>
-            <!-- Row 3 -->
-            <tr>
-                <td class="number" data-number="1">1</td>
-                <td class="number" data-number="4">4</td>
-                <td class="number" data-number="7">7</td>
-                <td class="number" data-number="10">10</td>
-                <td class="number" data-number="13">13</td>
-                <td class="number" data-number="16">16</td>
-                <td class="number" data-number="19">19</td>
-                <td class="number" data-number="22">22</td>
-                <td class="number" data-number="25">25</td>
-                <td class="number" data-number="28">28</td>
-                <td class="number" data-number="31">31</td>
-                <td class="number" data-number="34">34</td>
-            </tr>
-            <!-- Additional Betting Options -->
-            <tr>
-                <td colspan="4" class="bet-row" data-bet="1to12">1 to 12</td>
-                <td colspan="4" class="bet-row" data-bet="13to24">13 to 24</td>
-                <td colspan="4" class="bet-row" data-bet="25to36">25 to 36</td>
-                <td class="bet-column" rowspan="3" data-bet="2to1">2:1</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="bet-row" data-bet="1to18">1 to 18</td>
-                <td colspan="2" class="bet-row" data-bet="even">Even</td>
-                <td colspan="4" class="bet-row" data-bet="red">Red</td>
-                <td colspan="2" class="bet-row" data-bet="odd">Odd</td>
-                <td colspan="2" class="bet-row" data-bet="19to36">19 to 36</td>
-            </tr>
-            <tr>
-                <td colspan="12" class="number" data-number="0">0</td>
-            </tr>
-        </table>
+    <div id="actionButtons">
+        <button id="hitButton">Hit</button>
+        <button id="standButton">Stand</button>
     </div>
-    <div id="controls">
-        <input type="number" id="bet-amount" placeholder="Bet Amount">
-        <button id="place-bet">Place Bet</button>
-    </div>
-    <div id="results">
-        <p id="result"></p>
-        <p>Balance: <span id="balance">1000</span></p>
-    </div>
+    <div id="resultDisplay"></div>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
