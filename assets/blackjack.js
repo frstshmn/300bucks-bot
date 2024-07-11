@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let dealerCards = [];
     let playerCards = [];
     let deck = [];
-    let gameInProgress = false; // Статус гри
+    let gameInProgress = false;
 
     function initializeDeck() {
         const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         renderHands();
         resultDisplay.textContent = '';
         updateHandValues();
-        gameInProgress = true; // Початок гри
+        gameInProgress = true;
         toggleBetButton();
     }
 
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateHandValues() {
-        const dealerValue = calculateHandValue(dealerCards.slice(1)); // Відображаємо значення руки без перевернутої карти
+        const dealerValue = calculateHandValue(dealerCards.slice(1)); // Only show the dealer's second card
         const playerValue = calculateHandValue(playerCards);
         dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`;
         playerValueDisplay.textContent = `Your Hand: ${playerValue}`;
@@ -144,9 +144,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         balanceDisplay.textContent = balance.toFixed(2);
         betAmount = 0;
-        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Показуємо повне значення руки дилера
-        renderHands(true); // Показуємо повну руку дилера
-        gameInProgress = false; // Кінець гри
+        dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Show full dealer hand value
+        renderHands(true); // Show full dealer hand
+        gameInProgress = false; // End of game
         toggleBetButton();
     }
 
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     standButton.addEventListener('click', function() {
         if (betAmount === 0 || !gameInProgress) return;
-        renderHands(true); // Показуємо повну руку дилера після натискання stand
+        renderHands(true); // Show full dealer hand after stand
         endGame();
     });
 });
