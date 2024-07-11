@@ -11,6 +11,10 @@
 <div class="game-container__dice">
     <a href="app.php" class="previous">&laquo; Back to all Games</a>
     <h1>Dice Game</h1>
+    <div class="bet-buttons">
+        <input type="number" id="bet-amount" value="1">
+        <button id="betButton" style="margin-top: 2px;">Bet</button>
+    </div>
 
     <div class="slider-container">
         <div class="slider-outer">
@@ -54,10 +58,7 @@
         <p>Multiplier: <span id="multiplier">2.00</span>x</p>
         <p>Expected Profit: <span id="expectedProfit">0.00</span> $</p>
         <p>Balance: <span id="balance">300.00</span> $</p>
-        <div class="bet-buttons">
-            <input type="number" id="bet-amount" value="1">
-            <button id="betButton" style="margin-top: 2px;">Bet</button>
-        </div>
+
     </div>
     <p id="result"></p>
 </div>
