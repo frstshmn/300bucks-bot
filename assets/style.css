@@ -508,11 +508,32 @@ button:hover {
     border-radius: 5px;
     background-size: cover;
     background-repeat: no-repeat;
+    position: absolute;
+}
+
+.card {
     margin-left: -40px; /* Adjust this value to control the overlap */
 }
 
-.card:first-child {
+.hand .card:nth-child(1) {
     margin-left: 0; /* Ensure the first card is properly positioned */
+    top: 0; /* Position the first card at the top */
+}
+
+.hand .card:nth-child(2) {
+    top: 20px; /* Adjust this value to set the position of the second card */
+}
+
+.hand .card:nth-child(3) {
+    top: 40px; /* Adjust this value to set the position of the third card */
+}
+
+.hand .card:nth-child(4) {
+    top: 60px; /* Adjust this value to set the position of the fourth card */
+}
+
+.hand .card:nth-child(5) {
+    top: 80px; /* Adjust this value to set the position of the fifth card */
 }
 
 .deal-animation {
