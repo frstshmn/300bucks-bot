@@ -481,66 +481,38 @@ button:hover {
     background-color: #34495e;
 }
 
-#betSection, #gameSection, #actionButtons, #resultDisplay {
+ #betSection, #gameSection, #actionButtons, #resultDisplay {
     margin: 10px 0;
 }
-
-#betSection {
+#betSection{
     display: flex;
     flex-direction: column;
 }
-
-#balanceDisplay {
+#balanceDisplay{
     margin: 20px 0;
     font-weight: bold;
 }
-
 .hand {
     display: flex;
     justify-content: center;
     margin: 10px 0;
-    position: relative;
 }
 
-.card-back, .card {
+.card-back,.card {
     width: 85px;
     height: 124px;
     border-radius: 5px;
     background-size: cover;
     background-repeat: no-repeat;
-    position: absolute;
+    margin: 0 5px;
 }
 
-.card {
-    margin-left: -40px; /* Adjust this value to control the overlap */
-}
 
-.hand .card:nth-child(1) {
-    margin-left: 0; /* Ensure the first card is properly positioned */
-    top: 0; /* Position the first card at the top */
-}
-
-.hand .card:nth-child(2) {
-    top: 20px; /* Adjust this value to set the position of the second card */
-}
-
-.hand .card:nth-child(3) {
-    top: 40px; /* Adjust this value to set the position of the third card */
-}
-
-.hand .card:nth-child(4) {
-    top: 60px; /* Adjust this value to set the position of the fourth card */
-}
-
-.hand .card:nth-child(5) {
-    top: 80px; /* Adjust this value to set the position of the fifth card */
-}
 
 .deal-animation {
     animation: dealCard 0.5s forwards;
 }
-
-.hitButton, .standButton {
+.hitButton, .standButton{
     padding: 5px 10px;
     margin: 5px;
     border: 2px solid #ffffff;
@@ -551,24 +523,20 @@ button:hover {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-#resultDisplay {
+#resultDisplay{
     text-align: center;
     font-weight: 600;
     font-size: 24px;
 }
-
-#gameSection {
+#gameSection{
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-
-.hand-value {
+.hand-value{
     text-align: center;
     font-weight: 600;
 }
-
 
 /* Roulette */
 #container{
