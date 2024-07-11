@@ -1,7 +1,5 @@
 Telegram.WebApp.ready();
 
-Telegram.WebApp.ready();
-
 document.addEventListener("DOMContentLoaded", function() {
     const betButton = document.getElementById("betButton");
     const hitButton = document.getElementById("hitButton");
@@ -19,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let dealerCards = [];
     let playerCards = [];
     let deck = [];
+    let gameInProgress = false; // Статус гри
 
     function initializeDeck() {
         const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
@@ -46,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
         renderHands();
         resultDisplay.textContent = '';
         updateHandValues();
+        gameInProgress = true; // Початок гри
+        toggleBetButton();
     }
 
     function drawCard() {
@@ -145,9 +146,17 @@ document.addEventListener("DOMContentLoaded", function() {
         betAmount = 0;
         dealerValueDisplay.textContent = `Dealer's Hand: ${dealerValue}`; // Показуємо повне значення руки дилера
         renderHands(true); // Показуємо повну руку дилера
+        gameInProgress = false; // Кінець гри
+        toggleBetButton();
+    }
+
+    function toggleBetButton() {
+        betButton.disabled = gameInProgress;
+        betAmountInput.disabled = gameInProgress;
     }
 
     betButton.addEventListener('click', function() {
+        if (gameInProgress) return;
         betAmount = parseFloat(betAmountInput.value);
         if (isNaN(betAmount) || betAmount <= 0) {
             resultDisplay.textContent = 'Please enter a valid bet amount.';
@@ -164,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     hitButton.addEventListener('click', function() {
-        if (betAmount === 0) return;
+        if (betAmount === 0 || !gameInProgress) return;
         playerCards.push(drawCard());
         renderHands();
         updateHandValues();
@@ -174,9 +183,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     standButton.addEventListener('click', function() {
-        if (betAmount === 0) return;
+        if (betAmount === 0 || !gameInProgress) return;
         renderHands(true); // Показуємо повну руку дилера після натискання stand
         endGame();
     });
 });
-

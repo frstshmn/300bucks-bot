@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-
-
-
 <div class="blackJack_container">
     <a href="app.php" class="previous">&laquo; Back to all Games</a>
     </br>
