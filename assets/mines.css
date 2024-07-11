@@ -64,13 +64,15 @@ button:hover {
 
 .tile {
     width: 42px; /* Adjusted from 52px to 40px */
-    padding-top: 5px; /* Adjusted from 52px to 40px */
     position: relative;
     background-color: #213743;
     text-align: center;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s; /* Add a smooth transition */
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .tile.hidden {
