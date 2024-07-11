@@ -250,6 +250,10 @@ body.plinko-body{
     flex-direction: column;
 }
 
+.bet-buttons input[type="number"]{
+    width: 280px;
+}
+
 button.plinko-btn {
     padding: 15px 25px;
     margin: 5px;
