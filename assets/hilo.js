@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const betAmount = parseFloat(document.getElementById('bet-amount').value);
 
         if (newValueIndex > currentValueIndex) {
-            balance += calculateBet('higher', currentValueIndex, betAmount);
+            balance += calculateProfit('higher', currentValueIndex, betAmount);
         } else {
             balance -= betAmount;
         }
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const betAmount = parseFloat(document.getElementById('bet-amount').value);
 
         if (newValueIndex < currentValueIndex) {
-            balance += calculateBet('lower', currentValueIndex, betAmount);
+            balance += calculateProfit('lower', currentValueIndex, betAmount);
         } else {
             balance -= betAmount;
         }
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('total-profit').textContent = totalProfit.toFixed(2);
     }
 
-    function calculateBet(type, currentValueIndex, betAmount) {
+    function calculateProfit(type, currentValueIndex, betAmount) {
         let multiplier = calculateProfitMultiplier(currentValueIndex, type);
         return betAmount * multiplier;
     }
