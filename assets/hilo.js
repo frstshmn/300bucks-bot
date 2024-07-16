@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             balance -= betAmount;
         }
         updateBalanceDisplay();
-        updateProfit('higher', currentValueIndex, betAmount);
+        updateProfits('higher', currentValueIndex, betAmount);
 
         currentCard = newCard;
         updateCardDisplay(currentCard);
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             balance -= betAmount;
         }
         updateBalanceDisplay();
-        updateProfit('lower', currentValueIndex, betAmount);
+        updateProfits('lower', currentValueIndex, betAmount);
 
         currentCard = newCard;
         updateCardDisplay(currentCard);
@@ -88,17 +88,17 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('profit-lower-multiplier').textContent = lowerMultiplier;
     }
 
-    function updateProfit(type, currentValueIndex, betAmount) {
+    function updateProfits(type, currentValueIndex, betAmount) {
         let profitHigher = parseFloat(document.getElementById('profit-higher').textContent);
         let profitLower = parseFloat(document.getElementById('profit-lower').textContent);
         let totalProfit = parseFloat(document.getElementById('total-profit').textContent);
 
         if (type === 'higher') {
-            let multiplier = calculateProfitMultiplier(currentValueIndex, 'higher');
-            profitHigher += betAmount * multiplier;
+            let multiplier = parseFloat(document.getElementById('profit-higher-multiplier').textContent);
+            profitHigher += betAmount * (multiplier - 1);
         } else {
-            let multiplier = calculateProfitMultiplier(currentValueIndex, 'lower');
-            profitLower += betAmount * multiplier;
+            let multiplier = parseFloat(document.getElementById('profit-lower-multiplier').textContent);
+            profitLower += betAmount * (multiplier - 1);
         }
 
         totalProfit = profitHigher + profitLower;
@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function calculateProfit(type, currentValueIndex, betAmount) {
-        let multiplier = calculateProfitMultiplier(currentValueIndex, type);
-        return betAmount * multiplier;
+        let multiplier = parseFloat(document.getElementById(`profit-${type}-multiplier`).textContent);
+        return betAmount * (multiplier - 1);
     }
 
     function updateBalanceDisplay() {
