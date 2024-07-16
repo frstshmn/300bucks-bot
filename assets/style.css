@@ -556,7 +556,7 @@ button:hover {
 .card {
     width: 100px;
     height: 150px;
-    background-image: url('assets/images/cards/card-back.png');
+    background-image: url('./images/cards/card-back.png');
     background-size: cover;
     margin: 0 auto;
 }
