@@ -34,6 +34,10 @@
                     <img class="game-cover" src="assets/images/blackjack.jpg" alt="">
                 </a>
 
+                <a class="game" href="hilo.php">
+                    <img class="game-cover" src="assets/images/blackjack.jpg" alt="">
+                </a>
+
 
             </div>
 
