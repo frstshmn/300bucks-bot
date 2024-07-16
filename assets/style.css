@@ -547,6 +547,7 @@ button:hover {
 
 .hilo__game-container {
     text-align: center;
+    width: 300px;
 }
 
 .hilo__card-display {
@@ -560,8 +561,11 @@ button:hover {
     margin: 0 auto;
 }
 
-.controls {
+.hilo__game-container .controls {
     margin-bottom: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+
 }
 
 button {
