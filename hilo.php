@@ -14,11 +14,12 @@
     <div class="controls">
         <button id="higher-btn">Higher</button>
         <button id="lower-btn">Lower</button>
+        <button id="skip-btn">Skip</button>
     </div>
     <div class="profit-display">
-        <div>Profit Higher (1.17x): <span id="profit-higher">0</span></div>
-        <div>Profit Lower (4.29x): <span id="profit-lower">0</span></div>
-        <div>Total Profit (1.00x): <span id="total-profit">0</span></div>
+        <div>Profit Higher (<span id="profit-higher-multiplier">1.17</span>x): <span id="profit-higher">0</span></div>
+        <div>Profit Lower (<span id="profit-lower-multiplier">4.29</span>x): <span id="profit-lower">0</span></div>
+        <div>Total Profit: <span id="total-profit">0</span></div>
     </div>
     <div class="balance-display">
         Balance: $<span id="balance">300.00</span>

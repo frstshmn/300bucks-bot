@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let balance = 300.00;
     let currentCard = drawCard();
     updateCardDisplay(currentCard);
+    updateProfitMultipliers(currentCard);
 
     document.getElementById('higher-btn').addEventListener('click', () => {
         const newCard = drawCard();
@@ -16,15 +17,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const newValueIndex = values.indexOf(newCard.value);
 
         if (newValueIndex > currentValueIndex) {
-            updateProfit('higher', currentValueIndex);
             balance += calculateBet('higher', currentValueIndex);
         } else {
             balance -= calculateBet('higher', currentValueIndex);
         }
         updateBalanceDisplay();
+        updateProfit('higher', currentValueIndex);
 
         currentCard = newCard;
         updateCardDisplay(currentCard);
+        updateProfitMultipliers(currentCard);
     });
 
     document.getElementById('lower-btn').addEventListener('click', () => {
@@ -33,21 +35,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const newValueIndex = values.indexOf(newCard.value);
 
         if (newValueIndex < currentValueIndex) {
-            updateProfit('lower', currentValueIndex);
             balance += calculateBet('lower', currentValueIndex);
         } else {
             balance -= calculateBet('lower', currentValueIndex);
         }
         updateBalanceDisplay();
+        updateProfit('lower', currentValueIndex);
 
         currentCard = newCard;
         updateCardDisplay(currentCard);
+        updateProfitMultipliers(currentCard);
     });
 
     document.getElementById('skip-btn').addEventListener('click', () => {
         const newCard = drawCard();
         currentCard = newCard;
         updateCardDisplay(currentCard);
+        updateProfitMultipliers(currentCard);
     });
 
     function drawCard() {
@@ -66,11 +70,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (direction === 'higher') {
             let higherCards = remainingCards - currentValueIndex;
-            return remainingCards / higherCards;
+            return (higherCards > 0) ? (remainingCards / higherCards) : remainingCards;
         } else {
             let lowerCards = currentValueIndex;
-            return remainingCards / lowerCards;
+            return (lowerCards > 0) ? (remainingCards / lowerCards) : remainingCards;
         }
+    }
+
+    function updateProfitMultipliers(card) {
+        const currentValueIndex = values.indexOf(card.value);
+        const higherMultiplier = calculateProfitMultiplier(currentValueIndex, 'higher').toFixed(2);
+        const lowerMultiplier = calculateProfitMultiplier(currentValueIndex, 'lower').toFixed(2);
+
+        document.getElementById('profit-higher-multiplier').textContent = higherMultiplier;
+        document.getElementById('profit-lower-multiplier').textContent = lowerMultiplier;
     }
 
     function updateProfit(type, currentValueIndex) {
@@ -106,5 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Start the game when the page loads
     document.addEventListener("DOMContentLoaded", function() {
         updateCardDisplay(currentCard);
+        updateProfitMultipliers(currentCard);
     });
+
 })
