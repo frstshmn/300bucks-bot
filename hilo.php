@@ -24,8 +24,9 @@
         Balance: $<span id="balance">300.00</span>
     </div>
 </div>
-<script src="assets/hilo.js"></script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script src="assets/hilo.js"></script>
 
 </body>
 </html>

@@ -545,18 +545,17 @@ button:hover {
 
 /* Hilo game */
 
-.game-container {
+.hilo__game-container {
     text-align: center;
 }
 
-.card-display {
+.hilo__card-display {
     margin-bottom: 20px;
 }
 
 .card {
     width: 100px;
     height: 150px;
-    background-image: url('./images/cards/card-back.png');
     background-size: cover;
     margin: 0 auto;
 }
@@ -579,6 +578,7 @@ button:hover {
     background-color: #2980b9;
 }
 
-.profit-display {
+.profit-display, .balance-display {
     font-size: 16px;
+    margin-top: 10px;
 }
