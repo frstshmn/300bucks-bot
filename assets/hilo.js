@@ -57,7 +57,7 @@ function drawCard() {
 
 function updateCardDisplay(card) {
     const cardDiv = document.getElementById('current-card');
-    cardDiv.style.backgroundImage = `url(assets/images/cards/${card.value}_of_${card.suit}.png)`;
+    cardDiv.style.backgroundImage = `url(/images/cards/${card.value}_of_${card.suit}.png)`;
 }
 
 function calculateProfitMultiplier(currentValueIndex, direction) {

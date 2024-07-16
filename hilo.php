@@ -25,5 +25,7 @@
     </div>
 </div>
 <script src="assets/hilo.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 </body>
 </html>
