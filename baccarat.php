@@ -601,11 +601,11 @@
 
                 this.balance += winnings;
                 this.wins++;
-                this.showModal('Перемога!', `Ви виграли ₴${winnings}!`, 'win');
+                this.showModal('Перемога!', `Ви виграли $${winnings}!`, 'win');
             } else {
                 this.balance -= this.currentBet.amount;
                 this.losses++;
-                this.showModal('Програш', `Ви програли ₴${this.currentBet.amount}`, 'lose');
+                this.showModal('Програш', `Ви програли $${this.currentBet.amount}`, 'lose');
             }
 
             if (result === 'tie') {
