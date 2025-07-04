@@ -380,17 +380,17 @@
         <div class="bet-option" data-bet="player">
             <div class="bet-label">Гравець</div>
             <div class="bet-payout">2:1</div>
-            <div class="bet-amount" id="playerBet">₴0</div>
+            <div class="bet-amount" id="playerBet">$0</div>
         </div>
         <div class="bet-option" data-bet="banker">
             <div class="bet-label">Банкір</div>
             <div class="bet-payout">1.95:1</div>
-            <div class="bet-amount" id="bankerBet">₴0</div>
+            <div class="bet-amount" id="bankerBet">$0</div>
         </div>
         <div class="bet-option tie" data-bet="tie">
             <div class="bet-label">Нічия</div>
             <div class="bet-payout">9:1</div>
-            <div class="bet-amount" id="tieBet">₴0</div>
+            <div class="bet-amount" id="tieBet">$0</div>
         </div>
     </div>
 
@@ -409,7 +409,7 @@
 <script>
     class BaccaratGame {
         constructor() {
-            this.balance = 3000;
+            this.balance = 300;
             this.wins = 0;
             this.losses = 0;
             this.ties = 0;
@@ -450,12 +450,12 @@
             const betAmount = parseInt(document.getElementById('betAmount').value) || 0;
             this.currentBet.amount = betAmount;
 
-            document.getElementById('playerBet').textContent = '₴0';
-            document.getElementById('bankerBet').textContent = '₴0';
-            document.getElementById('tieBet').textContent = '₴0';
+            document.getElementById('playerBet').textContent = '$0';
+            document.getElementById('bankerBet').textContent = '$0';
+            document.getElementById('tieBet').textContent = '$0';
 
             if (this.currentBet.type && betAmount > 0) {
-                document.getElementById(`${this.currentBet.type}Bet`).textContent = `₴${betAmount}`;
+                document.getElementById(`${this.currentBet.type}Bet`).textContent = `$${betAmount}`;
             }
         }
 
