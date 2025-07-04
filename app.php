@@ -21,10 +21,13 @@
                 <img class="game-cover" src="assets/images/mines.jpg" alt="">
             </a>
 
-                <a class="game" href="plinko.php">
-                    <img class="game-cover" src="assets/images/plinko.jpg" alt="">
-                </a>
+<!--                <a class="game" href="plinko.php">-->
+<!--                    <img class="game-cover" src="assets/images/plinko.jpg" alt="">-->
+<!--                </a>-->
 
+                <a class="game" href="baccarat.php">
+                    <img class="game-cover" src="assets/images/baccarat.jpg" alt="">
+                </a>
 
                 <a class="game" href="dice.php">
                     <img class="game-cover" src="assets/images/dice.jpg" alt="">
