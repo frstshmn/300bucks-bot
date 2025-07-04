@@ -283,11 +283,11 @@ button:hover {
 }
 
 canvas {
-    width: 400px;
-    height: 400px;
-    margin-bottom: 0;
+    width: 100vw !important;
+    height: 75vh !important;
+    display: block;
+    margin: 0 auto;
 }
-
 .previous {
     background-color: transparent;
     color: #ffffff;

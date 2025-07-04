@@ -1,179 +1,178 @@
 Telegram.WebApp.ready();
 
 // Matter.js module aliases
-var Engine = Matter.Engine,
-    Render = Matter.Render,
-    World = Matter.World,
-    Bodies = Matter.Bodies,
-    Events = Matter.Events,
-    Common = Matter.Common;
+const {
+    Engine,
+    Render,
+    World,
+    Bodies,
+    Events
+} = Matter;
 
-// Create an engine
-var engine = Engine.create();
+// Створення фізичного світу
+const engine = Engine.create();
 
-// Create a renderer
-var render = Render.create({
+const render = Render.create({
     element: document.body,
     engine: engine,
     options: {
-        width: 800,
-        height: 800, // Increased height to accommodate slots at the bottom
+        width: window.innerWidth,
+        height: window.innerHeight,
         wireframes: false,
-        background: '#1b1b1b'
+        background: '#1b1b1b',
+        pixelRatio: window.devicePixelRatio
     }
 });
 
-// Create ground
-var ground = Bodies.rectangle(400, 790, 800, 20, { isStatic: true, render: { fillStyle: '#1b1b1b' } });
+// Статичний "земля"
+const ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight - 10, window.innerWidth, 20, {
+    isStatic: true,
+    render: { fillStyle: '#222' }
+});
 
-// Create pegs in a triangular layout
-var pegs = [];
-var rows = 13; // Increased to 13 rows
-var pegSpacing = 50;
-var pegOffsetY = -100; // Raise the peg grid by adjusting the Y offset
-for (var row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
-    for (var col = 0; col <= row; col++) {
-        var x = 400 + col * pegSpacing - row * pegSpacing / 2;
-        var y = 100 + row * pegSpacing + pegOffsetY;
-        var peg = Bodies.circle(x, y, 5, { isStatic: true, render: { fillStyle: '#ffffff' } });
+// Створення пінів
+const pegs = [];
+const rows = 10;
+const pegSpacing = 40;
+for (let row = 0; row < rows; row++) {
+    for (let col = 0; col <= row; col++) {
+        const x = window.innerWidth / 2 + col * pegSpacing - row * pegSpacing / 2;
+        const y = 80 + row * pegSpacing;
+        const peg = Bodies.circle(x, y, 5, {
+            isStatic: true,
+            render: { fillStyle: '#ffffff' }
+        });
         pegs.push(peg);
     }
 }
 
-// Stake chances (example data)
-var stakeChances = {
-    '16x': 0.01,
-    '8x': 0.05,
-    '4x': 0.1,
-    '1x': 0.5,
-    '0.2x': 0.34
-};
+// Множники та їх позиції
+const multipliers = ['16x', '8x', '4x', '1x', '0.2x', '0.2x', '1x', '4x', '8x', '16x'];
+const slotWidth = window.innerWidth / multipliers.length;
+const slots = [];
 
-// Create multiplier slots
-var multiplierValues = ['16x', '8x', '4x', '1x', '0.2x', '0.2x', '0.2x', '1x', '4x', '8x', '16x']; // Use keys for stakeChances
-var slotWidth = 60;
-var slotHeight = 40;
-var slotY = 750; // Move the slots to the bottom
-var slots = [];
-for (var i = 0; i < multiplierValues.length; i++) {
-    var x = 60 + i * (slotWidth + 10); // Adjusted position to align correctly
-    var color;
-    switch(multiplierValues[i]) {
-        case '0.2x': color = '#00FF00'; break; // Green for 0.2
-        case '1x': color = '#FFD700'; break; // Yellow for 1
-        case '4x': color = '#FF8C00'; break; // Orange for 4
-        case '8x': color = '#FF4500'; break; // OrangeRed for 8
-        case '16x': color = '#FF0000'; break; // Red for 16
-        default: color = '#FF0000'; // Red for the rest
-    }
+for (let i = 0; i < multipliers.length; i++) {
+    const x = i * slotWidth + slotWidth / 2;
+    const y = window.innerHeight - 40;
 
-    var slot = Bodies.rectangle(x, slotY, slotWidth, slotHeight, {
+    let color = '#ff0000';
+    if (multipliers[i] === '0.2x') color = '#00ff00';
+    if (multipliers[i] === '1x') color = '#ffff00';
+    if (multipliers[i] === '4x') color = '#ff8c00';
+    if (multipliers[i] === '8x') color = '#ff4500';
+    if (multipliers[i] === '16x') color = '#ff0000';
+
+    const slot = Bodies.rectangle(x, y, slotWidth - 4, 30, {
         isStatic: true,
-        render: {
-            fillStyle: color
-        },
         label: 'slot',
-        multiplier: multiplierValues[i]
+        multiplier: multipliers[i],
+        render: { fillStyle: color }
     });
+
     slots.push(slot);
 }
 
-// Create boundaries
-var boundaries = [
-    Bodies.rectangle(400, 0, 800, 20, { isStatic: true }), // Top boundary
-    Bodies.rectangle(0, 400, 20, 800, { isStatic: true }), // Left boundary
-    Bodies.rectangle(800, 400, 20, 800, { isStatic: true }) // Right boundary
+// Межі
+const walls = [
+    Bodies.rectangle(window.innerWidth / 2, -10, window.innerWidth, 20, { isStatic: true }), // верх
+    Bodies.rectangle(-10, window.innerHeight / 2, 20, window.innerHeight, { isStatic: true }), // ліво
+    Bodies.rectangle(window.innerWidth + 10, window.innerHeight / 2, 20, window.innerHeight, { isStatic: true }) // право
 ];
 
-// Add all bodies to the world
-World.add(engine.world, [ground, ...pegs, ...slots, ...boundaries]);
+// Світ
+World.add(engine.world, [ground, ...pegs, ...slots, ...walls]);
 
-// Balance variable
-var balance = 300;
-var ballInPlay = false; // Flag to check if ball is in play
+let balance = 300;
+let ballInPlay = false;
 
-// Function to throw the ball
-function throwBall() {
-    if (ballInPlay) return; // Prevent throwing a new ball while one is in play
+// Шанси
+const slotChances = [0.01, 0.03, 0.08, 0.15, 0.20, 0.20, 0.15, 0.08, 0.06, 0.04];
 
-    var bet = parseInt(document.getElementById('bet').value) || 1;
-    if (balance >= bet) {
-        ballInPlay = true;
-        balance -= bet;
-        updateBalanceDisplay();
-        // Start the ball slightly above the center
-        var startX = 400 + Math.random() * 10 - 5;
-        var ball = Bodies.circle(startX, 0, 10, {
-            restitution: 0.3, // Lower restitution for less bounce
-            friction: 0.005, // Slight friction
-            frictionAir: 0.02, // Increase air friction to slow down the ball
-            density: 0.001, // Adjust density for slower fall
-            label: 'ball',
-            render: {
-                fillStyle: '#ff0000'
-            }
-        });
-        World.add(engine.world, [ball]);
-    } else {
-        document.getElementById('messageDisplay').innerText = "Not enough balance!";
+function getRandomSlotIndex() {
+    const rnd = Math.random();
+    let sum = 0;
+    for (let i = 0; i < slotChances.length; i++) {
+        sum += slotChances[i];
+        if (rnd <= sum) return i;
     }
+    return slotChances.length - 1;
 }
 
-// Function to update balance display
+// Запуск кулі
+function throwBall() {
+    if (ballInPlay) return;
+
+    const bet = parseInt(document.getElementById('bet').value) || 1;
+    if (bet <= 0 || bet > balance) {
+        showMessage('Invalid bet');
+        return;
+    }
+
+    const index = getRandomSlotIndex();
+    const targetSlot = slots[index];
+    const startX = targetSlot.position.x + (Math.random() * 20 - 10);
+
+    balance -= bet;
+    updateBalanceDisplay();
+    showMessage('');
+
+    const ball = Bodies.circle(startX, 0, 10, {
+        restitution: 0.4,
+        frictionAir: 0.02,
+        label: 'ball',
+        render: { fillStyle: '#ff0000' }
+    });
+
+    ball.bet = bet;
+    ball.target = targetSlot.multiplier;
+    World.add(engine.world, ball);
+
+    ballInPlay = true;
+}
+
+// Відображення балансу
 function updateBalanceDisplay() {
     document.getElementById('balanceDisplay').innerText = balance.toFixed(0);
 }
 
-// Function to get multiplier from stake chances
-function getMultiplier() {
-    var random = Math.random();
-    var sum = 0;
-    for (var key in stakeChances) {
-        sum += stakeChances[key];
-        if (random <= sum) return key;
-    }
-    return '0.2x'; // Fallback in case of rounding errors
+// Повідомлення
+function showMessage(msg) {
+    document.getElementById('messageDisplay').innerText = msg;
 }
 
-// Event handling for ball hitting multiplier slots
+// Колізії
 Events.on(engine, 'collisionStart', function(event) {
-    var pairs = event.pairs;
-    for (var i = 0; i < pairs.length; i++) {
-        var pair = pairs[i];
-        if ((pair.bodyA.label === 'ball' && pair.bodyB.label === 'slot') ||
-            (pair.bodyA.label === 'slot' && pair.bodyB.label === 'ball')) {
-            var slotMultiplier = (pair.bodyA.label === 'slot') ? pair.bodyA.multiplier : pair.bodyB.multiplier;
-            var realMultiplier = getMultiplier();
-            var multiplierValue = parseFloat(realMultiplier.replace('x', '')); // Extract numeric part from the multiplier
-            balance += parseInt(document.getElementById('bet').value) * multiplierValue;
-            updateBalanceDisplay();
-            World.remove(engine.world, pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB);
-            ballInPlay = false; // Ball is no longer in play
-            return;
+    const pairs = event.pairs;
+    for (let pair of pairs) {
+        const ball = pair.bodyA.label === 'ball' ? pair.bodyA : pair.bodyB;
+        const slot = pair.bodyA.label === 'slot' ? pair.bodyA : pair.bodyB;
+
+        if (ball.label === 'ball' && slot.label === 'slot') {
+            if (slot.multiplier === ball.target) {
+                const multiplier = parseFloat(slot.multiplier.replace('x', ''));
+                const win = Math.round(ball.bet * multiplier);
+                balance += win;
+                updateBalanceDisplay();
+                showMessage(`You won: ${win}`);
+                World.remove(engine.world, ball);
+                ballInPlay = false;
+            }
         }
     }
 });
 
-// Run the engine
-Engine.run(engine);
-
-// Run the renderer
-Render.run(render);
-
-// Render multiplier texts
+// Вивід тексту множників
 Events.on(render, 'afterRender', function() {
-    var context = render.context;
-    context.font = '24px Arial';
-    context.fillStyle = 'black';
-    context.textAlign = 'center';
+    const ctx = render.context;
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'center';
 
-    // Draw multiplier texts on the slots
-    for (var i = 0; i < slots.length; i++) {
-        var slot = slots[i];
-        var text = slot.multiplier;
-        var x = slot.position.x;
-        var y = slot.position.y + 10; // Adjusted position to be on the slots
-
-        context.fillText(text, x, y);
+    for (let slot of slots) {
+        ctx.fillText(slot.multiplier, slot.position.x, slot.position.y + 5);
     }
 });
+
+// Старт
+Engine.run(engine);
+Render.run(render);
