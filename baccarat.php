@@ -2,662 +2,685 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baccarat - Stake Style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baccarat</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0f212e, #1a2c38);
-            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f212e;
+            color: #fff;
             overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px 0;
+            background: #1a2c38;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2f4553;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #00e701;
-            text-shadow: 0 0 10px rgba(0, 231, 1, 0.3);
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
         }
 
         .balance {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(0, 231, 1, 0.2);
-        }
-
-        .balance-title {
+            background: #213743;
+            padding: 8px 15px;
+            border-radius: 8px;
             font-size: 14px;
-            opacity: 0.7;
-            margin-bottom: 5px;
+            font-weight: 600;
         }
 
-        .balance-amount {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00e701;
-        }
-
-        .game-table {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
         }
 
         .cards-area {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            background: #1a2c38;
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin-bottom: 15px;
         }
 
         .hand {
-            flex: 1;
-            margin: 0 10px;
+            margin-bottom: 25px;
         }
 
         .hand-title {
-            text-align: center;
-            font-size: 14px;
+            font-size: 12px;
+            color: #b1bad3;
             margin-bottom: 10px;
-            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cards {
             display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin-bottom: 10px;
-            min-height: 70px;
+            gap: 8px;
+            min-height: 85px;
             align-items: center;
         }
 
         .card {
-            width: 45px;
-            height: 65px;
-            background: #ffffff;
-            border-radius: 6px;
+            width: 60px;
+            height: 85px;
+            background: #fff;
+            border-radius: 8px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
             font-weight: bold;
-            font-size: 12px;
-            color: #000;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            animation: cardFlip 0.5s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+            animation: dealCard 0.3s ease-out;
+        }
+
+        @keyframes dealCard {
+            from {
+                transform: translateX(-50px) rotateY(-90deg);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) rotateY(0);
+                opacity: 1;
+            }
         }
 
         .card.red {
-            color: #dc2626;
+            color: #e74c3c;
         }
 
         .card.black {
-            color: #000000;
+            color: #2c3e50;
         }
 
-        @keyframes cardFlip {
-            0% { transform: rotateY(180deg); opacity: 0; }
-            100% { transform: rotateY(0deg); opacity: 1; }
+        .card-value {
+            font-size: 20px;
         }
 
-        .hand-total {
-            text-align: center;
+        .card-suit {
             font-size: 18px;
-            font-weight: bold;
-            color: #00e701;
+            margin-top: -5px;
+        }
+
+        .score {
+            display: inline-block;
+            background: #00c74d;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .score.banker {
+            background: #e74c3c;
+        }
+
+        .score.tie {
+            background: #f39c12;
         }
 
         .betting-area {
+            background: #1a2c38;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .bet-title {
+            font-size: 14px;
+            color: #b1bad3;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .bet-options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .bet-option {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 20px;
+            background: #213743;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.2s;
         }
 
-        .bet-option:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
+        .bet-option.active {
+            border-color: #00c74d;
+            background: #00c74d15;
         }
 
-        .bet-option.selected {
-            border-color: #00e701;
-            background: rgba(0, 231, 1, 0.1);
-            box-shadow: 0 0 20px rgba(0, 231, 1, 0.2);
+        .bet-option.win {
+            border-color: #00c74d;
+            background: #00c74d25;
+            animation: winPulse 0.5s;
         }
 
-        .bet-option.tie {
-            grid-column: span 2;
+        .bet-option.lose {
+            opacity: 0.5;
+        }
+
+        @keyframes winPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .bet-label {
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 12px;
+            color: #b1bad3;
             margin-bottom: 5px;
         }
 
-        .bet-payout {
-            font-size: 12px;
-            opacity: 0.7;
+        .bet-multiplier {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
         }
 
-        .bet-amount {
-            font-size: 14px;
-            color: #00e701;
-            font-weight: bold;
-            margin-top: 5px;
+        .bet-amount-section {
+            margin-bottom: 15px;
+        }
+
+        .bet-input-wrapper {
+            display: flex;
+            align-items: center;
+            background: #213743;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
         }
 
         .bet-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            color: #ffffff;
-            font-size: 16px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .bet-input:focus {
-            outline: none;
-            border-color: #00e701;
-            box-shadow: 0 0 10px rgba(0, 231, 1, 0.3);
-        }
-
-        .deal-button {
-            background: linear-gradient(45deg, #00e701, #00b801);
+            flex: 1;
+            background: transparent;
             border: none;
-            border-radius: 12px;
-            padding: 18px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 15px;
+            outline: none;
+        }
+
+        .quick-bets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .quick-bet {
+            background: #213743;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            color: #b1bad3;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-bet:active {
+            transform: scale(0.95);
+            background: #2f4553;
+        }
+
+        .play-button {
             width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.3);
+            background: #00c74d;
+            border: none;
+            border-radius: 10px;
+            padding: 18px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .deal-button:hover {
-            background: linear-gradient(45deg, #00b801, #009601);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.4);
+        .play-button:active {
+            transform: scale(0.98);
         }
 
-        .deal-button:disabled {
-            background: rgba(255, 255, 255, 0.2);
+        .play-button:disabled {
+            background: #2f4553;
+            color: #5a6c7d;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
-        .modal {
+        .result-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #1a2c38;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            z-index: 1000;
+            min-width: 280px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease-out;
+        }
+
+        .result-popup.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .result-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .result-text.win {
+            color: #00c74d;
+        }
+
+        .result-text.lose {
+            color: #e74c3c;
+        }
+
+        .result-amount {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .history {
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 15px;
+        }
+
+        .history-item {
+            min-width: 30px;
+            height: 30px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1a2c38, #0f212e);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            max-width: 300px;
-            width: 90%;
-            border: 2px solid rgba(0, 231, 1, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: modalBounce 0.5s ease-out;
-        }
-
-        @keyframes modalBounce {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #00e701;
-            text-shadow: 0 0 10px rgba(0, 231, 1, 0.3);
-        }
-
-        .modal-text {
-            font-size: 16px;
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-
-        .win {
-            color: #00e701;
-        }
-
-        .lose {
-            color: #ff4757;
-        }
-
-        .tie {
-            color: #ffa726;
-        }
-
-        .game-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .stat-label {
             font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 5px;
+            font-weight: 600;
         }
 
-        .stat-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #00e701;
+        .history-item.player {
+            background: #00c74d;
         }
 
-        .loading-animation {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0, 231, 1, 0.3);
-            border-radius: 50%;
-            border-top-color: #00e701;
-            animation: spin 1s ease-in-out infinite;
+        .history-item.banker {
+            background: #e74c3c;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .history-item.tie {
+            background: #f39c12;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div class="logo">BACCARAT</div>
-    </div>
+<div class="header">
+    <h1>🎴 Baccarat</h1>
+    <div class="balance">₴<span id="balance">1000.00</span></div>
+</div>
 
-    <div class="balance">
-        <div class="balance-title">Баланс</div>
-        <div class="balance-amount">$<span id="balance">300</span></div>
-    </div>
+<div class="game-container">
+    <div class="history" id="history"></div>
 
-    <div class="game-stats">
-        <div class="stat-item">
-            <div class="stat-label">Виграші</div>
-            <div class="stat-value" id="wins">0</div>
+    <div class="cards-area">
+        <div class="hand">
+            <div class="hand-title">Гравець</div>
+            <div class="cards" id="playerCards"></div>
+            <div id="playerScore"></div>
         </div>
-        <div class="stat-item">
-            <div class="stat-label">Програші</div>
-            <div class="stat-value" id="losses">0</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-label">Нічиї</div>
-            <div class="stat-value" id="ties">0</div>
-        </div>
-    </div>
 
-    <div class="game-table">
-        <div class="cards-area">
-            <div class="hand">
-                <div class="hand-title">Гравець</div>
-                <div class="cards" id="playerCards"></div>
-                <div class="hand-total">Сума: <span id="playerTotal">0</span></div>
-            </div>
-            <div class="hand">
-                <div class="hand-title">Банкір</div>
-                <div class="cards" id="bankerCards"></div>
-                <div class="hand-total">Сума: <span id="bankerTotal">0</span></div>
-            </div>
+        <div class="hand">
+            <div class="hand-title">Банкір</div>
+            <div class="cards" id="bankerCards"></div>
+            <div id="bankerScore"></div>
         </div>
     </div>
 
     <div class="betting-area">
-        <div class="bet-option" data-bet="player">
-            <div class="bet-label">Гравець</div>
-            <div class="bet-payout">2:1</div>
-            <div class="bet-amount" id="playerBet">$0</div>
+        <div class="bet-title">Оберіть ставку</div>
+        <div class="bet-options">
+            <div class="bet-option" data-bet="player">
+                <div class="bet-label">Гравець</div>
+                <div class="bet-multiplier">2.00×</div>
+            </div>
+            <div class="bet-option" data-bet="banker">
+                <div class="bet-label">Банкір</div>
+                <div class="bet-multiplier">1.95×</div>
+            </div>
+            <div class="bet-option" data-bet="tie">
+                <div class="bet-label">Нічия</div>
+                <div class="bet-multiplier">9.00×</div>
+            </div>
         </div>
-        <div class="bet-option" data-bet="banker">
-            <div class="bet-label">Банкір</div>
-            <div class="bet-payout">1.95:1</div>
-            <div class="bet-amount" id="bankerBet">$0</div>
+
+        <div class="bet-amount-section">
+            <div class="bet-title">Сума ставки</div>
+            <div class="bet-input-wrapper">
+                <input type="number" class="bet-input" id="betAmount" value="10" min="1" step="1">
+            </div>
+            <div class="quick-bets">
+                <button class="quick-bet" data-amount="10">10</button>
+                <button class="quick-bet" data-amount="50">50</button>
+                <button class="quick-bet" data-amount="100">100</button>
+                <button class="quick-bet" data-amount="500">500</button>
+            </div>
         </div>
-        <div class="bet-option tie" data-bet="tie">
-            <div class="bet-label">Нічия</div>
-            <div class="bet-payout">9:1</div>
-            <div class="bet-amount" id="tieBet">$0</div>
-        </div>
+
+        <button class="play-button" id="playButton">Грати</button>
     </div>
-
-    <input type="number" class="bet-input" id="betAmount" placeholder="Введіть ставку" min="10" max="1000">
-
-    <button class="deal-button" id="dealButton">Роздати карти</button>
 </div>
 
-<div class="modal" id="resultModal">
-    <div class="modal-content">
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-text" id="modalText"></div>
-    </div>
+<div class="overlay" id="overlay"></div>
+<div class="result-popup" id="resultPopup">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-text" id="resultText"></div>
+    <div class="result-amount" id="resultAmount"></div>
 </div>
 
 <script>
-    class BaccaratGame {
-        constructor() {
-            this.balance = 300;
-            this.wins = 0;
-            this.losses = 0;
-            this.ties = 0;
-            this.currentBet = { type: null, amount: 0 };
-            this.deck = [];
-            this.playerCards = [];
-            this.bankerCards = [];
-            this.gameInProgress = false;
+    const suits = ['♠', '♥', '♦', '♣'];
+    const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-            this.initializeGame();
-        }
+    let balance = 1000;
+    let selectedBet = null;
+    let isPlaying = false;
+    let history = [];
 
-        initializeGame() {
-            this.setupEventListeners();
-            this.updateDisplay();
-        }
+    const betOptions = document.querySelectorAll('.bet-option');
+    const playButton = document.getElementById('playButton');
+    const betAmountInput = document.getElementById('betAmount');
+    const quickBets = document.querySelectorAll('.quick-bet');
+    const balanceEl = document.getElementById('balance');
 
-        setupEventListeners() {
-            document.querySelectorAll('.bet-option').forEach(option => {
-                option.addEventListener('click', (e) => this.selectBet(e.target.closest('.bet-option')));
-            });
+    betOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            if (isPlaying) return;
+            betOptions.forEach(o => o.classList.remove('active'));
+            option.classList.add('active');
+            selectedBet = option.dataset.bet;
+        });
+    });
 
-            document.getElementById('dealButton').addEventListener('click', () => this.dealCards());
-            document.getElementById('betAmount').addEventListener('input', () => this.updateBetDisplay());
-        }
+    quickBets.forEach(btn => {
+        btn.addEventListener('click', () => {
+            betAmountInput.value = btn.dataset.amount;
+        });
+    });
 
-        selectBet(option) {
-            if (this.gameInProgress) return;
+    playButton.addEventListener('click', playGame);
 
-            document.querySelectorAll('.bet-option').forEach(opt => opt.classList.remove('selected'));
-            option.classList.add('selected');
-
-            this.currentBet.type = option.dataset.bet;
-            this.updateBetDisplay();
-        }
-
-        updateBetDisplay() {
-            const betAmount = parseInt(document.getElementById('betAmount').value) || 0;
-            this.currentBet.amount = betAmount;
-
-            document.getElementById('playerBet').textContent = '$0';
-            document.getElementById('bankerBet').textContent = '$0';
-            document.getElementById('tieBet').textContent = '$0';
-
-            if (this.currentBet.type && betAmount > 0) {
-                document.getElementById(`${this.currentBet.type}Bet`).textContent = `$${betAmount}`;
-            }
-        }
-
-        createDeck() {
-            this.deck = [];
-            const suits = ['♠', '♥', '♦', '♣'];
-            const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
+    function createDeck() {
+        const deck = [];
+        for (let i = 0; i < 8; i++) {
             for (let suit of suits) {
-                for (let rank of ranks) {
-                    this.deck.push({ suit, rank });
+                for (let value of values) {
+                    deck.push({ suit, value });
                 }
             }
-
-            this.shuffleDeck();
         }
-
-        shuffleDeck() {
-            for (let i = this.deck.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
-            }
-        }
-
-        drawCard() {
-            return this.deck.pop();
-        }
-
-        getCardValue(card) {
-            if (card.rank === 'A') return 1;
-            if (['J', 'Q', 'K'].includes(card.rank)) return 0;
-            return parseInt(card.rank);
-        }
-
-        calculateHandValue(cards) {
-            return cards.reduce((sum, card) => sum + this.getCardValue(card), 0) % 10;
-        }
-
-        displayCard(card) {
-            const cardElement = document.createElement('div');
-            cardElement.className = `card ${(['♥', '♦'].includes(card.suit)) ? 'red' : 'black'}`;
-            cardElement.textContent = `${card.rank}${card.suit}`;
-            return cardElement;
-        }
-
-        async dealCards() {
-            if (this.gameInProgress) return;
-
-            const betAmount = parseInt(document.getElementById('betAmount').value) || 0;
-            if (!this.currentBet.type || betAmount <= 0) {
-                this.showModal('Помилка', 'Виберіть тип ставки та введіть суму!', 'lose');
-                return;
-            }
-
-            if (betAmount > this.balance) {
-                this.showModal('Помилка', 'Недостатньо коштів!', 'lose');
-                return;
-            }
-
-            this.gameInProgress = true;
-            document.getElementById('dealButton').disabled = true;
-            document.getElementById('dealButton').innerHTML = '<span class="loading-animation"></span> Роздача...';
-
-            this.createDeck();
-            this.playerCards = [];
-            this.bankerCards = [];
-
-            document.getElementById('playerCards').innerHTML = '';
-            document.getElementById('bankerCards').innerHTML = '';
-
-            await this.sleep(500);
-
-            // Початкова роздача
-            this.playerCards.push(this.drawCard());
-            this.bankerCards.push(this.drawCard());
-            this.playerCards.push(this.drawCard());
-            this.bankerCards.push(this.drawCard());
-
-            // Показуємо карти з анімацією
-            for (let i = 0; i < 2; i++) {
-                await this.sleep(300);
-                document.getElementById('playerCards').appendChild(this.displayCard(this.playerCards[i]));
-                await this.sleep(300);
-                document.getElementById('bankerCards').appendChild(this.displayCard(this.bankerCards[i]));
-            }
-
-            this.updateTotals();
-
-            const playerTotal = this.calculateHandValue(this.playerCards);
-            const bankerTotal = this.calculateHandValue(this.bankerCards);
-
-            // Правила третьої карти
-            if (playerTotal <= 5 && bankerTotal <= 5) {
-                await this.sleep(1000);
-
-                if (playerTotal <= 5) {
-                    this.playerCards.push(this.drawCard());
-                    document.getElementById('playerCards').appendChild(this.displayCard(this.playerCards[2]));
-                    await this.sleep(500);
-                }
-
-                if (bankerTotal <= 5) {
-                    this.bankerCards.push(this.drawCard());
-                    document.getElementById('bankerCards').appendChild(this.displayCard(this.bankerCards[2]));
-                    await this.sleep(500);
-                }
-
-                this.updateTotals();
-            }
-
-            await this.sleep(1000);
-            this.determineWinner();
-        }
-
-        updateTotals() {
-            document.getElementById('playerTotal').textContent = this.calculateHandValue(this.playerCards);
-            document.getElementById('bankerTotal').textContent = this.calculateHandValue(this.bankerCards);
-        }
-
-        determineWinner() {
-            const playerTotal = this.calculateHandValue(this.playerCards);
-            const bankerTotal = this.calculateHandValue(this.bankerCards);
-
-            let result;
-            let winnings = 0;
-
-            if (playerTotal > bankerTotal) {
-                result = 'player';
-            } else if (bankerTotal > playerTotal) {
-                result = 'banker';
-            } else {
-                result = 'tie';
-            }
-
-            if (this.currentBet.type === result) {
-                if (result === 'player') {
-                    winnings = this.currentBet.amount * 2;
-                } else if (result === 'banker') {
-                    winnings = Math.floor(this.currentBet.amount * 1.95);
-                } else if (result === 'tie') {
-                    winnings = this.currentBet.amount * 9;
-                }
-
-                this.balance += winnings;
-                this.wins++;
-                this.showModal('Перемога!', `Ви виграли $${winnings}!`, 'win');
-            } else {
-                this.balance -= this.currentBet.amount;
-                this.losses++;
-                this.showModal('Програш', `Ви програли $${this.currentBet.amount}`, 'lose');
-            }
-
-            if (result === 'tie') {
-                this.ties++;
-            }
-
-            this.updateDisplay();
-            this.resetGame();
-        }
-
-        showModal(title, text, type) {
-            const modal = document.getElementById('resultModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalText = document.getElementById('modalText');
-
-            modalTitle.textContent = title;
-            modalText.textContent = text;
-            modalTitle.className = `modal-title ${type}`;
-
-            modal.classList.add('show');
-
-            setTimeout(() => {
-                modal.classList.remove('show');
-            }, 3000);
-        }
-
-        resetGame() {
-            this.gameInProgress = false;
-            document.getElementById('dealButton').disabled = false;
-            document.getElementById('dealButton').textContent = 'Роздати карти';
-            document.querySelectorAll('.bet-option').forEach(opt => opt.classList.remove('selected'));
-            this.currentBet = { type: null, amount: 0 };
-            document.getElementById('betAmount').value = '';
-            this.updateBetDisplay();
-        }
-
-        updateDisplay() {
-            document.getElementById('balance').textContent = this.balance;
-            document.getElementById('wins').textContent = this.wins;
-            document.getElementById('losses').textContent = this.losses;
-            document.getElementById('ties').textContent = this.ties;
-        }
-
-        sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+        return shuffle(deck);
     }
 
-    // Запуск гри
-    document.addEventListener('DOMContentLoaded', () => {
-        new BaccaratGame();
-    });
+    function shuffle(deck) {
+        for (let i = deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        return deck;
+    }
+
+    function getCardValue(card) {
+        if (card.value === 'A') return 1;
+        if (['J', 'Q', 'K'].includes(card.value)) return 0;
+        return parseInt(card.value);
+    }
+
+    function calculateScore(cards) {
+        return cards.reduce((sum, card) => sum + getCardValue(card), 0) % 10;
+    }
+
+    function displayCard(card) {
+        const isRed = ['♥', '♦'].includes(card.suit);
+        return `
+                <div class="card ${isRed ? 'red' : 'black'}">
+                    <div class="card-value">${card.value}</div>
+                    <div class="card-suit">${card.suit}</div>
+                </div>
+            `;
+    }
+
+    function displayScore(score, type) {
+        const className = type === 'player' ? 'score' : type === 'banker' ? 'score banker' : 'score tie';
+        return `<span class="${className}">Очки: ${score}</span>`;
+    }
+
+    async function playGame() {
+        if (!selectedBet) {
+            alert('Оберіть тип ставки!');
+            return;
+        }
+
+        const betAmount = parseFloat(betAmountInput.value);
+        if (betAmount <= 0 || betAmount > balance) {
+            alert('Невірна сума ставки!');
+            return;
+        }
+
+        isPlaying = true;
+        playButton.disabled = true;
+        balance -= betAmount;
+        updateBalance();
+
+        betOptions.forEach(o => {
+            o.classList.remove('win', 'lose');
+        });
+
+        const deck = createDeck();
+        const playerCards = [deck.pop(), deck.pop()];
+        const bankerCards = [deck.pop(), deck.pop()];
+
+        document.getElementById('playerCards').innerHTML = '';
+        document.getElementById('bankerCards').innerHTML = '';
+        document.getElementById('playerScore').innerHTML = '';
+        document.getElementById('bankerScore').innerHTML = '';
+
+        await delay(200);
+        document.getElementById('playerCards').innerHTML = displayCard(playerCards[0]);
+        await delay(200);
+        document.getElementById('bankerCards').innerHTML = displayCard(bankerCards[0]);
+        await delay(200);
+        document.getElementById('playerCards').innerHTML += displayCard(playerCards[1]);
+        await delay(200);
+        document.getElementById('bankerCards').innerHTML += displayCard(bankerCards[1]);
+
+        let playerScore = calculateScore(playerCards);
+        let bankerScore = calculateScore(bankerCards);
+
+        document.getElementById('playerScore').innerHTML = displayScore(playerScore, 'player');
+        document.getElementById('bankerScore').innerHTML = displayScore(bankerScore, 'banker');
+
+        if (playerScore < 8 && bankerScore < 8) {
+            if (playerScore <= 5) {
+                await delay(500);
+                const newCard = deck.pop();
+                playerCards.push(newCard);
+                document.getElementById('playerCards').innerHTML += displayCard(newCard);
+                playerScore = calculateScore(playerCards);
+                document.getElementById('playerScore').innerHTML = displayScore(playerScore, 'player');
+            }
+
+            const playerThirdCard = playerCards[2] ? getCardValue(playerCards[2]) : null;
+            let bankerDraws = false;
+
+            if (playerThirdCard === null) {
+                bankerDraws = bankerScore <= 5;
+            } else {
+                if (bankerScore <= 2) bankerDraws = true;
+                else if (bankerScore === 3) bankerDraws = playerThirdCard !== 8;
+                else if (bankerScore === 4) bankerDraws = [2,3,4,5,6,7].includes(playerThirdCard);
+                else if (bankerScore === 5) bankerDraws = [4,5,6,7].includes(playerThirdCard);
+                else if (bankerScore === 6) bankerDraws = [6,7].includes(playerThirdCard);
+            }
+
+            if (bankerDraws) {
+                await delay(500);
+                const newCard = deck.pop();
+                bankerCards.push(newCard);
+                document.getElementById('bankerCards').innerHTML += displayCard(newCard);
+                bankerScore = calculateScore(bankerCards);
+                document.getElementById('bankerScore').innerHTML = displayScore(bankerScore, 'banker');
+            }
+        }
+
+        await delay(800);
+
+        let result;
+        let winAmount = 0;
+
+        if (playerScore > bankerScore) {
+            result = 'player';
+            if (selectedBet === 'player') {
+                winAmount = betAmount * 2;
+                balance += winAmount;
+            }
+        } else if (bankerScore > playerScore) {
+            result = 'banker';
+            if (selectedBet === 'banker') {
+                winAmount = betAmount * 1.95;
+                balance += winAmount;
+            }
+        } else {
+            result = 'tie';
+            if (selectedBet === 'tie') {
+                winAmount = betAmount * 9;
+                balance += winAmount;
+            } else {
+                balance += betAmount;
+            }
+        }
+
+        updateBalance();
+        addToHistory(result);
+        showResult(result, winAmount, betAmount);
+
+        betOptions.forEach(option => {
+            if (option.dataset.bet === result) {
+                option.classList.add('win');
+            } else if (result !== 'tie' || option.dataset.bet !== selectedBet) {
+                option.classList.add('lose');
+            }
+        });
+
+        isPlaying = false;
+        playButton.disabled = false;
+    }
+
+    function updateBalance() {
+        balanceEl.textContent = balance.toFixed(2);
+    }
+
+    function addToHistory(result) {
+        history.unshift(result);
+        if (history.length > 20) history.pop();
+
+        const historyEl = document.getElementById('history');
+        historyEl.innerHTML = history.map(r =>
+            `<div class="history-item ${r}">${r[0].toUpperCase()}</div>`
+        ).join('');
+    }
+
+    function showResult(result, winAmount, betAmount) {
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('resultPopup');
+        const icon = document.getElementById('resultIcon');
+        const text = document.getElementById('resultText');
+        const amount = document.getElementById('resultAmount');
+
+        if (winAmount > betAmount) {
+            icon.textContent = '🎉';
+            text.textContent = 'Виграш!';
+            text.className = 'result-text win';
+            amount.textContent = `+₴${(winAmount - betAmount).toFixed(2)}`;
+            amount.style.color = '#00c74d';
+        } else if (winAmount === betAmount && result === 'tie') {
+            icon.textContent = '↩️';
+            text.textContent = 'Повернення';
+            text.className = 'result-text';
+            amount.textContent = `₴${winAmount.toFixed(2)}`;
+            amount.style.color = '#f39c12';
+        } else {
+            icon.textContent = '😔';
+            text.textContent = 'Програш';
+            text.className = 'result-text lose';
+            amount.textContent = `-₴${betAmount.toFixed(2)}`;
+            amount.style.color = '#e74c3c';
+        }
+
+        overlay.classList.add('show');
+        popup.classList.add('show');
+
+        setTimeout(() => {
+            overlay.classList.remove('show');
+            popup.classList.remove('show');
+        }, 2500);
+    }
+
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 </script>
 </body>
 </html>

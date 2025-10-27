@@ -283,7 +283,7 @@ if (isset($_SESSION['telegram_id'])) {
     <div style="margin-top:12px; text-align:center;">
         <?php if (!$user): ?>
             <script async src="https://telegram.org/js/telegram-widget.js?22"
-                    data-telegram-login="YourBotUsername"
+                    data-telegram-login="threehunderedbucks_bot"
                     data-size="large"
                     data-auth-url="auth.php"
                     data-request-access="write">
