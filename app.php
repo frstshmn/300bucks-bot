@@ -282,12 +282,13 @@ if (isset($_SESSION['telegram_id'])) {
     </div>
     <div style="margin-top:12px; text-align:center;">
         <?php if (!$user): ?>
-            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="threehunderedbucks_bot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-            <script type="text/javascript">
-                function onTelegramAuth(user) {
-                    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-                }
+            <script async src="https://telegram.org/js/telegram-widget.js?22"
+                    data-telegram-login="threehunderedbucks_bot"
+                    data-size="medium"
+                    data-auth-url="https://frstshmn.top/casino/auth.php"
+                    data-request-access="write">
             </script>
+
         <?php else: ?>
             <div style="display:flex; justify-content:center; align-items:center; gap:12px;">
                 <img src="<?= htmlspecialchars($user['photo_url']) ?>" alt="Фото" style="width:40px; height:40px; border-radius:50%;">
