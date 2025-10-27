@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once 'config.php';
+require_once 'db.php';
+
+$user = null;
+if (isset($_SESSION['telegram_id'])) {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE telegram_id = ?");
+    $stmt->execute([$_SESSION['telegram_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -266,6 +279,25 @@
     <div class="search-container">
         <input type="text" class="search-input" id="searchInput" placeholder="Пошук ігор...">
         <span class="search-icon">🔍</span>
+    </div>
+    <div style="margin-top:12px; text-align:center;">
+        <?php if (!$user): ?>
+            <script async src="https://telegram.org/js/telegram-widget.js?22"
+                    data-telegram-login="YourBotUsername"
+                    data-size="large"
+                    data-auth-url="auth.php"
+                    data-request-access="write">
+            </script>
+        <?php else: ?>
+            <div style="display:flex; justify-content:center; align-items:center; gap:12px;">
+                <img src="<?= htmlspecialchars($user['photo_url']) ?>" alt="Фото" style="width:40px; height:40px; border-radius:50%;">
+                <div>
+                    <div><?= htmlspecialchars($user['first_name']) ?> <?= htmlspecialchars($user['last_name']) ?></div>
+                    <div>Баланс: $<?= $user['balance'] ?></div>
+                </div>
+                <a href="logout.php" style="color:#00e701; text-decoration:none;">Вийти</a>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

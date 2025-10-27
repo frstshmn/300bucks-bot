@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once 'config.php';
+require_once 'db.php';
+
+if (isset($_SESSION['telegram_id'])) {
+
+    $stmt = $pdo->prepare("SELECT balance, name, photo FROM users WHERE telegram_id = ?");
+    $stmt->execute([$_SESSION['telegram_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $balance = $user['balance'] ?? 300;
+    $userName = $user['name'] ?? 'User';
+    $userPhoto = $user['photo'] ?? '';
+    $isDemo = false;
+} else {
+    $balance = 5000;
+    $userName = 'Demo User';
+    $userPhoto = '';
+    $isDemo = true;
+}
+?>
+
+<script>
+    const userBalance = <?= json_encode((float)$balance) ?>;
+    const checkDemo = <?= json_encode($isDemo) ?>;
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

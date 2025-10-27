@@ -12,7 +12,11 @@ $(document).ready(function() {
     const $resultIndicator = $("#resultIndicator");
     const $indicatorValue = $("#indicatorValue");
 
-    let balance = 300.00;
+    let balance = userBalance;
+
+    if(isDemo){
+        console.log("Демо режим активний: баланс " + balance + "$");
+    }
 
     $winChanceSlider.on("input", function() {
         updateWinChance();
@@ -45,6 +49,11 @@ $(document).ready(function() {
         const multiplier = (100 / winChance).toFixed(2);
 
         animateResult(winChance, win, betAmount, multiplier, randomValue);
+
+        // Для реальних користувачів можна оновлювати баланс на сервері через AJAX
+        if(!isDemo){
+            $.post("update_balance.php", {balance: balance});
+        }
     });
 
     function updateWinChance() {
@@ -91,7 +100,6 @@ $(document).ready(function() {
             $resultIndicator.addClass('lose').removeClass('win');
         }
 
-        // Запуск анімації
         $resultIndicator.css("animation", "none");
         requestAnimationFrame(() => {
             $resultIndicator.css("animation", "");
