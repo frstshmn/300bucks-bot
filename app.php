@@ -693,7 +693,7 @@ if (isset($_SESSION['telegram_id'])) {
     // Додаємо інлайн-стилі для кнопки Telegram після завантаження
     document.addEventListener('DOMContentLoaded', function () {
         const checkAndStyleTelegramButton = setInterval(() => {
-            const button = document.querySelector('.tgme_widget_login_button');
+            const button = document.querySelector('.btn.tgme_widget_login_button');
             if (button) {
                 // === ІНЛАЙН СТИЛІ ДЛЯ КНОПКИ ===
                 button.style.cssText = `
