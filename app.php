@@ -79,15 +79,16 @@ if (isset($_SESSION['telegram_id'])) {
             align-items: center;
         }
 
-        /* Обгортка для кнопки Telegram */
+        /* Обгортка для кнопки Telegram - приховуємо фон iframe */
         .telegram-login-wrapper {
-            background: linear-gradient(135deg, #0f212e 0%, #1a2c38 100%);
+            background: transparent;
             border: 2px solid #00e701;
             border-radius: 12px;
-            padding: 4px;
+            padding: 8px 12px;
             box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
             transition: all 0.3s ease;
             display: inline-block;
+            overflow: hidden;
         }
 
         .telegram-login-wrapper:hover {
@@ -98,6 +99,7 @@ if (isset($_SESSION['telegram_id'])) {
         /* Стилізація iframe Telegram */
         .telegram-login-wrapper iframe {
             border-radius: 8px !important;
+            display: block;
         }
 
         /* Профіль користувача */
@@ -287,6 +289,7 @@ if (isset($_SESSION['telegram_id'])) {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            margin-bottom: 24px;
         }
 
         .game {
@@ -361,32 +364,6 @@ if (isset($_SESSION['telegram_id'])) {
         .game:nth-child(4) { animation-delay: 0.2s; }
         .game:nth-child(5) { animation-delay: 0.25s; }
 
-        @media (max-width: 360px) {
-            .games-grid {
-                gap: 10px;
-            }
-
-            .game-cover {
-                height: 160px;
-            }
-
-            .logo img {
-                max-width: 160px;
-            }
-
-            .user-profile {
-                flex-wrap: wrap;
-                gap: 8px;
-                padding: 10px 16px;
-            }
-        }
-        button.tgme_widget_login_button{
-            background: unset !important;
-        }
-        #telegram-login-threehunderedbucks_bot{
-            height: 22px !important;
-        }
-
         .live-games-section {
             padding: 0 20px;
             margin: 24px 0;
@@ -416,6 +393,8 @@ if (isset($_SESSION['telegram_id'])) {
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             position: relative;
             animation: slideInLive 0.5s ease forwards;
+            display: flex;
+            gap: 12px;
         }
 
         @keyframes slideInLive {
@@ -431,8 +410,8 @@ if (isset($_SESSION['telegram_id'])) {
 
         .live-indicator {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 12px;
+            left: 12px;
             background: #ff3b30;
             color: #fff;
             padding: 4px 10px;
@@ -459,18 +438,24 @@ if (isset($_SESSION['telegram_id'])) {
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
+        .live-game-image-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
         .live-game-image {
-            width: 100%;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 10px;
         }
 
         .live-game-info {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             gap: 8px;
+            flex: 1;
         }
 
         .live-player {
@@ -490,10 +475,11 @@ if (isset($_SESSION['telegram_id'])) {
             font-weight: 700;
             font-size: 14px;
             color: #0f212e;
+            flex-shrink: 0;
         }
 
         .live-player-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #b1bad3;
         }
@@ -511,7 +497,7 @@ if (isset($_SESSION['telegram_id'])) {
             color: #00e701;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .win-badge {
@@ -524,13 +510,33 @@ if (isset($_SESSION['telegram_id'])) {
             text-transform: uppercase;
         }
 
-        /* Показувати перші N ігор */
-        .games-grid-limited {
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
+        @media (max-width: 360px) {
+            .games-grid {
+                gap: 10px;
+            }
+
+            .game-cover {
+                height: 160px;
+            }
+
+            .logo img {
+                max-width: 120px;
+            }
+
+            .user-profile {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 10px 16px;
+            }
+
+            .live-game-card {
+                min-width: 260px;
+            }
+
+            .live-game-image {
+                width: 80px;
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -547,6 +553,7 @@ if (isset($_SESSION['telegram_id'])) {
                     <script async src="https://telegram.org/js/telegram-widget.js?22"
                             data-telegram-login="threehunderedbucks_bot"
                             data-size="medium"
+                            data-radius="8"
                             data-auth-url="https://frstshmn.top/casino/auth.php"
                             data-request-access="write">
                     </script>
@@ -601,7 +608,7 @@ if (isset($_SESSION['telegram_id'])) {
 
 <div class="section-title">🎮 Популярні ігри</div>
 
-<div class="games-grid-limited" id="gamesGridLimited">
+<div class="games-grid" id="gamesGridTop">
     <a class="game" href="slots.php" data-name="slots слоти">
         <img class="game-cover" src="assets/images/slot.jpg" alt="Slots">
         <div class="game-overlay">
@@ -639,41 +646,20 @@ if (isset($_SESSION['telegram_id'])) {
     </div>
 </div>
 
-<div class="section-title">🎯 Всі ігри</div>
+<div class="section-title">🎯 Більше ігор</div>
 
-<div class="games-grid" id="gamesGrid">
-    <a class="game" href="slots.php" data-name="slots слоти">
-        <img class="game-cover" src="assets/images/slot.jpg" alt="Slots">
-        <div class="game-overlay">
-            <div class="game-name">🎰 Slots</div>
-        </div>
-    </a>
-
-    <a class="game" href="mines.php" data-name="mines міни">
-        <img class="game-cover" src="assets/images/mines.jpg" alt="Mines">
-        <div class="game-overlay">
-            <div class="game-name">💣 Mines</div>
-        </div>
-    </a>
-
-    <a class="game" href="baccarat.php" data-name="baccarat баккара">
-        <img class="game-cover" src="assets/images/baccarat.jpg" alt="Baccarat">
-        <div class="game-overlay">
-            <div class="game-name">🎴 Baccarat</div>
-        </div>
-    </a>
-
-    <a class="game" href="dice.php" data-name="dice дайс кубики">
-        <img class="game-cover" src="assets/images/dice.jpg" alt="Dice">
-        <div class="game-overlay">
-            <div class="game-name">🎲 Dice</div>
-        </div>
-    </a>
-
+<div class="games-grid" id="gamesGridBottom">
     <a class="game" href="blackjack.php" data-name="blackjack блекджек">
         <img class="game-cover" src="assets/images/blackjack.jpg" alt="Blackjack">
         <div class="game-overlay">
             <div class="game-name">🃏 Blackjack</div>
+        </div>
+    </a>
+
+    <a class="game" href="roulette.php" data-name="roulette рулетка">
+        <img class="game-cover" src="assets/images/roulette.jpg" alt="Roulette">
+        <div class="game-overlay">
+            <div class="game-name">🎡 Roulette</div>
         </div>
     </a>
 </div>
@@ -719,15 +705,17 @@ if (isset($_SESSION['telegram_id'])) {
 
     // Search functionality
     const searchInput = document.getElementById('searchInput');
-    const gamesGrid = document.getElementById('gamesGrid');
+    const gamesGridTop = document.getElementById('gamesGridTop');
+    const gamesGridBottom = document.getElementById('gamesGridBottom');
     const noResults = document.getElementById('noResults');
 
     searchInput.addEventListener('input', function(e) {
         const searchTerm = e.target.value.toLowerCase().trim();
-        const games = gamesGrid.querySelectorAll('.game');
+        const gamesTop = gamesGridTop.querySelectorAll('.game');
+        const gamesBottom = gamesGridBottom.querySelectorAll('.game');
         let visibleCount = 0;
 
-        games.forEach(game => {
+        [...gamesTop, ...gamesBottom].forEach(game => {
             const gameName = game.getAttribute('data-name').toLowerCase();
             if (gameName.includes(searchTerm)) {
                 game.style.display = 'block';
@@ -739,10 +727,8 @@ if (isset($_SESSION['telegram_id'])) {
 
         if (visibleCount === 0) {
             noResults.classList.add('show');
-            gamesGrid.style.display = 'none';
         } else {
             noResults.classList.remove('show');
-            gamesGrid.style.display = 'grid';
         }
     });
 
@@ -794,11 +780,13 @@ if (isset($_SESSION['telegram_id'])) {
         const initials = data.player.split(' ').map(n => n.charAt(0)).join('');
 
         card.innerHTML = `
-            <div class="live-indicator">
-                <div class="live-pulse"></div>
-                LIVE
+            <div class="live-game-image-wrapper">
+                <div class="live-indicator">
+                    <div class="live-pulse"></div>
+                    LIVE
+                </div>
+                <img class="live-game-image" src="${data.image}" alt="${data.game}">
             </div>
-            <img class="live-game-image" src="${data.image}" alt="${data.game}">
             <div class="live-game-info">
                 <div class="live-game-name">${data.game}</div>
                 <div class="live-player">
@@ -829,7 +817,6 @@ if (isset($_SESSION['telegram_id'])) {
     }
 
     updateLiveGames();
-
     setInterval(updateLiveGames, 8000);
 
     let scrollPosition = 0;
