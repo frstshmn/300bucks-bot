@@ -689,6 +689,47 @@ if (isset($_SESSION['telegram_id'])) {
 
     renderEndlessCarousel();
 
+
+    // Додаємо інлайн-стилі для кнопки Telegram після завантаження
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkAndStyleTelegramButton = setInterval(() => {
+            const button = document.querySelector('.tgme_widget_login_button');
+            if (button) {
+                // === ІНЛАЙН СТИЛІ ДЛЯ КНОПКИ ===
+                button.style.cssText = `
+                    background: #0f212e !important;
+                    color: #fff !important;
+                    border: 2px solid #00e701 !important;
+                    border-radius: 12px !important;
+                    padding: 0 !important;
+                    font-family: 'Nunito Sans', sans-serif !important;
+                    font-weight: 600 !important;
+                    font-size: 15px !important;
+                    box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2) !important;
+                    transition: all 0.3s ease !important;
+                    overflow: hidden !important;
+                    display: block !important;
+                    width: 100% !important;
+                    height: auto !important;
+                `;
+
+                // Додаємо ефект ховера
+                button.addEventListener('mouseenter', () => {
+                    button.style.boxShadow = '0 6px 20px rgba(0, 231, 1, 0.4)';
+                    button.style.transform = 'translateY(-2px)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.boxShadow = '0 4px 15px rgba(0, 231, 1, 0.2)';
+                    button.style.transform = 'translateY(0)';
+                });
+
+                clearInterval(checkAndStyleTelegramButton); // Зупиняємо перевірку
+            }
+        }, 100);
+
+        // Запасний таймаут — якщо кнопка не з'явилася за 5 сек
+        setTimeout(() => clearInterval(checkAndStyleTelegramButton), 5000);
+    });
 </script>
 </body>
 </html>
