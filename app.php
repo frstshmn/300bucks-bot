@@ -68,6 +68,42 @@ if (isset($_SESSION['telegram_id'])) {
             transform: scale(1.05);
         }
 
+        /* Кастомна кнопка Telegram */
+        .custom-telegram-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 20px;
+            background: #0f212e;
+            color: #fff;
+            border: 2px solid #00e701;
+            border-radius: 12px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .custom-telegram-btn:hover {
+            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.4);
+            transform: translateY(-2px);
+            background: #1a2c38;
+        }
+
+        .custom-telegram-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 231, 1, 0.2);
+        }
+
+        .telegram-icon {
+            flex-shrink: 0;
+        }
+
         /* Telegram Button Fix */
         .telegram-login-wrapper {
             position: relative;
@@ -516,7 +552,16 @@ if (isset($_SESSION['telegram_id'])) {
 
         <div class="auth-container">
             <?php if (!$user): ?>
-                <div class="telegram-login-wrapper">
+                <!-- КАСТОМНА КНОПКА TELEGRAM -->
+                <button id="customTelegramLogin" class="custom-telegram-btn">
+                    <svg class="telegram-icon" width="20" height="20" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#ffffff" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm54.9 172.1c-1.2 1.2-2.9 1.6-4.4 1.1-8.6-2.9-17.8-6-27.3-9.6-13.3-5.1-26.8-10.3-41.1-14.9-3.2-1-6.4-2-9.5-3-2.9-1-4.8-2.9-5.3-6-.5-3.1.8-5.9 3.2-7.8 9.6-7.5 19.1-15 28.6-22.6 1.5-1.2 3-2.3 4.5-3.5 1.2-1 2.3-1 3.5-.2 1.2.8 1.9 2.1 2.6 3.4 5.6 10.3 11.1 20.6 16.5 31 1.1 2.1 2.1 4.3 3.2 6.4.8 1.6 2.1 2.9 3.7 3.5 1.6.6 3.4.3 4.8-.6 1.9-1.2 3.5-2.7 5.1-4.3 7.8-7.8 15.6-15.6 23.5-23.2 1.5-1.5 3.2-2.9 5-4.3 1.1-1 2.4-1 3.7-.3.8.5 1.3 1.3 1.6 2.3.8 2.6 1.6 5.3 2.3 7.9.8 3.2 1.6 6.4 2.1 9.6.5 2.9.3 5.9-1.1 8.5-1.6 2.9-4 5-6.7 6.7-3.7 3.7-7.5 7.4-11.3 11.1z"/>
+                    </svg>
+                    <span>Увійти через Telegram</span>
+                </button>
+
+                <!-- Оригінальний віджет Telegram (прихований) -->
+                <div id="telegramLoginWidget" style="display: none;">
                     <script async src="https://telegram.org/js/telegram-widget.js?22"
                             data-telegram-login="threehunderedbucks_bot"
                             data-size="medium"
@@ -526,6 +571,7 @@ if (isset($_SESSION['telegram_id'])) {
                     </script>
                 </div>
             <?php else: ?>
+                <!-- Профіль користувача (як раніше) -->
                 <div class="user-profile">
                     <img src="<?= htmlspecialchars($user['photo_url']) ?>" alt="<?= htmlspecialchars($user['first_name']) ?>" class="user-avatar">
                     <div class="user-info">
@@ -693,75 +739,27 @@ if (isset($_SESSION['telegram_id'])) {
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const styleTelegramButton = () => {
-            const button = document.querySelector('.tgme_widget_login_button');
-            if (!button) return false;
+        const customBtn = document.getElementById('customTelegramLogin');
+        if (!customBtn) return;
 
-            // === ІНЛАЙН СТИЛІ ДЛЯ <button> ===
-            button.style.cssText = `
-                background: #0f212e !important;
-                color: #fff !important;
-                border: 2px solid #00e701 !important;
-                border-radius: 12px !important;
-                padding: 12px 20px !important;
-                font-family: 'Nunito Sans', sans-serif !important;
-                font-weight: 600 !important;
-                font-size: 15px !important;
-                box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2) !important;
-                transition: all 0.3s ease !important;
-                cursor: pointer !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                gap: 10px !important;
-                width: 100% !important;
-                height: auto !important;
-                outline: none !important;
-            `;
-
-            // === Стилі для іконки ===
-            const icon = button.querySelector('.tgme_widget_login_button_icon');
-            if (icon) {
-                icon.style.cssText = `
-                    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 240 240"><path fill="%23ffffff" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm54.9 172.1c-1.2 1.2-2.9 1.6-4.4 1.1-8.6-2.9-17.8-6-27.3-9.6-13.3-5.1-26.8-10.3-41.1-14.9-3.2-1-6.4-2-9.5-3-2.9-1-4.8-2.9-5.3-6-.5-3.1.8-5.9 3.2-7.8 9.6-7.5 19.1-15 28.6-22.6 1.5-1.2 3-2.3 4.5-3.5 1.2-1 2.3-1 3.5-.2 1.2.8 1.9 2.1 2.6 3.4 5.6 10.3 11.1 20.6 16.5 31 1.1 2.1 2.1 4.3 3.2 6.4.8 1.6 2.1 2.9 3.7 3.5 1.6.6 3.4.3 4.8-.6 1.9-1.2 3.5-2.7 5.1-4.3 7.8-7.8 15.6-15.6 23.5-23.2 1.5-1.5 3.2-2.9 5-4.3 1.1-1 2.4-1 3.7-.3.8.5 1.3 1.3 1.6 2.3.8 2.6 1.6 5.3 2.3 7.9.8 3.2 1.6 6.4 2.1 9.6.5 2.9.3 5.9-1.1 8.5-1.6 2.9-4 5-6.7 6.7-3.7 3.7-7.5 7.4-11.3 11.1z"/></svg>') !important;
-                    background-size: contain !important;
-                    background-repeat: no-repeat !important;
-                    width: 20px !important;
-                    height: 20px !important;
-                    display: inline-block !important;
-                `;
+        customBtn.addEventListener('click', function () {
+            // Показуємо прихований віджет і клікаємо по оригінальній кнопці
+            const widget = document.getElementById('telegramLoginWidget');
+            if (widget) {
+                widget.style.display = 'block';
+                setTimeout(() => {
+                    const originalBtn = widget.querySelector('.tgme_widget_login_button');
+                    if (originalBtn) {
+                        originalBtn.click();
+                    } else {
+                        // Запасний варіант: викликаємо глобальну функцію
+                        if (typeof TWidgetLogin !== 'undefined' && TWidgetLogin.auth) {
+                            TWidgetLogin.auth();
+                        }
+                    }
+                }, 100);
             }
-
-            // === Змінюємо текст ===
-            const textNode = Array.from(button.childNodes).find(node => node.nodeType === 3);
-            if (textNode) {
-                textNode.textContent = ' Увійти через Telegram';
-            } else {
-                button.insertAdjacentHTML('beforeend', '<span style="margin-left: 8px;">Увійти через Telegram</span>');
-            }
-
-            // === Ховер ефекти ===
-            button.addEventListener('mouseenter', () => {
-                button.style.boxShadow = '0 6px 20px rgba(0, 231, 1, 0.4)';
-                button.style.transform = 'translateY(-2px)';
-            });
-            button.addEventListener('mouseleave', () => {
-                button.style.boxShadow = '0 4px 15px rgba(0, 231, 1, 0.2)';
-                button.style.transform = 'translateY(0)';
-            });
-
-            return true;
-        };
-
-        // Перевіряємо кожні 100 мс (бо кнопка з iframe)
-        const checkInterval = setInterval(() => {
-            if (styleTelegramButton()) {
-                clearInterval(checkInterval);
-            }
-        }, 100);
-
-        // Запобіжник: зупинити через 5 сек
-        setTimeout(() => clearInterval(checkInterval), 5000);
+        });
     });
 </script>
 </body>
