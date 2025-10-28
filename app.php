@@ -276,10 +276,6 @@ if (isset($_SESSION['telegram_id'])) {
 <body>
 <div class="header">
     <div class="logo">⚣ 300Bucks Casino ⚣</div>
-    <div class="search-container">
-        <input type="text" class="search-input" id="searchInput" placeholder="Пошук ігор...">
-        <span class="search-icon">🔍</span>
-    </div>
     <div style="margin-top:12px; text-align:center;">
         <?php if (!$user): ?>
             <script async src="https://telegram.org/js/telegram-widget.js?22"
@@ -300,6 +296,11 @@ if (isset($_SESSION['telegram_id'])) {
             </div>
         <?php endif; ?>
     </div>
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Пошук ігор...">
+        <span class="search-icon">🔍</span>
+    </div>
+
 </div>
 
 <div class="promo-slider">
