@@ -44,15 +44,115 @@ if (isset($_SESSION['telegram_id'])) {
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
         .logo {
-            font-size: 24px;
-            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .logo img {
+            max-width: 200px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 231, 1, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Стилізація Telegram Login Widget */
+        .auth-container {
+            margin-top: 12px;
             text-align: center;
-            background: linear-gradient(135deg, #00e701 0%, #00a8cc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Обгортка для кнопки Telegram */
+        .telegram-login-wrapper {
+            background: linear-gradient(135deg, #0f212e 0%, #1a2c38 100%);
+            border: 2px solid #00e701;
+            border-radius: 12px;
+            padding: 4px;
+            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .telegram-login-wrapper:hover {
+            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Стилізація iframe Telegram */
+        .telegram-login-wrapper iframe {
+            border-radius: 8px !important;
+        }
+
+        /* Профіль користувача */
+        .user-profile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #1a2c38 0%, #2f4553 100%);
+            border: 2px solid #00e701;
+            border-radius: 12px;
+            padding: 12px 20px;
+            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #00e701;
+            box-shadow: 0 2px 8px rgba(0, 231, 1, 0.3);
+        }
+
+        .user-info {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .user-balance {
+            font-size: 14px;
+            color: #00e701;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            color: #ff3b30;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 59, 48, 0.2);
+            border-color: rgba(255, 59, 48, 0.5);
         }
 
         .search-container {
@@ -239,7 +339,6 @@ if (isset($_SESSION['telegram_id'])) {
             display: block;
         }
 
-        /* Пульсація для слайдера */
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -261,7 +360,6 @@ if (isset($_SESSION['telegram_id'])) {
         .game:nth-child(4) { animation-delay: 0.2s; }
         .game:nth-child(5) { animation-delay: 0.25s; }
 
-        /* Responsive */
         @media (max-width: 360px) {
             .games-grid {
                 gap: 10px;
@@ -270,39 +368,58 @@ if (isset($_SESSION['telegram_id'])) {
             .game-cover {
                 height: 160px;
             }
+
+            .logo img {
+                max-width: 160px;
+            }
+
+            .user-profile {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 10px 16px;
+            }
         }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="logo-wrapper">
-    <div class="logo">⚣ 300Bucks Casino ⚣</div>
-    <div style="margin-top:12px; text-align:center;">
-        <?php if (!$user): ?>
-            <script async src="https://telegram.org/js/telegram-widget.js?22"
-                    data-telegram-login="threehunderedbucks_bot"
-                    data-size="medium"
-                    data-auth-url="https://frstshmn.top/casino/auth.php"
-                    data-request-access="write">
-            </script>
+        <div class="logo">
+            <img src="/assets/images/logo/logo.png" alt="300Bucks Casino" />
+        </div>
 
-        <?php else: ?>
-            <div style="display:flex; justify-content:center; align-items:center; gap:12px;">
-                <img src="<?= htmlspecialchars($user['photo_url']) ?>" alt="Фото" style="width:40px; height:40px; border-radius:50%;">
-                <div>
-                    <div><?= htmlspecialchars($user['first_name']) ?> <?= htmlspecialchars($user['last_name']) ?></div>
-                    <div>Баланс: $<?= $user['balance'] ?></div>
+        <div class="auth-container">
+            <?php if (!$user): ?>
+                <div class="telegram-login-wrapper">
+                    <script async src="https://telegram.org/js/telegram-widget.js?22"
+                            data-telegram-login="threehunderedbucks_bot"
+                            data-size="medium"
+                            data-auth-url="https://frstshmn.top/casino/auth.php"
+                            data-request-access="write">
+                    </script>
                 </div>
-                <a href="logout.php" style="color:#00e701; text-decoration:none;">Вийти</a>
-            </div>
-        <?php endif; ?>
+            <?php else: ?>
+                <div class="user-profile">
+                    <img src="<?= htmlspecialchars($user['photo_url']) ?>"
+                         alt="<?= htmlspecialchars($user['first_name']) ?>"
+                         class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-name">
+                            <?= htmlspecialchars($user['first_name']) ?>
+                            <?= htmlspecialchars($user['last_name']) ?>
+                        </div>
+                        <div class="user-balance">💰 Баланс: $<?= number_format($user['balance'], 2) ?></div>
+                    </div>
+                    <a href="logout.php" class="logout-btn">Вийти</a>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
-    </div>
+
     <div class="search-container">
         <input type="text" class="search-input" id="searchInput" placeholder="Пошук ігор...">
         <span class="search-icon">🔍</span>
     </div>
-
 </div>
 
 <div class="promo-slider">
@@ -380,7 +497,6 @@ if (isset($_SESSION['telegram_id'])) {
     const slideCount = slides.children.length;
     let currentSlide = 0;
 
-    // Create dots
     for (let i = 0; i < slideCount; i++) {
         const dot = document.createElement('div');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -406,7 +522,6 @@ if (isset($_SESSION['telegram_id'])) {
         goToSlide(currentSlide);
     }
 
-    // Auto slide every 4 seconds
     setInterval(nextSlide, 4000);
 
     // Search functionality
