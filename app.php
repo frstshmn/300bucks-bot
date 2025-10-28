@@ -46,20 +46,21 @@ if (isset($_SESSION['telegram_id'])) {
 
         .logo-wrapper {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            gap: 16px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 8px;
+            justify-content: flex-start;
+            flex: 0 0 auto;
         }
 
         .logo img {
-            max-width: 200px;
+            max-width: 140px;
             height: auto;
             filter: drop-shadow(0 4px 8px rgba(0, 231, 1, 0.3));
             transition: transform 0.3s ease;
@@ -379,13 +380,165 @@ if (isset($_SESSION['telegram_id'])) {
                 padding: 10px 16px;
             }
         }
+        button.tgme_widget_login_button{
+            background: unset !important;
+        }
+        #telegram-login-threehunderedbucks_bot{
+            height: 22px !important;
+        }
+
+        .live-games-section {
+            padding: 0 20px;
+            margin: 24px 0;
+            overflow: hidden;
+        }
+
+        .live-games-carousel {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 12px;
+        }
+
+        .live-games-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .live-game-card {
+            min-width: 280px;
+            background: linear-gradient(135deg, #1a2c38 0%, #2f4553 100%);
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(0, 231, 1, 0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideInLive 0.5s ease forwards;
+        }
+
+        @keyframes slideInLive {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .live-indicator {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #ff3b30;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.4);
+        }
+
+        .live-pulse {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .live-game-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .live-game-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .live-player {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-player-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00e701 0%, #00a501 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0f212e;
+        }
+
+        .live-player-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #b1bad3;
+        }
+
+        .live-game-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .live-win-amount {
+            font-size: 18px;
+            font-weight: 800;
+            color: #00e701;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .win-badge {
+            background: rgba(0, 231, 1, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #00e701;
+            text-transform: uppercase;
+        }
+
+        /* Показувати перші N ігор */
+        .games-grid-limited {
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="logo-wrapper">
         <div class="logo">
-            <img src="/assets/images/logo/logo.png" alt="300Bucks Casino" />
+            <img src="./assets/images/logo/logo.png" alt="300Bucks Casino" />
         </div>
 
         <div class="auth-container">
@@ -447,6 +600,46 @@ if (isset($_SESSION['telegram_id'])) {
 </div>
 
 <div class="section-title">🎮 Популярні ігри</div>
+
+<div class="games-grid-limited" id="gamesGridLimited">
+    <a class="game" href="slots.php" data-name="slots слоти">
+        <img class="game-cover" src="assets/images/slot.jpg" alt="Slots">
+        <div class="game-overlay">
+            <div class="game-name">🎰 Slots</div>
+        </div>
+    </a>
+
+    <a class="game" href="mines.php" data-name="mines міни">
+        <img class="game-cover" src="assets/images/mines.jpg" alt="Mines">
+        <div class="game-overlay">
+            <div class="game-name">💣 Mines</div>
+        </div>
+    </a>
+
+    <a class="game" href="baccarat.php" data-name="baccarat баккара">
+        <img class="game-cover" src="assets/images/baccarat.jpg" alt="Baccarat">
+        <div class="game-overlay">
+            <div class="game-name">🎴 Baccarat</div>
+        </div>
+    </a>
+
+    <a class="game" href="dice.php" data-name="dice дайс кубики">
+        <img class="game-cover" src="assets/images/dice.jpg" alt="Dice">
+        <div class="game-overlay">
+            <div class="game-name">🎲 Dice</div>
+        </div>
+    </a>
+</div>
+
+<div class="section-title">🔥 Зараз грають</div>
+
+<div class="live-games-section">
+    <div class="live-games-carousel" id="liveGamesCarousel">
+        <!-- Карточки будуть генеруватися JavaScript -->
+    </div>
+</div>
+
+<div class="section-title">🎯 Всі ігри</div>
 
 <div class="games-grid" id="gamesGrid">
     <a class="game" href="slots.php" data-name="slots слоти">
@@ -575,6 +768,80 @@ if (isset($_SESSION['telegram_id'])) {
             goToSlide(currentSlide);
         }
     }
+
+    const liveGamesData = [
+        { game: '🎰 Slots', image: 'assets/images/slot.jpg', player: 'Олександр К.', amount: 245.50 },
+        { game: '💣 Mines', image: 'assets/images/mines.jpg', player: 'Марія В.', amount: 189.00 },
+        { game: '🎴 Baccarat', image: 'assets/images/baccarat.jpg', player: 'Дмитро П.', amount: 567.25 },
+        { game: '🎲 Dice', image: 'assets/images/dice.jpg', player: 'Анна С.', amount: 92.80 },
+        { game: '🃏 Blackjack', image: 'assets/images/blackjack.jpg', player: 'Іван М.', amount: 412.15 },
+        { game: '🎰 Slots', image: 'assets/images/slot.jpg', player: 'Юлія Б.', amount: 678.90 },
+        { game: '💣 Mines', image: 'assets/images/mines.jpg', player: 'Сергій Т.', amount: 234.50 },
+    ];
+
+    function censorName(name) {
+        const parts = name.split(' ');
+        if (parts.length >= 2) {
+            return `${parts[0]} ${parts[1].charAt(0)}.`;
+        }
+        return name.charAt(0) + '*'.repeat(name.length - 2) + name.charAt(name.length - 1);
+    }
+
+    function createLiveGameCard(data) {
+        const card = document.createElement('div');
+        card.className = 'live-game-card';
+
+        const initials = data.player.split(' ').map(n => n.charAt(0)).join('');
+
+        card.innerHTML = `
+            <div class="live-indicator">
+                <div class="live-pulse"></div>
+                LIVE
+            </div>
+            <img class="live-game-image" src="${data.image}" alt="${data.game}">
+            <div class="live-game-info">
+                <div class="live-game-name">${data.game}</div>
+                <div class="live-player">
+                    <div class="live-player-avatar">${initials}</div>
+                    <div class="live-player-name">${censorName(data.player)}</div>
+                </div>
+                <div class="live-win-amount">
+                    <span class="win-badge">WIN</span>
+                    $${data.amount.toFixed(2)}
+                </div>
+            </div>
+        `;
+
+        return card;
+    }
+
+    const liveCarousel = document.getElementById('liveGamesCarousel');
+
+    function updateLiveGames() {
+        const shuffled = [...liveGamesData].sort(() => Math.random() - 0.5);
+
+        liveCarousel.innerHTML = '';
+        shuffled.slice(0, 5).forEach((game, index) => {
+            const card = createLiveGameCard(game);
+            card.style.animationDelay = `${index * 0.1}s`;
+            liveCarousel.appendChild(card);
+        });
+    }
+
+    updateLiveGames();
+
+    setInterval(updateLiveGames, 8000);
+
+    let scrollPosition = 0;
+    setInterval(() => {
+        if (liveCarousel.scrollWidth > liveCarousel.clientWidth) {
+            scrollPosition += 1;
+            if (scrollPosition >= liveCarousel.scrollWidth - liveCarousel.clientWidth) {
+                scrollPosition = 0;
+            }
+            liveCarousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        }
+    }, 50);
 </script>
 </body>
 </html>
