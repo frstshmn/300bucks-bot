@@ -68,42 +68,6 @@ if (isset($_SESSION['telegram_id'])) {
             transform: scale(1.05);
         }
 
-        /* Кастомна кнопка Telegram */
-        .custom-telegram-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 14px 20px;
-            background: #0f212e;
-            color: #fff;
-            border: 2px solid #00e701;
-            border-radius: 12px;
-            font-family: 'Nunito Sans', sans-serif;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .custom-telegram-btn:hover {
-            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.4);
-            transform: translateY(-2px);
-            background: #1a2c38;
-        }
-
-        .custom-telegram-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 231, 1, 0.2);
-        }
-
-        .telegram-icon {
-            flex-shrink: 0;
-        }
-
         /* Telegram Button Fix */
         .telegram-login-wrapper {
             position: relative;
@@ -552,23 +516,13 @@ if (isset($_SESSION['telegram_id'])) {
 
         <div class="auth-container">
             <?php if (!$user): ?>
-                <button id="customTelegramLogin" class="custom-telegram-btn">
-                    <svg class="telegram-icon" width="20" height="20" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="#ffffff" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm54.9 172.1c-1.2 1.2-2.9 1.6-4.4 1.1-8.6-2.9-17.8-6-27.3-9.6-13.3-5.1-26.8-10.3-41.1-14.9-3.2-1-6.4-2-9.5-3-2.9-1-4.8-2.9-5.3-6-.5-3.1.8-5.9 3.2-7.8 9.6-7.5 19.1-15 28.6-22.6 1.5-1.2 3-2.3 4.5-3.5 1.2-1 2.3-1 3.5-.2 1.2.8 1.9 2.1 2.6 3.4 5.6 10.3 11.1 20.6 16.5 31 1.1 2.1 2.1 4.3 3.2 6.4.8 1.6 2.1 2.9 3.7 3.5 1.6.6 3.4.3 4.8-.6 1.9-1.2 3.5-2.7 5.1-4.3 7.8-7.8 15.6-15.6 23.5-23.2 1.5-1.5 3.2-2.9 5-4.3 1.1-1 2.4-1 3.7-.3.8.5 1.3 1.3 1.6 2.3.8 2.6 1.6 5.3 2.3 7.9.8 3.2 1.6 6.4 2.1 9.6.5 2.9.3 5.9-1.1 8.5-1.6 2.9-4 5-6.7 6.7-3.7 3.7-7.5 7.4-11.3 11.1z"/>
-                    </svg>
-                    <span>Увійти через Telegram</span>
-                </button>
-
-                <!-- ПРИХОВАНИЙ ВІДЖЕТ — ОБОВ'ЯЗКОВО В DOM -->
-                <div id="telegramWidgetContainer" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
-                    <script
-                            async
-                            src="https://telegram.org/js/telegram-widget.js?22"
+                <div class="telegram-login-wrapper">
+                    <script async src="https://telegram.org/js/telegram-widget.js?22"
                             data-telegram-login="threehunderedbucks_bot"
                             data-size="medium"
+                            data-radius="8"
                             data-auth-url="https://frstshmn.top/casino/auth.php"
-                            data-request-access="write"
-                            data-onauth="onTelegramAuth(user)">
+                            data-request-access="write">
                     </script>
                 </div>
             <?php else: ?>
@@ -735,70 +689,6 @@ if (isset($_SESSION['telegram_id'])) {
 
     renderEndlessCarousel();
 
-
-</script>
-<script>
-    // ГЛОБАЛЬНА ФУНКЦІЯ — Telegram її викликає
-    window.onTelegramAuth = function(user) {
-        fetch('https://frstshmn.top/casino/auth.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        })
-            .then(r => r.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload();
-                } else {
-                    alert('Помилка авторизації');
-                }
-            })
-            .catch(() => alert('Помилка мережі'));
-    };
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const btn = document.getElementById('customTelegramLogin');
-        if (!btn) return;
-
-        let loading = false;
-
-        btn.addEventListener('click', function () {
-            if (loading) return;
-            loading = true;
-            btn.disabled = true;
-
-            const span = btn.querySelector('span');
-            const original = span.textContent;
-            span.textContent = 'Зачекайте...';
-
-            // Чекаємо TWidgetLogin
-            const check = setInterval(() => {
-                if (window.TWidgetLogin && typeof window.TWidgetLogin.auth === 'function') {
-                    clearInterval(check);
-                    span.textContent = 'Вхід...';
-                    window.TWidgetLogin.auth();
-                    setTimeout(() => {
-                        if (span.textContent === 'Вхід...') {
-                            span.textContent = original;
-                            btn.disabled = false;
-                            loading = false;
-                        }
-                    }, 5000);
-                }
-            }, 100);
-
-            // Запобіжник
-            setTimeout(() => {
-                clearInterval(check);
-                if (loading) {
-                    span.textContent = original;
-                    btn.disabled = false;
-                    loading = false;
-                    alert('Не вдалося підключитися до Telegram. Перевірте інтернет.');
-                }
-            }, 10000);
-        });
-    });
 </script>
 </body>
 </html>
