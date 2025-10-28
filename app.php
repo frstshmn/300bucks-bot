@@ -558,6 +558,19 @@ if (isset($_SESSION['telegram_id'])) {
                     </svg>
                     <span>Увійти через Telegram</span>
                 </button>
+
+                <!-- ПРИХОВАНИЙ ВІДЖЕТ — ОБОВ'ЯЗКОВО В DOM -->
+                <div id="telegramWidgetContainer" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
+                    <script
+                            async
+                            src="https://telegram.org/js/telegram-widget.js?22"
+                            data-telegram-login="threehunderedbucks_bot"
+                            data-size="medium"
+                            data-auth-url="https://frstshmn.top/casino/auth.php"
+                            data-request-access="write"
+                            data-onauth="onTelegramAuth(user)">
+                    </script>
+                </div>
             <?php else: ?>
                 <div class="user-profile">
                     <img src="<?= htmlspecialchars($user['photo_url']) ?>" alt="<?= htmlspecialchars($user['first_name']) ?>" class="user-avatar">
@@ -725,7 +738,7 @@ if (isset($_SESSION['telegram_id'])) {
 
 </script>
 <script>
-    // Глобальна функція — ОБОВ'ЯЗКОВО перед завантаженням!
+    // ГЛОБАЛЬНА ФУНКЦІЯ — Telegram її викликає
     window.onTelegramAuth = function(user) {
         fetch('https://frstshmn.top/casino/auth.php', {
             method: 'POST',
@@ -737,50 +750,11 @@ if (isset($_SESSION['telegram_id'])) {
                 if (data.success) {
                     location.reload();
                 } else {
-                    alert('Помилка входу');
+                    alert('Помилка авторизації');
                 }
             })
             .catch(() => alert('Помилка мережі'));
     };
-
-    // Динамічне завантаження + ініціалізація
-    function initTelegramLogin() {
-        return new Promise((resolve, reject) => {
-            if (window.TWidgetLogin) {
-                resolve();
-                return;
-            }
-
-            const script = document.createElement('script');
-            script.src = 'https://telegram.org/js/telegram-widget.js?22';
-            script.async = false;
-
-            script.onload = () => {
-                // Чекаємо TWidgetLogin
-                const check = setInterval(() => {
-                    if (window.TWidgetLogin) {
-                        clearInterval(check);
-                        // ІНІЦІАЛІЗУЄМО ВІДЖЕТ ВРУЧНУ
-                        window.TWidgetLogin.init({
-                            bot_username: 'threehunderedbucks_bot',
-                            auth_url: 'https://frstshmn.top/casino/auth.php',
-                            request_access: 'write',
-                            onAuth: window.onTelegramAuth
-                        });
-                        resolve();
-                    }
-                }, 50);
-
-                setTimeout(() => {
-                    clearInterval(check);
-                    reject(new Error('TWidgetLogin not initialized'));
-                }, 10000);
-            };
-
-            script.onerror = () => reject(new Error('Script load failed'));
-            document.head.appendChild(script);
-        });
-    }
 
     document.addEventListener('DOMContentLoaded', function () {
         const btn = document.getElementById('customTelegramLogin');
@@ -788,27 +762,41 @@ if (isset($_SESSION['telegram_id'])) {
 
         let loading = false;
 
-        btn.addEventListener('click', async function () {
+        btn.addEventListener('click', function () {
             if (loading) return;
             loading = true;
             btn.disabled = true;
 
             const span = btn.querySelector('span');
             const original = span.textContent;
-            span.textContent = 'Завантаження...';
+            span.textContent = 'Зачекайте...';
 
-            try {
-                await initTelegramLogin();
-                span.textContent = 'Вхід...';
-                window.TWidgetLogin.auth();
-            } catch (err) {
-                console.error('Telegram Login Error:', err);
-                span.textContent = original;
-                alert('Не вдалося підключитися до Telegram. Перевірте інтернет або спробуйте пізніше.');
-            } finally {
-                loading = false;
-                btn.disabled = false;
-            }
+            // Чекаємо TWidgetLogin
+            const check = setInterval(() => {
+                if (window.TWidgetLogin && typeof window.TWidgetLogin.auth === 'function') {
+                    clearInterval(check);
+                    span.textContent = 'Вхід...';
+                    window.TWidgetLogin.auth();
+                    setTimeout(() => {
+                        if (span.textContent === 'Вхід...') {
+                            span.textContent = original;
+                            btn.disabled = false;
+                            loading = false;
+                        }
+                    }, 5000);
+                }
+            }, 100);
+
+            // Запобіжник
+            setTimeout(() => {
+                clearInterval(check);
+                if (loading) {
+                    span.textContent = original;
+                    btn.disabled = false;
+                    loading = false;
+                    alert('Не вдалося підключитися до Telegram. Перевірте інтернет.');
+                }
+            }, 10000);
         });
     });
 </script>
