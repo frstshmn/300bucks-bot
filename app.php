@@ -275,6 +275,7 @@ if (isset($_SESSION['telegram_id'])) {
 </head>
 <body>
 <div class="header">
+    <div class="logo-wrapper">
     <div class="logo">⚣ 300Bucks Casino ⚣</div>
     <div style="margin-top:12px; text-align:center;">
         <?php if (!$user): ?>
@@ -295,6 +296,7 @@ if (isset($_SESSION['telegram_id'])) {
                 <a href="logout.php" style="color:#00e701; text-decoration:none;">Вийти</a>
             </div>
         <?php endif; ?>
+    </div>
     </div>
     <div class="search-container">
         <input type="text" class="search-input" id="searchInput" placeholder="Пошук ігор...">
