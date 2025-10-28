@@ -552,7 +552,7 @@ if (isset($_SESSION['telegram_id'])) {
 
         <div class="auth-container">
             <?php if (!$user): ?>
-                <!-- КАСТОМНА КНОПКА TELEGRAM -->
+                <!-- КАСТОМНА КНОПКА — ТІЛЬКИ ВОНА ВИДИМА! -->
                 <button id="customTelegramLogin" class="custom-telegram-btn">
                     <svg class="telegram-icon" width="20" height="20" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#ffffff" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm54.9 172.1c-1.2 1.2-2.9 1.6-4.4 1.1-8.6-2.9-17.8-6-27.3-9.6-13.3-5.1-26.8-10.3-41.1-14.9-3.2-1-6.4-2-9.5-3-2.9-1-4.8-2.9-5.3-6-.5-3.1.8-5.9 3.2-7.8 9.6-7.5 19.1-15 28.6-22.6 1.5-1.2 3-2.3 4.5-3.5 1.2-1 2.3-1 3.5-.2 1.2.8 1.9 2.1 2.6 3.4 5.6 10.3 11.1 20.6 16.5 31 1.1 2.1 2.1 4.3 3.2 6.4.8 1.6 2.1 2.9 3.7 3.5 1.6.6 3.4.3 4.8-.6 1.9-1.2 3.5-2.7 5.1-4.3 7.8-7.8 15.6-15.6 23.5-23.2 1.5-1.5 3.2-2.9 5-4.3 1.1-1 2.4-1 3.7-.3.8.5 1.3 1.3 1.6 2.3.8 2.6 1.6 5.3 2.3 7.9.8 3.2 1.6 6.4 2.1 9.6.5 2.9.3 5.9-1.1 8.5-1.6 2.9-4 5-6.7 6.7-3.7 3.7-7.5 7.4-11.3 11.1z"/>
@@ -560,18 +560,17 @@ if (isset($_SESSION['telegram_id'])) {
                     <span>Увійти через Telegram</span>
                 </button>
 
-                <!-- Оригінальний віджет Telegram (прихований) -->
-                <div id="telegramLoginWidget" style="display: none;">
+                <!-- ПРИХОВАНИЙ ВІДЖЕТ — ТІЛЬКИ ДЛЯ JS, НЕ ВИДИМИЙ -->
+                <div id="telegramLoginScript" style="display: none;">
                     <script async src="https://telegram.org/js/telegram-widget.js?22"
                             data-telegram-login="threehunderedbucks_bot"
                             data-size="medium"
-                            data-radius="8"
                             data-auth-url="https://frstshmn.top/casino/auth.php"
-                            data-request-access="write">
+                            data-request-access="write"
+                            data-onauth="onTelegramAuth(user)">
                     </script>
                 </div>
             <?php else: ?>
-                <!-- Профіль користувача (як раніше) -->
                 <div class="user-profile">
                     <img src="<?= htmlspecialchars($user['photo_url']) ?>" alt="<?= htmlspecialchars($user['first_name']) ?>" class="user-avatar">
                     <div class="user-info">
@@ -738,27 +737,53 @@ if (isset($_SESSION['telegram_id'])) {
 
 </script>
 <script>
+    // Глобальна функція для обробки авторизації (обов'язково!)
+    function onTelegramAuth(user) {
+        // Telegram викликає цю функцію після входу
+        fetch('https://frstshmn.top/casino/auth.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                }
+            })
+            .catch(() => {
+                alert('Помилка авторизації');
+            });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         const customBtn = document.getElementById('customTelegramLogin');
         if (!customBtn) return;
 
         customBtn.addEventListener('click', function () {
-            // Показуємо прихований віджет і клікаємо по оригінальній кнопці
-            const widget = document.getElementById('telegramLoginWidget');
-            if (widget) {
-                widget.style.display = 'block';
-                setTimeout(() => {
-                    const originalBtn = widget.querySelector('.tgme_widget_login_button');
-                    if (originalBtn) {
-                        originalBtn.click();
-                    } else {
-                        // Запасний варіант: викликаємо глобальну функцію
-                        if (typeof TWidgetLogin !== 'undefined' && TWidgetLogin.auth) {
-                            TWidgetLogin.auth();
-                        }
+            // Показуємо лоадер (опціонально)
+            const span = this.querySelector('span');
+            const originalText = span.textContent;
+            span.textContent = 'Вхід...';
+
+            // Викликаємо авторизацію напряму
+            if (typeof TWidgetLogin !== 'undefined' && TWidgetLogin.auth) {
+                TWidgetLogin.auth();
+            } else {
+                // Якщо TWidgetLogin ще не завантажився — чекаємо
+                const check = setInterval(() => {
+                    if (typeof TWidgetLogin !== 'undefined') {
+                        clearInterval(check);
+                        TWidgetLogin.auth();
                     }
                 }, 100);
+                setTimeout(() => clearInterval(check), 5000);
             }
+
+            // Повертаємо текст через 3 сек (на випадок помилки)
+            setTimeout(() => {
+                span.textContent = originalText;
+            }, 3000);
         });
     });
 </script>
